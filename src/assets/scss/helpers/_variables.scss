@@ -1,0 +1,55 @@
+//
+// Colors
+$white-text: #ffffff;
+//header
+$header-height: 100px;
+
+// Default
+$color-default: #f2f2f2;
+$color-default-lightest: #fff;
+$color-default-lighter: #c2c2c2;
+$color-default-darker: #acacac;
+$color-default-darkest: #000;
+$color-default-dark: #111111;
+
+// Primary colors
+$color-primary: #01adab;
+
+// Success colors
+$color-success: #00a849;
+
+// Warning
+$color-warning: #ffc700;
+
+// Danger
+$color-danger: #f54747;
+
+//colors
+$whiteish: #f2f2f2;
+$pink: #e96f92;
+$purple: #75517d;
+$green: #54fad4;
+
+//options
+$duration: 0.8s;
+$ease-in-out: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+$ease-in: cubic-bezier(0.47, 0, 0.745, 0.715);
+$ease-out: cubic-bezier(0.39, 0.575, 0.565, 1);
+$size: 20px;
+$hsize: $size/2;
+//
+// Fonts size
+//
+
+//
+// Padding & margin
+//
+//$info-phone-horizontal: "only screen and (max-width : 767px)";
+//$info-phone: "only screen and (max-width : 640px)";
+
+$info-tablet-horizontal: 'only screen and (max-width : 1160px)';
+$info-tablet-vertical: 'only screen and (max-width : 900px)';
+$info-phone: 'only screen and (max-width : 767px)';
+$info-phone-4: 'only screen and (max-width : 320px)';
+
+$primary-green: #0eb493;
