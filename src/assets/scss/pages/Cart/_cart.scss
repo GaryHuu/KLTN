@@ -1,0 +1,319 @@
+.cart {
+  background-color: #ebebeb;
+  padding: 30px 0;
+  .container {
+    display: flex;
+    @media #{$info-tablet-horizontal} {
+      flex-direction: column;
+    }
+
+    .cart-empty {
+      background-color: $color-default-lightest;
+      height: 470px;
+      width: 100%;
+      @include flex();
+      flex-direction: column;
+      align-items: center;
+
+      img {
+        margin-top: 40px;
+        width: 120px;
+        margin-bottom: 20px;
+      }
+
+      h5 {
+        margin-bottom: 20px;
+        font-size: 22px;
+        font-weight: 400;
+      }
+
+      .link {
+        font-weight: 400;
+        font-size: 17px;
+        color: $color-primary;
+        cursor: pointer;
+
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+    }
+
+    .cart__left {
+      background-color: $color-default-lightest;
+      flex: 1;
+      position: relative;
+      padding-top: 70px;
+      &__header {
+        position: absolute;
+        top: -5px;
+        left: 27px;
+        background-color: #01adab;
+        padding: 0 50px;
+        height: 55px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -5px;
+          border-top: 5px solid transparent;
+          border-right: 5px solid #016b68;
+        }
+        p {
+          font-size: 14px;
+          @media #{$info-phone} {
+            font-size: 12px;
+          }
+          &:nth-child(1) {
+            font-weight: 500;
+            color: $color-default-lightest;
+          }
+          &:nth-child(2) {
+            color: #ea4036;
+          }
+        }
+      }
+      &__product {
+        & > p {
+          font-size: 14px;
+          font-weight: 400;
+          display: flex;
+          align-items: center;
+          margin-bottom: 5px;
+          @media #{$info-phone} {
+            display: none;
+          }
+          span {
+            &:nth-child(1) {
+              flex: 2;
+              padding-left: 25px;
+            }
+            &:nth-child(2) {
+              flex: 1;
+            }
+            &:nth-child(3) {
+              margin-right: 50px;
+            }
+          }
+        }
+        .item {
+          display: flex;
+          padding: 23px 25px;
+          border-top: 1px solid #e5e5e4;
+          position: relative;
+          &:last-child {
+            border-bottom: 1px solid #e5e5e4;
+          }
+          & > a {
+            text-decoration: none;
+            display: inline-block;
+            flex-shrink: 0;
+            img {
+              width: 60px;
+            }
+          }
+          &__info {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            @media #{$info-phone} {
+              flex-direction: column;
+            }
+            .description {
+              flex: 2;
+              margin-left: 25px;
+              p {
+                font-size: 14px;
+                padding-right: 10%;
+                line-height: 18px;
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+                @media #{$info-phone} {
+                  font-size: 12px;
+                  padding-right: 0;
+                }
+              }
+              span {
+                display: block;
+                font-size: 11px;
+                color: $color-danger;
+                text-decoration: underline;
+                cursor: pointer;
+                margin-top: 11px;
+                @media #{$info-phone} {
+                  bottom: 15%;
+                  left: 8%;
+                  position: absolute;
+                  bottom: 25px;
+                  left: 25px;
+                }
+              }
+            }
+            .price {
+              flex: 1;
+              margin-right: 70px;
+              @media #{$info-phone} {
+                margin: 8px 0 0 25px;
+              }
+              &__new {
+                font-size: 20px;
+                @media #{$info-phone} {
+                  font-size: 14px;
+                }
+              }
+              &__discount {
+                font-size: 10px;
+                position: relative;
+                background-color: $color-danger;
+                color: $color-default-lightest;
+                padding: 2px 5px;
+                border-radius: 2px;
+                margin-right: 10px;
+                &::after {
+                  content: '';
+                  position: absolute;
+                  top: 0;
+                  right: -5px;
+                  border-width: 8.3px 5px;
+                  border-style: solid;
+                  border-color: $color-danger transparent $color-danger
+                    transparent;
+                }
+              }
+              &__old {
+                font-size: 10px;
+                text-decoration: line-through;
+                color: $color-default-darker;
+              }
+            }
+          }
+        }
+      }
+    }
+    .cart__right {
+      width: 388px;
+      margin-left: 15px;
+      @media #{$info-tablet-horizontal} {
+        width: 500px;
+        margin-left: 0;
+        margin-top: 15px;
+      }
+      @media #{$info-phone} {
+        width: 100%;
+      }
+      .discount__code {
+        padding: 20px 25px;
+        background-color: $color-default-lightest;
+        margin-bottom: 15px;
+        h2 {
+          font-size: 14px;
+          font-weight: 400;
+          padding-bottom: 15px;
+          border-bottom: 1px solid #ebebeb;
+        }
+        form {
+          margin-top: 15px;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          height: 45px;
+          @media #{$info-phone} {
+            flex-direction: column;
+            height: auto;
+          }
+          input {
+            flex: 1;
+            border: 1px solid #ebebeb;
+            border-right: none;
+            outline: none;
+            height: 100%;
+            padding: 0 20px;
+            font-size: 14px;
+            color: $color-default-lighter;
+            @media #{$info-phone} {
+              font-size: 10px;
+              padding: 15px 20px;
+              width: 100%;
+              border: 1px solid #ebebeb;
+            }
+          }
+          button {
+            border: none;
+            height: 100%;
+            padding: 0 20px;
+            background-color: #01adab;
+            color: $color-default-lightest;
+            font-size: 18px;
+            @media #{$info-phone} {
+              font-size: 14px;
+              width: 100%;
+              padding: 15px;
+              margin-top: 15px;
+            }
+          }
+        }
+      }
+      .checkout {
+        padding: 30px 25px 40px 25px;
+        background-color: $color-default-lightest;
+        position: relative;
+        & > p {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding-bottom: 15px;
+          span {
+            font-size: 14px;
+            @media #{$info-phone-4} {
+              font-size: 12px;
+            }
+          }
+          &:nth-child(2) {
+            border-bottom: 1px solid #ebebeb;
+          }
+          &:nth-child(3) {
+            padding-bottom: 0;
+            margin-top: 15px;
+            span {
+              &:nth-child(2) {
+                font-size: 24px;
+                color: $color-danger;
+                margin-right: 10px;
+                @media #{$info-phone-4} {
+                  font-size: 20px;
+                }
+              }
+            }
+          }
+        }
+        & > span {
+          position: absolute;
+          bottom: 25px;
+          right: 25px;
+          font-size: 12px;
+        }
+      }
+      & > button {
+        width: 100%;
+        height: 56px;
+        background-color: #ea4036;
+        color: $color-default-lightest;
+        font-size: 22px;
+        border: none;
+        outline: none;
+        margin-top: 15px;
+        @media #{$info-phone-4} {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+}

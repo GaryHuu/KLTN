@@ -1,0 +1,72 @@
+.banner-slide {
+  background-color: $white-text;
+  padding: 25px 0 30px 0;
+
+  &__content {
+    @include flex();
+    align-items: center;
+
+    .slider {
+      width: 902px;
+      border-radius: 19px;
+
+      .slider__item {
+        outline: none;
+      }
+
+      .slick-arrows {
+        display: none;
+      }
+
+      .slick-dots {
+        bottom: 2px;
+
+        li {
+          width: 30px;
+        }
+
+        .slick-active button {
+          background-color: #fff;
+        }
+
+        button {
+          width: 100%;
+          background-color: #0099a8;
+          height: 6px;
+          padding: 0;
+          &::before {
+            content: unset;
+          }
+        }
+      }
+    }
+
+    .banner__icon {
+      flex: 1;
+      height: 228px;
+      @include flex();
+      flex-flow: wrap;
+
+      .icon__item {
+        width: 50%;
+        @include flex();
+        flex-flow: column;
+        align-items: center;
+
+        img {
+          margin-bottom: 1px;
+          height: 70px;
+        }
+
+        p {
+          margin-top: 2px;
+          max-width: 65px;
+          text-align: center;
+          color: #777777;
+          line-height: 1.2;
+          @include font-size(13px);
+        }
+      }
+    }
+  }
+}

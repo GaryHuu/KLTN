@@ -1,0 +1,33 @@
+.quantity {
+  height: 25px;
+  display: flex;
+  align-items: center;
+  background-color: #ebebeb;
+  border-radius: 5px;
+  overflow: hidden;
+  @media #{$info-phone} {
+    margin: 8px 0 0 25px;
+    width: 100px;
+  }
+  button {
+    border: none;
+    outline: none;
+    font-size: 12px;
+    height: 100%;
+    padding: 0 10px;
+    cursor: pointer;
+  }
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    padding: 0 15px;
+    background-color: $color-default-lightest;
+    height: 100%;
+    border: 2px solid #ebebeb;
+    @media #{$info-phone} {
+      font-size: 12px;
+    }
+  }
+}
