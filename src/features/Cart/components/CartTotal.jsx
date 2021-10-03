@@ -1,16 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useHistory, useLocation, useRouteMatch } from 'react-router';
+import { toast } from 'react-toastify';
 
 function CartTotal() {
   const location = useLocation();
   const path = useRouteMatch();
   const history = useHistory();
-  console.log(location);
 
-  const [isConfirm, setIsConfirm] = useState(() => {
-    console.log(location.pathname === '/cart/confirm');
-    return location.pathname === '/cart/confirm';
-  });
+  const [isConfirm, setIsConfirm] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  useEffect(() => {
+    if (location.pathname === '/cart/confirm') setIsConfirm(true);
+    else setIsConfirm(false);
+
+    if (location.pathname === '/cart/success') setIsSuccess(true);
+    else setIsSuccess(false);
+  }, [location.pathname]);
 
   const handleClick = () => {
     if (!isConfirm) {
@@ -19,19 +25,24 @@ function CartTotal() {
       return;
     }
 
-    console.log('Đã Xác Nhận');
-    history.push('/');
+    // Delete Cart
+
+    toast.success('Đặt Hàng Thành Công!');
+    history.push(`${path.url}/success`);
   };
 
   return (
     <>
-      <div className='discount__code'>
-        <h2>Mã Giảm Giá</h2>
-        <form action=''>
-          <input type='text' placeholder='Nhập mã giảm giá....' />
-          <button>ÁP DỤNG</button>
-        </form>
-      </div>
+      {isSuccess || (
+        <div className='discount__code'>
+          <h2>Mã Giảm Giá</h2>
+          <form action=''>
+            <input type='text' placeholder='Nhập mã giảm giá....' />
+            <button>ÁP DỤNG</button>
+          </form>
+        </div>
+      )}
+
       <div className='checkout'>
         <p>
           <span>Tạm Tính:</span> <span>1.080.000 đ</span>
@@ -44,9 +55,12 @@ function CartTotal() {
         </p>
         <span>(Đã bao gồm VAT nếu có)</span>
       </div>
-      <button style={{ cursor: 'pointer' }} onClick={handleClick}>
-        {!isConfirm ? 'TIẾN HÀNH ĐẶT HÀNG' : 'XÁC NHẬN THANH TOÁN'}
-      </button>
+
+      {isSuccess || (
+        <button style={{ cursor: 'pointer' }} onClick={handleClick}>
+          {!isConfirm ? 'TIẾN HÀNH ĐẶT HÀNG' : 'XÁC NHẬN THANH TOÁN'}
+        </button>
+      )}
     </>
   );
 }
