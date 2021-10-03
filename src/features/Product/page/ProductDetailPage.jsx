@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
+
 // import { useRouteMatch } from 'react-router';
 import productDetailImg from 'assets/img/product-detail.png';
 import Quantity from 'components/Quantity';
-import { useHistory } from 'react-router';
-function ProductDetailPage() {
-  const history = useHistory();
 
+import 'react-toastify/dist/ReactToastify.css';
+
+function ProductDetailPage() {
   // const {
   //   params: { id },
   // } = useRouteMatch();
@@ -18,7 +20,7 @@ function ProductDetailPage() {
   };
 
   const handleAddToCartClick = () => {
-    history.push('/cart');
+    toast.success('Thêm vào giỏ hàng thành công!');
   };
 
   return (

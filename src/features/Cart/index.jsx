@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
-import { Route, Switch, useRouteMatch, useHistory } from 'react-router';
+import React from 'react';
+import { Route, Switch, useRouteMatch } from 'react-router';
+
 import CartEmpty from './components/CartEmpty';
 import CartHeader from './components/CartHeader';
 import CartLocationConfirm from './components/CartLocationConfirm';
@@ -9,15 +10,7 @@ import PaymentSuccess from './components/PaymentSuccess';
 
 function Cart() {
   const isCartEmpty = false;
-  const isLogged = true;
   const { url } = useRouteMatch();
-  const history = useHistory();
-
-  useEffect(() => {
-    if (isLogged) return;
-    // history.push('/');
-  }, [isLogged]);
-
   return (
     <section className='cart'>
       <div className='container'>
@@ -35,7 +28,12 @@ function Cart() {
             </Route>
           </Switch>
         </div>
-        <div className='cart__right'>{isCartEmpty || <CartTotal />}</div>
+
+        {isCartEmpty || (
+          <div className='cart__right'>
+            <CartTotal />
+          </div>
+        )}
       </div>
     </section>
   );

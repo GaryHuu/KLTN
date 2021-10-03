@@ -1,17 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
-import './assets/scss/styles.scss';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
 import ScrollToTop from 'components/ScrollToTop';
 
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+
+import './assets/scss/styles.scss';
+
+//  anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <ScrollToTop />
       <App />
+      <ToastContainer
+        position='top-right'
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
