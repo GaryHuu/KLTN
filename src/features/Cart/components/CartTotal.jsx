@@ -33,7 +33,7 @@ function CartTotal() {
 
   return (
     <>
-      {isSuccess || (
+      {isSuccess || isConfirm || (
         <div className='discount__code'>
           <h2>Mã Giảm Giá</h2>
           <form action=''>
