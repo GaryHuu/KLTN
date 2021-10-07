@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
+import Modal from 'react-modal/lib/components/Modal';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import headerLogo from 'assets/img/header-logo.svg';
 import userIcon from 'assets/img/user-icon.svg';
-import Modal from 'react-modal/lib/components/Modal';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import ModalAuth from 'features/Auth/components/ModalAuth';
 import { closeModal, openModal } from 'features/Auth/userSlice';
 
 function Header() {
   const [inputSearch, setInputSearch] = useState('');
   const modalIsOpen = useSelector((state) => state.user.modalIsOpen);
   const dispatch = useDispatch();
-  console.log(modalIsOpen);
   const handleOpenModal = () => {
     const action = openModal();
     dispatch(action);
@@ -27,7 +26,6 @@ function Header() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(inputSearch);
   };
   return (
     <>
@@ -89,21 +87,21 @@ function Header() {
           },
           content: {
             position: 'absolute',
-            top: '50%',
+            top: '5%',
             left: '50%',
             right: 'auto',
             bottom: 'auto',
-            border: '1px solid rgb(204, 204, 204)',
+            border: 'none',
             background: 'rgb(255, 255, 255)',
-            overflow: 'auto',
+            overflow: 'unset',
             borderRadius: '4px',
             outline: 'none',
-            padding: '20px',
-            transform: 'translate(-50%, -50%)',
+            padding: '0',
+            transform: 'translateX(-50%)',
           },
         }}
       >
-        <h1 id='heading'>LOGIN HERE</h1>
+        <ModalAuth />
       </Modal>
     </>
   );

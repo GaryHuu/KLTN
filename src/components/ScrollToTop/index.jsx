@@ -21,7 +21,6 @@ export default function ScrollToTop() {
     });
   };
 
-  console.log('ScrollToTop');
   useEffect(() => {
     scrollToTop();
   }, [pathname]);
