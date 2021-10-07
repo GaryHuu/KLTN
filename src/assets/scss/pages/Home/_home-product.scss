@@ -1,0 +1,56 @@
+.home-product {
+  background-color: #ebebeb;
+  padding-top: 12px;
+  padding-bottom: 12px;
+
+  &__content {
+    background-color: $white-text;
+
+    .home-product__top {
+      @include flex();
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 32px;
+
+      .home-product__title {
+        img {
+          width: 35px;
+        }
+
+        span {
+          color: #505050;
+          margin-left: 12px;
+          @include font-size(16px);
+        }
+      }
+
+      .see-all {
+        color: #505050;
+        transition: all linear 0.2s;
+        @include font-size(16px);
+        position: relative;
+
+        &::after {
+          position: absolute;
+          content: '';
+          height: 2px;
+          width: 0;
+          top: calc(100% + 3px);
+          left: 0;
+          background-color: $color-primary;
+          transition: width 0.2s ease-in;
+        }
+
+        &:hover {
+          opacity: 0.8;
+          color: $color-primary;
+          cursor: pointer;
+
+          &::after {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}

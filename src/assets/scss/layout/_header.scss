@@ -1,0 +1,151 @@
+header {
+  z-index: 999;
+  height: 100px;
+  padding: 20px 0 5px;
+  width: 100%;
+  background-color: $color-primary;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+
+  .header {
+    @include flex();
+    align-items: flex-start;
+    height: 100%;
+
+    &__logo {
+      width: 175px;
+      cursor: pointer;
+    }
+
+    &__search {
+      flex-grow: 1;
+      max-width: 705px;
+      margin: 0 20px;
+
+      &-main {
+        @include flex();
+        height: 40px;
+        border-radius: 7px;
+        overflow: hidden;
+
+        input {
+          flex-grow: 1;
+          border: none;
+          outline: none;
+          color: #838383;
+          padding: 0 17px;
+          font-style: italic;
+          border-radius: 0;
+        }
+
+        button {
+          border-radius: 0;
+          border: none;
+          width: 128px;
+          max-width: 100%;
+          background-color: #e2e3e4;
+          color: #888888;
+          @include font-size(14px);
+          cursor: pointer;
+
+          &:hover {
+            opacity: 0.85;
+          }
+
+          i {
+            margin-right: 5px;
+          }
+        }
+      }
+
+      &-product {
+        margin-top: 5px;
+        line-height: 12px;
+
+        a {
+          display: inline-block;
+          @include font-size(12px);
+          margin-right: 5px;
+          color: $white-text;
+          transition: all ease-in 0.2s;
+
+          &:hover {
+            color: #838383;
+          }
+        }
+      }
+    }
+
+    &__cart {
+      width: 120px;
+      height: 40px;
+      padding: 0 10px;
+      @include flex();
+      align-items: center;
+      @include font-size(14px);
+      color: #838383;
+      background-color: $white-text;
+      border-radius: 6px;
+      position: relative;
+      cursor: pointer;
+      transition: all ease-in 0.1s;
+
+      &:hover {
+        opacity: 0.85;
+      }
+
+      span {
+        height: 25px;
+        width: 25px;
+        text-align: center;
+        line-height: 25px;
+        @include font-size(14px);
+        border-radius: 50%;
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background-color: #fa434e;
+        color: $white-text;
+      }
+
+      i {
+        color: $color-primary;
+        @include font-size(20px);
+        margin-right: 12px;
+      }
+    }
+
+    &__user {
+      @include flex();
+      align-items: center;
+      height: 40px;
+      min-width: 110px;
+      align-items: center;
+      margin-left: 20px;
+
+      img {
+        width: 36px;
+      }
+
+      .user-log {
+        div {
+          @include font-size(14px);
+          color: $white-text;
+          margin-left: 2px;
+          cursor: pointer;
+          transition: all ease-in 0.15s;
+
+          &:hover {
+            color: #111;
+          }
+        }
+
+        div + div {
+          margin-top: 4px;
+        }
+      }
+    }
+  }
+}

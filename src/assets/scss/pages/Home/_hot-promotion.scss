@@ -1,0 +1,85 @@
+.hot-promotion {
+  background-color: #ebebeb;
+  padding-top: 12px;
+
+  &__content {
+    background-color: $white-text;
+    padding-bottom: 20px;
+
+    .hot-promotion__top {
+      @include flex();
+      padding: 15px 32px;
+      justify-content: space-between;
+      align-items: center;
+
+      .hot-promotion__title {
+        @include flex();
+        flex-direction: row;
+        align-items: center;
+
+        img {
+          width: 25px;
+        }
+
+        span {
+          color: #505050;
+          margin-left: 12px;
+          @include font-size(16px);
+        }
+      }
+
+      .see-all {
+        color: #505050;
+        transition: all linear 0.2s;
+        @include font-size(16px);
+        position: relative;
+
+        &::after {
+          position: absolute;
+          content: '';
+          height: 2px;
+          width: 0;
+          top: calc(100% + 3px);
+          left: 0;
+          background-color: $color-primary;
+          transition: width 0.2s ease-in;
+        }
+
+        &:hover {
+          opacity: 0.8;
+          color: $color-primary;
+          cursor: pointer;
+
+          &::after {
+            width: 100%;
+          }
+        }
+      }
+    }
+
+    .hot-promotion__list {
+      @include flex();
+      flex-flow: row nowrap;
+      justify-content: space-between;
+
+      .slick-arrow {
+        &::before {
+          font-size: 23px;
+        }
+      }
+
+      .slick-dots {
+        bottom: -10px;
+      }
+
+      .slick-list {
+        width: 100%;
+      }
+
+      .hot-promotion__item {
+        width: 32%;
+        outline: none;
+      }
+    }
+  }
+}
