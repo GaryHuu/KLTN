@@ -23,19 +23,19 @@
 // Components
 @import '~slick-carousel/slick/slick.css';
 @import '~slick-carousel/slick/slick-theme.css';
-@import './components/product-list';
-@import './components/quantity';
+@import 'components/product-list';
+@import 'components/quantity';
 
 // Page specific styles
 // Home Page
-@import './pages/home/banner-slide';
-@import './pages/home/hot-promotion';
-@import './pages/home/feature-product';
-@import './pages/home/home-product';
+@import 'pages/home/banner-slide';
+@import 'pages/home/hot-promotion';
+@import 'pages/home/feature-product';
+@import 'pages/home/home-product';
 
 // Cart Page
-@import './pages/Cart/cart';
+@import 'pages/Cart/cart';
 
 //Product
-@import './pages/Product/product-page';
-@import './pages/Product/product-detail-page';
+@import 'pages/Product/product-page';
+@import 'pages/Product/product-detail-page';
