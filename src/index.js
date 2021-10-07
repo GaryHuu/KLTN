@@ -9,25 +9,28 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import './assets/scss/styles.scss';
+import { Provider } from 'react-redux';
+import { store } from 'app/store';
 
-//  anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <ScrollToTop />
-      <App />
-      <ToastContainer
-        position='top-right'
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <ScrollToTop />
+        <App />
+        <ToastContainer
+          position='top-right'
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
