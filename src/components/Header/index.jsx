@@ -103,10 +103,7 @@ function Header() {
           },
         }}
       >
-        <h1 id='heading'>Alert</h1>
-        <div id='full_description'>
-          <p>Description goes here.</p>
-        </div>
+        <h1 id='heading'>LOGIN HERE</h1>
       </Modal>
     </>
   );

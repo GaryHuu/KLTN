@@ -1,11 +1,11 @@
 // Variables + Mixins + Functions
-@import 'helpers/variables';
+@import 'helpers/variables.scss';
 
 // Always include variable 1st !
-@import 'helpers/mixins';
+@import 'helpers/mixins.scss';
 
 // Base
-@import 'base/typography';
+@import 'base/typography.scss';
 
 // Vendors
 // Import jQuery lib, Bootstrap ... etc
@@ -14,28 +14,28 @@
 // If we have themes, import specific styles here
 
 // Layout
-@import 'layout/common';
-@import 'layout/header';
-@import 'layout/main';
-@import 'layout/sidebar';
-@import 'layout/footer';
+@import 'layout/common.scss';
+@import 'layout/header.scss';
+@import 'layout/main.scss';
+@import 'layout/sidebar.scss';
+@import 'layout/footer.scss';
 
 // Components
 @import '~slick-carousel/slick/slick.css';
 @import '~slick-carousel/slick/slick-theme.css';
-@import 'components/product-list';
-@import 'components/quantity';
+@import 'components/product-list.scss';
+@import 'components/quantity.scss';
 
 // Page specific styles
 // Home Page
-@import 'pages/home/banner-slide';
-@import 'pages/home/hot-promotion';
-@import 'pages/home/feature-product';
-@import 'pages/home/home-product';
+@import 'pages/home/banner-slide.scss';
+@import 'pages/home/hot-promotion.scss';
+@import 'pages/home/feature-product.scss';
+@import 'pages/home/home-product.scss';
 
 // Cart Page
-@import 'pages/Cart/cart';
+@import 'pages/cart/cart.scss';
 
 //Product
-@import 'pages/Product/product-page';
-@import 'pages/Product/product-detail-page';
+@import 'pages/product/product-page.scss';
+@import 'pages/product/product-detail-page';
