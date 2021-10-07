@@ -25,6 +25,7 @@
 @import '~slick-carousel/slick/slick-theme.css';
 @import 'components/product-list.scss';
 @import 'components/quantity.scss';
+@import 'components/input-field.scss';
 
 // Page specific styles
 // Home Page
@@ -38,4 +39,7 @@
 
 //Product
 @import 'pages/product/product-page.scss';
-@import 'pages/product/product-detail-page';
+@import 'pages/product/product-detail-page.scss';
+
+// Modal Login
+@import 'pages/modal/modal-auth.scss';
