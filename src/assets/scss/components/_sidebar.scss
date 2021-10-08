@@ -1,0 +1,49 @@
+.side-bar-product,
+.side-bar-user {
+  background-color: $white-text;
+  padding: 14px;
+
+  h5 {
+    font-size: 16px;
+    font-weight: 400;
+    color: #505050;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+  }
+
+  ul {
+    .category-item {
+      display: block;
+      font-size: 14px;
+      color: #505050;
+      line-height: 30px;
+      padding-left: 12px;
+      transition: 0.15s;
+      cursor: pointer;
+      position: relative;
+
+      &::before {
+        content: '>';
+        font-size: 14px;
+        color: $color-primary;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        display: none;
+      }
+
+      &.active,
+      &:hover {
+        transform: translateX(7px);
+        color: $color-primary;
+        display: block;
+
+        &::before {
+          display: block;
+        }
+      }
+    }
+  }
+}

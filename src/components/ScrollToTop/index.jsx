@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+
 import iconMoveTop from 'assets/img/button-move-top.png';
 
 export default function ScrollToTop() {
