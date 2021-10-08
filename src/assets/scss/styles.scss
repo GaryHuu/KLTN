@@ -26,6 +26,11 @@
 @import 'components/product-list.scss';
 @import 'components/quantity.scss';
 @import 'components/input-field.scss';
+@import 'components/gender-field';
+@import 'components/sidebar.scss';
+@import 'components/product-promo';
+// Modal Login
+@import 'pages/modal/modal-auth.scss';
 
 // Page specific styles
 // Home Page
@@ -41,5 +46,5 @@
 @import 'pages/product/product-page.scss';
 @import 'pages/product/product-detail-page.scss';
 
-// Modal Login
-@import 'pages/modal/modal-auth.scss';
+//User
+@import 'pages/user/user';
