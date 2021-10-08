@@ -1,6 +1,6 @@
 .input-field {
   overflow: hidden;
-  margin-top: 10px;
+  margin-top: 4px;
   min-height: 88px;
 
   label {
@@ -17,6 +17,11 @@
     border: 1px solid #e2e3e4;
     padding: 12px 14px;
     font-size: 15px;
+
+    &::placeholder {
+      font-size: 13px;
+      color: #808081;
+    }
   }
 
   &.error {

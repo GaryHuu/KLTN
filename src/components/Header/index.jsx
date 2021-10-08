@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal/lib/components/Modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import headerLogo from 'assets/img/header-logo.svg';
 import userIcon from 'assets/img/user-icon.svg';
 import ModalAuth from 'features/Auth/components/ModalAuth';
 import { closeModal, openModal } from 'features/Auth/userSlice';
+import { toast } from 'react-toastify';
 
 function Header() {
+  const history = useHistory();
+  const dispatch = useDispatch();
   const [inputSearch, setInputSearch] = useState('');
   const modalIsOpen = useSelector((state) => state.user.modalIsOpen);
-  const dispatch = useDispatch();
+  const isLoggedIn = true;
+
   const handleOpenModal = () => {
     const action = openModal();
     dispatch(action);
@@ -26,6 +30,26 @@ function Header() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+  };
+
+  const handleCartClick = () => {
+    if (!isLoggedIn) {
+      const action = openModal();
+      dispatch(action);
+      toast.warn('Đăng nhập để xem giỏ hàng!');
+      return;
+    }
+    history.push('/cart');
+  };
+
+  const handleUserClick = () => {
+    if (!isLoggedIn) {
+      const action = openModal();
+      dispatch(action);
+      toast.warn('Đăng nhập để xem thông tin!');
+      return;
+    }
+    history.push('/user');
   };
   return (
     <>
@@ -58,16 +82,16 @@ function Header() {
               <Link to='/product'>Sức khỏe giới tính</Link>
             </div>
           </div>
-          <Link to='/cart' className='header__cart'>
+          <div onClick={handleCartClick} className='header__cart'>
             <span className='cart__noti-number'>69</span>
             <i className='fas fa-shopping-cart'></i>
             <p>Giỏ hàng</p>
-          </Link>
+          </div>
           <div className='header__user'>
             <img src={userIcon} alt='user logo' />
             <div className='user-log'>
               <div onClick={handleOpenModal}>Đăng nhập</div>
-              <div>Tài khoản</div>
+              <div onClick={handleUserClick}>Tài khoản</div>
             </div>
           </div>
         </div>

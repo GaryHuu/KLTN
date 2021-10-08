@@ -2,7 +2,7 @@ import React from 'react';
 import { Controller } from 'react-hook-form';
 
 function InputField(props) {
-  const { form, name, label, disable, placeholder } = props;
+  const { form, name, label, disable, placeholder, type = 'text' } = props;
   return (
     <Controller
       name={name}
@@ -19,7 +19,7 @@ function InputField(props) {
             onChange={onChange}
             onBlur={onBlur}
             placeholder={placeholder}
-            type='text'
+            type={type}
             name={name}
           />
           {invalid && <span>{error?.message}</span>}

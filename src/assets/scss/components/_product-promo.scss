@@ -1,0 +1,21 @@
+.produce-promo {
+  margin-top: 12px;
+  padding: 14px 0;
+  background-color: $white-text;
+
+  &__title {
+    padding: 0 14px;
+    @include flex();
+    margin-bottom: 10px;
+
+    img {
+      height: 26px;
+      width: 26px;
+    }
+
+    span {
+      line-height: 26px;
+      margin-left: 4px;
+    }
+  }
+}
