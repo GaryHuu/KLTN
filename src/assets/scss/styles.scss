@@ -30,21 +30,21 @@
 @import 'components/sidebar.scss';
 @import 'components/product-promo';
 // Modal Login
-@import 'pages/modal/modal-auth.scss';
+@import './pages/modal/modal-auth';
 
 // Page specific styles
 // Home Page
-@import 'pages/home/banner-slide.scss';
-@import 'pages/home/hot-promotion.scss';
-@import 'pages/home/feature-product.scss';
-@import 'pages/home/home-product.scss';
+@import './pages/home/banner-slide';
+@import './pages/home/hot-promotion';
+@import './pages/home/feature-product';
+@import './pages/home/home-product';
 
 // Cart Page
-@import 'pages/cart/cart.scss';
+@import './pages/cart/cart';
 
 //Product
-@import 'pages/product/product-page.scss';
-@import 'pages/product/product-detail-page.scss';
+@import './pages/product/product-page';
+@import './pages/product/product-detail-page';
 
 //User
-@import 'pages/user/user';
+@import './pages/user/user';
