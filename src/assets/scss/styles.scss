@@ -23,28 +23,28 @@
 // Components
 @import '~slick-carousel/slick/slick.css';
 @import '~slick-carousel/slick/slick-theme.css';
-@import 'components/product-list.scss';
-@import 'components/quantity.scss';
-@import 'components/input-field.scss';
-@import 'components/gender-field';
-@import 'components/sidebar.scss';
-@import 'components/product-promo';
+@import 'components/_product-list.scss';
+@import 'components/_quantity.scss';
+@import 'components/_input-field.scss';
+@import 'components/_gender-field.scss';
+@import 'components/_sidebar.scss';
+@import 'components/_product-promo.scss';
 // Modal Login
-@import './pages/modal/modal-auth';
+@import './pages/modal/_modal-auth.scss';
 
 // Page specific styles
 // Home Page
-@import './pages/home/banner-slide';
-@import './pages/home/hot-promotion';
-@import './pages/home/feature-product';
-@import './pages/home/home-product';
+@import './pages/home/_banner-slide.scss';
+@import './pages/home/_hot-promotion.scss';
+@import './pages/home/_feature-product.scss';
+@import './pages/home/_home-product.scss';
 
 // Cart Page
-@import './pages/cart/cart';
+@import './pages/cart/_cart.scss';
 
 //Product
-@import './pages/product/product-page';
-@import './pages/product/product-detail-page';
+@import './pages/product/_product-page.scss';
+@import './pages/product/_product-detail-page.scss';
 
 //User
-@import './pages/user/user';
+@import './pages/user/_user.scss';
