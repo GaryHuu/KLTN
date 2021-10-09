@@ -77,7 +77,7 @@ function UserInformationForm(props) {
         <InputField
           name='oldPassword'
           form={form}
-          label='Họ Mật khẩu cũ'
+          label='Mật khẩu cũ'
           placeholder='Nhập mật khẩu cũ'
         />
         <InputField
