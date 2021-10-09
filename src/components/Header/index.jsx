@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import Modal from 'react-modal/lib/components/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import headerLogo from 'assets/img/header-logo.svg';
 import userIcon from 'assets/img/user-icon.svg';
 import ModalAuth from 'features/Auth/components/ModalAuth';
 import { closeModal, openModal } from 'features/Auth/userSlice';
-import { toast } from 'react-toastify';
 
 function Header() {
   const history = useHistory();
