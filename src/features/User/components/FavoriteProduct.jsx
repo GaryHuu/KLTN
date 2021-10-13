@@ -1,13 +1,12 @@
-import ProductList from 'features/Product/components/ProductList';
 import React from 'react';
 import ReactPaginate from 'react-paginate';
-import { useRouteMatch } from 'react-router';
+
+import ProductList from 'features/Product/components/ProductList';
+
 function FavoriteProduct(props) {
-  const match = useRouteMatch();
-  console.log(match);
   const handlePageClick = (e) => {
-    const currentPage = e.selected + 1;
-    console.log(currentPage);
+    // const currentPage = e.selected + 1;
+    // console.log(currentPage);
   };
   return (
     <div className='favorite-product'>

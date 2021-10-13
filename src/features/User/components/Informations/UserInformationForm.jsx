@@ -5,6 +5,8 @@ import * as yup from 'yup';
 
 import GenderField from 'components/form-controls/GenderField';
 import InputField from 'components/form-controls/InputField';
+import Button from 'components/form-controls/Button';
+import PasswordField from 'components/form-controls/PasswordField';
 
 function UserInformationForm(props) {
   const { onSubmit } = props;
@@ -51,9 +53,8 @@ function UserInformationForm(props) {
   });
 
   const handleSubmit = (values) => {
-    console.log(values);
-    // if (!onSubmit) return;
-    // onSubmit(values);
+    if (!onSubmit) return;
+    onSubmit(values);
   };
   return (
     <form
@@ -74,28 +75,28 @@ function UserInformationForm(props) {
           form={form}
           label='Thay đổi mật khẩu'
         />
-        <InputField
+        <PasswordField
           name='oldPassword'
           form={form}
           label='Mật khẩu cũ'
           placeholder='Nhập mật khẩu cũ'
         />
-        <InputField
+        <PasswordField
           name='newPassword'
           form={form}
           label='Mật khẩu mới'
           placeholder='Mật khẩu từ 6 đến 32 ký tự'
         />
-        <InputField
+        <PasswordField
           name='retypeNewPassword'
           form={form}
           label='Xác nhận mật khẩu mới'
           placeholder='Mật khẩu từ 6 đến 32 ký tự'
         />
       </div>
-      <button type='submit' className='submit'>
+      <Button type='submit' className='submit'>
         CẬP NHẬT THAY ĐỔI
-      </button>
+      </Button>
     </form>
   );
 }
