@@ -1,16 +1,19 @@
 
 # Đồ Án :v: :sneezing_face:
+
+## Thông tin đồ án :rofl: :rofl: :rofl:
+
 ```
 Tên: Nguyễn Hồng Hữu  
 MSSV: 18119084
+GVHD: ThS Huỳnh Hoàng Hà
 Đề tài: Xây dựng Website bán thuốc
-Công nghệ: FE (REACTJS) - BE (C#)
-Giáo Viên Hướng Dẫn: ThS Huỳnh Hoàng Hà
+Công nghệ: Front-End(REACTJS)-Back-End(C#)
 ```
+## Thời gian thực hiện :rofl: :rofl: :rofl:
 ```
-Thời gian thực hiện: Từ Tuần 6 (ngày 30/09/2021)  đến Tuần 17 (ngày 16/12/2021)
+Từ Tuần 6 (ngày 30/09/2021)  đến Tuần 17 (ngày 16/12/2021)
 ```
-#### Chi Tiết :rofl: :rofl: :rofl:
 | Tuần | Thực Hiện |
 | ------------- | ------------- |
 | Tuần 06  | Xây dựng UI Logic trang Home  |
@@ -25,3 +28,4 @@ Thời gian thực hiện: Từ Tuần 6 (ngày 30/09/2021)  đến Tuần 17 (n
 | Tuần 15  | Fix và Deploy Project |
 | Tuần 16  | Viết Báo Cáo |
 | Tuần 17  | Viết Báo Cáo |
+
