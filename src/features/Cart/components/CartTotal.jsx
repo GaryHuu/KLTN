@@ -57,9 +57,19 @@ function CartTotal() {
       </div>
 
       {isSuccess || (
-        <button style={{ cursor: 'pointer' }} onClick={handleClick}>
-          {!isConfirm ? 'TIẾN HÀNH ĐẶT HÀNG' : 'XÁC NHẬN THANH TOÁN'}
-        </button>
+        <>
+          <button onClick={handleClick}>
+            {!isConfirm ? 'TIẾN HÀNH ĐẶT HÀNG' : 'XÁC NHẬN THANH TOÁN'}
+          </button>
+          <button
+            className='back'
+            onClick={() => {
+              history.goBack();
+            }}
+          >
+            BACK
+          </button>
+        </>
       )}
     </>
   );

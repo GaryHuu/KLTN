@@ -16,7 +16,6 @@
       .user-main {
         position: relative;
         background-color: #fff;
-        padding: 58px 0;
 
         .user-header {
           position: absolute;
@@ -44,59 +43,55 @@
           }
         }
 
-        .user-information {
-          @include flex();
-          justify-content: space-between;
-          flex-flow: row wrap;
-          padding: 0 70px;
+        .user-content {
+          padding: 58px 70px;
 
-          input {
-            color: #808081;
-          }
+          .user-information {
+            @include flex();
+            justify-content: space-between;
+            flex-flow: row wrap;
 
-          .left {
-            width: 59%;
-          }
+            input {
+              color: #808081;
+            }
 
-          .right {
-            width: 32%;
+            .left {
+              width: 59%;
+            }
 
-            .input-field:nth-child(1) {
-              @include flex();
-              flex-direction: row-reverse;
-              margin: 15px 0 0;
-              height: 40px;
-              min-height: unset;
+            .right {
+              width: 32%;
 
-              input {
-                cursor: pointer;
-                width: 20px;
-                height: 20px;
-                margin: 0 10px 0 0;
+              .input-field:nth-child(1) {
+                @include flex();
+                flex-direction: row-reverse;
+                margin: 15px 0 0;
+                height: 40px;
+                min-height: unset;
+
+                input {
+                  cursor: pointer;
+                  width: 20px;
+                  height: 20px;
+                  margin: 0 10px 0 0;
+                }
               }
             }
           }
 
-          .submit {
-            width: 100%;
-            margin-top: 20px;
-            border: none;
-            height: 48px;
-            font-size: 16px;
-            color: #fff;
-            cursor: pointer;
-            background-color: #01adab;
-
-            &:hover {
-              opacity: 0.85;
+          .user-location {
+            input,
+            textarea {
+              color: #808081;
             }
           }
-        }
-      }
 
-      .favorite-product {
-        .product__item {
-          width: 25%;
+          .favorite-product {
+            margin: 0 -70px;
+            .product__item {
+              width: 25%;
+            }
+          }
         }
       }
     }

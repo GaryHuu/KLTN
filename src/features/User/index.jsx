@@ -1,14 +1,36 @@
+import React, { useMemo } from 'react';
+import { Route, Switch, useLocation, useRouteMatch } from 'react-router-dom';
+
 import ProductPromotion from 'features/Product/components/ProductPromotion';
-import React from 'react';
-import { Route, Switch, useRouteMatch } from 'react-router-dom';
+
 import FavoriteProduct from './components/FavoriteProduct';
 import SideBarUser from './components/SideBarUser';
 import UserInfomation from './components/UserInformation';
 import UserLocation from './components/UserLocation';
+import UserOrder from './components/UserOrder';
 
 function User(props) {
-  const match = useRouteMatch();
-  console.log(match);
+  const { url } = useRouteMatch();
+  const { pathname } = useLocation();
+  const getTitleHeader = useMemo(() => {
+    switch (pathname) {
+      case '/user':
+        return 'THÔNG TIN TÀI KHOẢN';
+
+      case '/user/location':
+        return 'THÔNG TIN ĐỊA CHỈ';
+
+      case '/user/order':
+        return 'QUẢN LÝ ĐƠN HÀNG';
+
+      case '/user/favorite':
+        return 'SẢN PHẨM YÊU THÍCH';
+
+      default:
+        return '';
+    }
+  }, [pathname]);
+
   return (
     <div className='user'>
       <div className='container'>
@@ -19,20 +41,15 @@ function User(props) {
           </div>
           <div className='user__right'>
             <div className='user-main'>
-              <div className='user-header'>THÔNG TIN TÀI KHOẢN</div>
-              <Switch>
-                <Route path={match.url} exact component={UserInfomation} />
-                <Route
-                  path={`${match.url}/favorite`}
-                  exact
-                  component={FavoriteProduct}
-                />
-                <Route
-                  path={`${match.url}/location`}
-                  exact
-                  component={UserLocation}
-                />
-              </Switch>
+              <div className='user-header'>{getTitleHeader}</div>
+              <div className='user-content'>
+                <Switch>
+                  <Route path={url} exact component={UserInfomation} />
+                  <Route path={`${url}/favorite`} component={FavoriteProduct} />
+                  <Route path={`${url}/order`} component={UserOrder} />
+                  <Route path={`${url}/location`} component={UserLocation} />
+                </Switch>
+              </div>
             </div>
           </div>
         </div>

@@ -23,12 +23,15 @@
 // Components
 @import '~slick-carousel/slick/slick.css';
 @import '~slick-carousel/slick/slick-theme.css';
-@import 'components/_product-list.scss';
-@import 'components/_quantity.scss';
-@import 'components/_input-field.scss';
-@import 'components/_gender-field.scss';
-@import 'components/_sidebar.scss';
-@import 'components/_product-promo.scss';
+
+@import 'components/product-list.scss';
+@import 'components/quantity.scss';
+@import 'components/input-field.scss';
+@import 'components/button.scss';
+@import 'components/gender-field';
+@import 'components/sidebar.scss';
+@import 'components/product-promo';
+
 // Modal Login
 @import './pages/modal/_modal-auth.scss';
 
