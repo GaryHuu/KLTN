@@ -67,7 +67,7 @@ function CartTotal() {
               history.goBack();
             }}
           >
-            BACK
+            QUAY LẠI
           </button>
         </>
       )}
