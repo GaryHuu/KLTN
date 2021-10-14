@@ -3,18 +3,18 @@ import { Route, Switch } from 'react-router';
 
 import Footer from 'components/Footer';
 import Header from 'components/Header';
+import AdminPage from 'features/Admin';
 import Cart from 'features/Cart';
 import Home from 'features/Home';
+import NotFound from 'features/NotFound';
 import Product from 'features/Product';
 import User from 'features/User';
-import NotFound from 'features/NotFound';
-import Admin from 'features/Admin';
 
 function App() {
   return (
     <Fragment>
       <Switch>
-        <Route path='/admin' component={Admin} />
+        <Route path='/admin' component={AdminPage} />
         <Route>
           <Header />
           <main>
