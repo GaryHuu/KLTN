@@ -8,7 +8,11 @@ function PaymentSuccess(props) {
       <div className='info'>
         <p>Xin cảm ơn quý khách đã mua hàng tại PhanoLink</p>
         <p>
-          Đơn hàng <span>#34817</span> của bạn đã được đặt thành công!
+          Đơn hàng
+          <Link to='/user/order'>
+            <span>&nbsp;#34817&nbsp;</span>
+          </Link>
+          của bạn đã được đặt thành công!
         </p>
         <Link className='back-to-home' to='/'>
           &lt; Quay lại trang chủ
