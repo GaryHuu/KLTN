@@ -8,6 +8,7 @@ function HomeProduct(props) {
   useEffect(() => {
     (async function () {
       try {
+        console.log('1');
       } catch (error) {
         console.log(error);
       }
