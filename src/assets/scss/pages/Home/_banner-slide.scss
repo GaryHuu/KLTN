@@ -12,6 +12,13 @@
 
       .slider__item {
         outline: none;
+        height: 271px;
+        overflow: hidden;
+        border-radius: 18px;
+
+        img {
+          width: 100%;
+        }
       }
 
       .slick-arrows {

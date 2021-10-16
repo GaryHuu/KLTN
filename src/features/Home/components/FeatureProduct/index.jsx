@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
-import featureProduct from 'assets/img/feature-product-img.png';
+
+import productApi from 'api/productApi';
 import featureProductBanner from 'assets/img/feature-product-banner.png';
+import featureProduct from 'assets/img/feature-product-img.png';
 import iconFeatureProductBanner from 'assets/img/icon-feature-product.svg';
 
 function FeatureProduct() {
+  const [hotProductList, setHotProductList] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const settings = {
     dots: true,
     infinite: true,
@@ -15,6 +20,20 @@ function FeatureProduct() {
     slidesToScroll: 1,
     arrows: false,
   };
+
+  useEffect(() => {
+    setLoading(true);
+    (async () => {
+      try {
+        const { data } = await productApi.getHotProduct();
+        setHotProductList(data);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+      }
+    })();
+  }, []);
 
   return (
     <section className='feature-product'>
@@ -36,7 +55,7 @@ function FeatureProduct() {
                 <Link to='/product' className='feature-product__item'>
                   <img src={featureProduct} alt='' />
                 </Link>
-                <Link to='/product' className='feature-product__item'>
+                <Link to='/produc`t' className='feature-product__item'>
                   <img src={featureProduct} alt='' />
                 </Link>
               </div>
