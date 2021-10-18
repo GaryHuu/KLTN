@@ -28,7 +28,7 @@ function CartTotal() {
     // Delete Cart
 
     toast.success('Đặt Hàng Thành Công!');
-    history.push(`${path.url}/success`);
+    history.replace(`${path.url}/success`);
   };
 
   return (

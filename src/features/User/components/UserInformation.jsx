@@ -2,9 +2,7 @@ import React from 'react';
 import UserInformationForm from './Informations/UserInformationForm';
 
 function UserInformation(props) {
-  const handleSubmit = (values) => {
-    console.log(values);
-  };
+  const handleSubmit = (values) => {};
   return <UserInformationForm onSubmit={handleSubmit} />;
 }
 
