@@ -2,29 +2,12 @@ import React from 'react';
 
 import ProductItem from './ProductItem';
 
-function ProductList(props) {
+function ProductList({ data }) {
   return (
     <div className='home-product__list'>
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
+      {data?.map((product) => (
+        <ProductItem key={product.id} product={product} />
+      ))}
     </div>
   );
 }
