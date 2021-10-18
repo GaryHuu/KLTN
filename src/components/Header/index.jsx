@@ -15,6 +15,7 @@ function Header() {
   const [inputSearch, setInputSearch] = useState('');
   const modalIsOpen = useSelector((state) => state.user.modalIsOpen);
   const isLoggedIn = true;
+
   const handleOpenModal = () => {
     const action = openModal();
     dispatch(action);
