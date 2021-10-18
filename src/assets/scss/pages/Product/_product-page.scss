@@ -16,10 +16,24 @@
       background-color: #ebebeb;
       width: 79.5%;
 
+      .slick-slide {
+        overflow: hidden;
+        border-radius: 18px;
+      }
+
       .slick-slider {
         .slider__item {
           outline: none;
+          overflow: hidden;
+          border-radius: 18px;
+
+          img {
+            width: 100%;
+            height: 271px;
+            object-fit: cover;
+          }
         }
+
         .slick-dots,
         .slick-arrow {
           display: none !important;

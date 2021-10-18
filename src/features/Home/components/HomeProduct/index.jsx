@@ -1,14 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import productApi from 'api/productApi';
 import iconHomeProduct from 'assets/img/icon-home-product.png';
 import ProductList from 'features/Product/components/ProductList';
 
 function HomeProduct(props) {
+  const [productList, setProductList] = useState([]);
   useEffect(() => {
     (async function () {
       try {
-        console.log('1');
+        const { data } = await productApi.getProductList();
+        setProductList(data);
       } catch (error) {
         console.log(error);
       }
@@ -28,7 +31,7 @@ function HomeProduct(props) {
               Xem tất cả &nbsp; &gt;
             </Link>
           </div>
-          <ProductList />
+          <ProductList data={productList} />
         </div>
       </div>
     </section>

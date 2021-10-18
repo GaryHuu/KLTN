@@ -36,7 +36,7 @@ function HotPromotion() {
               <img src={iconHotPromotion} alt='' />
               <span>Khuyễn Mãi Hot</span>
             </div>
-            <Link to='/product' className='see-all'>
+            <Link to='/product?sort-by-sale=true' className='see-all'>
               Xem tất cả &nbsp; &gt;
             </Link>
           </div>

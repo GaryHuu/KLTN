@@ -9,21 +9,13 @@ const productApi = {
     return axiosClient.get(url);
   },
   getHotProduct() {
-    const url = '/products?sale';
+    const url = '/products?feature';
     return axiosClient.get(url);
   },
-  // add(data) {
-  //   const url = '/categories';
-  //   return axiosClient.post(url, data);
-  // },
-  // update(data) {
-  //   const url = `/categories/${data.id}`;
-  //   return axiosClient.patch(url, data);
-  // },
-  // remove(id) {
-  //   const url = `/categories/${id}`;
-  //   return axiosClient.delete(url);
-  // },
+  getProductList(params) {
+    const url = '/products';
+    return axiosClient.get(url, { params: params });
+  },
 };
 
 export default productApi;
