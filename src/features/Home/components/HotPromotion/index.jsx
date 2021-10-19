@@ -11,7 +11,7 @@ function HotPromotion() {
     dots: true,
     infinite: true,
     speed: 500,
-    // autoplay: true,
+    autoplay: true,
     slidesToShow: 3,
     slidesToScroll: 3,
   };

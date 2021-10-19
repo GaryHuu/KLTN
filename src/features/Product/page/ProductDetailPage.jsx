@@ -1,18 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useRouteMatch } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-// import { useRouteMatch } from 'react-router';
 import productDetailImg from 'assets/img/product-detail.png';
 import Quantity from 'components/Quantity';
 
 import 'react-toastify/dist/ReactToastify.css';
+import productApi from 'api/productApi';
 
 function ProductDetailPage() {
-  // const {
-  //   params: { id },
-  // } = useRouteMatch();
-
+  const {
+    params: { id },
+  } = useRouteMatch();
+  const [loading, setLoading] = useState(true);
+  const [product, setProduct] = useState({});
+  const [imgURL, setImgURL] = useState();
   const [quantity, setQuantity] = useState(1);
+
+  useEffect(() => {
+    (async function () {
+      setLoading(true);
+      try {
+        const { data } = await productApi.getProductByID(id);
+        setImgURL(data[0].images[0].url);
+        setProduct(data[0]);
+        setLoading(false);
+      } catch (error) {}
+    })();
+  }, [id]);
 
   const handleQuantityChange = (newValue) => {
     console.log(newValue);
@@ -23,25 +38,31 @@ function ProductDetailPage() {
     toast.success('Thêm vào giỏ hàng thành công!');
   };
 
+  const isPromo = product?.discount !== 'No';
+  const price = parseInt(product?.price);
+  let discountPercent;
+  let priceAfterDiscount;
+  if (isPromo) {
+    discountPercent = parseInt(product?.discount?.slice(0, -1)) / 100;
+    priceAfterDiscount = parseInt(price) - parseInt(price) * discountPercent;
+  }
+
   return (
     <div className='product-detail-page'>
       <div className='container'>
         <div className='product-detail-page__content'>
           <div className='product-detail-page__thumbnail'>
             <div className='thumbnail-main'>
-              <img src={productDetailImg} alt='' />
+              <img src={imgURL || ''} alt='' />
             </div>
             <div className='list'>
-              <img src={productDetailImg} alt='' />
-              <img src={productDetailImg} alt='' />
-              <img src={productDetailImg} alt='' />
+              <img src={imgURL || ''} alt='' />
+              <img src={imgURL || ''} alt='' />
+              <img src={imgURL || ''} alt='' />
             </div>
           </div>
           <div className='product-detail-page__info'>
-            <p className='short-desc'>
-              Thực Phẩm Chức Năng Bảo Vệ Sức Khỏe Solgar Vegetarian COQ-10 60mg
-              Chai 60 Viên
-            </p>
+            <p className='short-desc'>{product.name}</p>
             <div className='trademark'>
               <p>
                 Thương hiệu: &nbsp;
@@ -65,7 +86,15 @@ function ProductDetailPage() {
             </div>
             <div className='main-info'>
               <p className='price'>
-                Giá: &nbsp; <span>1.160.000đ</span>
+                Giá: &nbsp;{' '}
+                <span>
+                  {isPromo && priceAfterDiscount
+                    ? priceAfterDiscount.toLocaleString()
+                    : price
+                    ? price.toLocaleString()
+                    : ''}{' '}
+                  đ
+                </span>
               </p>
               <p className='status'>
                 Tình trạng:&nbsp; <span>Còn Hàng</span>
@@ -82,6 +111,13 @@ function ProductDetailPage() {
               </div>
             </div>
           </div>
+        </div>
+        <div className='content-info'>
+          <h4>Thông tin sản phẩm</h4>
+          <p
+            className='content'
+            dangerouslySetInnerHTML={{ __html: product.description }}
+          ></p>
         </div>
       </div>
     </div>

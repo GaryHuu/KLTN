@@ -4,7 +4,7 @@ import { closeModal } from '../userSlice';
 import Login from 'features/Auth/components/Login';
 import Register from 'features/Auth/components/Register';
 
-const MODE = {
+export const MODE = {
   LOGIN: 'login',
   REGISTER: 'register',
 };
@@ -33,7 +33,7 @@ function ModalAuth() {
         </div>
       </div>
       <div className='content'>
-        {mode === MODE.LOGIN ? <Login /> : <Register />}
+        {mode === MODE.LOGIN ? <Login /> : <Register setMode={setMode} />}
       </div>
     </div>
   );

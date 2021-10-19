@@ -3,27 +3,25 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
+import Button from 'components/form-controls/Button';
 import GenderField from 'components/form-controls/GenderField';
 import InputField from 'components/form-controls/InputField';
-import Button from 'components/form-controls/Button';
 import PasswordField from 'components/form-controls/PasswordField';
 
 function UserInformationForm(props) {
   const { onSubmit } = props;
   const schema = yup.object().shape({
-    fullName: yup.string().required('Please enter your name'),
+    name: yup.string().required('Please enter your name'),
     email: yup
       .string()
       .required('Please enter your email')
       .email('Please enter a valid email'),
-    phoneNumber: yup.string().required('Please enter your phone number'),
+    phone: yup.string().required('Please enter your phone number').min(10),
     gender: yup.string().required('Please enter your sex'),
     birthday: yup.string().required('Please enter your birthday'),
     isChangePassword: yup.boolean(),
-    oldPassword: yup.string().when('isChangePassword', {
-      is: true,
-      then: yup.string().required('Please enter your password'),
-    }),
+    old_password: yup.string().required('Please enter your password'),
+
     newPassword: yup.string().when('isChangePassword', {
       is: true,
       then: yup.string().required('Please enter your new password'),
@@ -39,13 +37,13 @@ function UserInformationForm(props) {
 
   const form = useForm({
     defaultValues: {
-      fullName: 'Nguyễn Hồng Hữu',
+      name: 'Nguyễn Hồng Hữu',
       email: 'honghuu.nguyen@gumiviet.com',
-      phoneNumber: '0379339693',
-      gender: 'male',
+      phone: '0379339693',
+      gender: '1',
       birthday: '2021-08-22',
       isChangePassword: false,
-      oldPassword: undefined,
+      old_password: undefined,
       newPassword: undefined,
       retypeNewPassword: undefined,
     },
@@ -62,11 +60,11 @@ function UserInformationForm(props) {
       className='user-information'
     >
       <div className='left'>
-        <InputField name='fullName' form={form} label='Họ Tên' />
+        <InputField name='name' form={form} label='Họ Tên' />
         <InputField name='email' form={form} label='Email' />
-        <InputField name='phoneNumber' form={form} label='Số điện thoại' />
+        <InputField name='phone' form={form} label='Số điện thoại' />
         <GenderField name='gender' form={form} label='Giới tính' />
-        <InputField type='date' name='birthday' form={form} label='Ngày Sinh' />
+        <InputField name='birthday' type='date' form={form} label='Ngày Sinh' />
       </div>
       <div className='right'>
         <InputField
@@ -76,7 +74,7 @@ function UserInformationForm(props) {
           label='Thay đổi mật khẩu'
         />
         <PasswordField
-          name='oldPassword'
+          name='old_password'
           form={form}
           label='Mật khẩu cũ'
           placeholder='Nhập mật khẩu cũ'

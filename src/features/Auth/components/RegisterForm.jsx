@@ -9,21 +9,26 @@ import PasswordField from 'components/form-controls/PasswordField';
 function RegisterForm(props) {
   const { onSubmit } = props;
   const schema = yup.object().shape({
-    fullName: yup.string().required('Please enter your full name'),
+    name: yup.string().required('Please enter your full name'),
     email: yup
       .string()
       .required('Please enter your email')
       .email('Please enter a valid email'),
     password: yup.string().required('Please enter your password'),
-    phoneNumber: yup.number().required('Please enter your phone number'),
+    password_confirmation: yup
+      .string()
+      .required('Please enter your password')
+      .oneOf([yup.ref('password')], 'Password does not match'),
+    phone: yup.string().required('Please enter your phone number').min(10),
   });
 
   const form = useForm({
     defaultValues: {
-      fullName: '',
+      name: '',
       email: '',
       password: '',
-      phoneNumber: undefined,
+      password_confirmation: '',
+      phone: undefined,
     },
     resolver: yupResolver(schema),
   });
@@ -39,7 +44,7 @@ function RegisterForm(props) {
       <form onSubmit={form.handleSubmit(handleSubmit)}>
         <InputField
           placeholder='Nhập họ tên'
-          name='fullName'
+          name='name'
           form={form}
           label='Họ tên'
         />
@@ -55,9 +60,15 @@ function RegisterForm(props) {
           form={form}
           label='Mật Khẩu'
         />
+        <PasswordField
+          placeholder='Mật khẩu từ 6 đến 32 ký tự'
+          name='password_confirmation'
+          form={form}
+          label='Nhập Lại Mật Khẩu'
+        />
         <InputField
           placeholder='Nhập số điện thoại'
-          name='phoneNumber'
+          name='phone'
           form={form}
           label='Số điện thoại'
         />

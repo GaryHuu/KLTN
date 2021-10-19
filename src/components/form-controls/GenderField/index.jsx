@@ -16,8 +16,8 @@ function GenderField(props) {
           <div className='group'>
             <input
               id='user-sex-male'
-              value='male'
-              defaultChecked={value === 'male'}
+              value='1'
+              defaultChecked={value === '1'}
               disabled={disable}
               onClick={onChange}
               onBlur={onBlur}
@@ -27,8 +27,8 @@ function GenderField(props) {
             <label htmlFor='user-sex-male'>Nam</label>
             <input
               id='user-sex-female'
-              value='female'
-              defaultChecked={value === 'female'}
+              value='0'
+              defaultChecked={value === '0'}
               disabled={disable}
               onClick={onChange}
               onBlur={onBlur}
@@ -36,7 +36,7 @@ function GenderField(props) {
               name={name}
             />
             <label htmlFor='user-sex-female'>Nữ</label>
-            <input
+            {/* <input
               id='user-sex-other'
               value='other'
               defaultChecked={value === 'other'}
@@ -46,7 +46,7 @@ function GenderField(props) {
               type='radio'
               name={name}
             />
-            <label htmlFor='user-sex-other'>Khác</label>
+            <label htmlFor='user-sex-other'>Khác</label> */}
           </div>
 
           {invalid && <span>{error?.message}</span>}

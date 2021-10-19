@@ -66,8 +66,8 @@ header {
 
         a {
           display: inline-block;
-          @include font-size(12px);
-          margin-right: 5px;
+          @include font-size(13px);
+          margin-right: 10px;
           color: $white-text;
           transition: all ease-in 0.2s;
 
