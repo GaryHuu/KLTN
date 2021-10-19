@@ -17,7 +17,6 @@ function Header() {
   const [inputSearch, setInputSearch] = useState('');
   const modalIsOpen = useSelector((state) => state.user.modalIsOpen);
   const isLoggedIn = useSelector((state) => state.user.current);
-  console.log(!!isLoggedIn);
 
   useEffect(() => {
     (async function () {

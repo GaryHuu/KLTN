@@ -2,7 +2,6 @@
   .group {
     margin-top: 10px;
     @include flex();
-    border: 1px solid #e2e3e4;
     border-radius: 4px;
     overflow: hidden;
 
@@ -16,6 +15,7 @@
       text-align: center;
       cursor: pointer;
       font-size: 15px;
+      border: 1px solid #e2e3e4;
 
       span {
         width: 100%;
@@ -27,11 +27,6 @@
     input:checked + label {
       background-color: #808081;
       color: #fff;
-    }
-
-    label:nth-child(2),
-    label:nth-child(4) {
-      border-right: 1px solid #e2e3e4;
     }
   }
 }
