@@ -155,4 +155,23 @@
       }
     }
   }
+
+  .content-info {
+    margin-top: 20px;
+    background-color: #fff;
+
+    h4 {
+      font-size: 18px;
+      color: #505050;
+      padding: 15px 0 15px 30px;
+      font-weight: normal;
+      border-bottom: 1px solid #ebebeb;
+    }
+
+    .content {
+      background-color: #fff;
+      padding: 30px 30px 30px 30px;
+      line-height: 30px;
+    }
+  }
 }

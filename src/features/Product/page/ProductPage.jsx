@@ -1,8 +1,10 @@
-import productApi from 'api/productApi';
-import BannerSlide from 'features/Home/components/BannerSlide';
 import React, { useEffect, useMemo, useState } from 'react';
 import ReactPaginate from 'react-paginate';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
+
+import productApi from 'api/productApi';
+import BannerSlide from 'features/Home/components/BannerSlide';
+
 import ProductFilter from '../components/ProductFilter';
 import ProductList from '../components/ProductList';
 import ProductLoading from '../components/ProductLoading';
@@ -31,7 +33,6 @@ function ProductPage() {
       setLoading(true);
       try {
         const result = await productApi.getProductList(queryParams);
-        console.log(result.pagination);
         setProductList(result.data);
         setPagination(result.pagination);
         setLoading(false);
@@ -55,7 +56,6 @@ function ProductPage() {
 
   const handlePageClick = (e) => {
     const currentPage = e.selected + 1;
-    console.log(currentPage);
     const filters = {
       ...queryParams,
       page: currentPage,

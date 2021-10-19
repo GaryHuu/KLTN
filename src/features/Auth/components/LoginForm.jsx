@@ -9,7 +9,7 @@ import PasswordField from 'components/form-controls/PasswordField';
 function LoginForm(props) {
   const { onSubmit } = props;
   const schema = yup.object().shape({
-    identifier: yup
+    email: yup
       .string()
       .required('Please enter your email')
       .email('Please enter a valid email'),
@@ -19,7 +19,7 @@ function LoginForm(props) {
 
   const form = useForm({
     defaultValues: {
-      identifier: '',
+      email: '',
       password: '',
     },
     resolver: yupResolver(schema),
@@ -36,7 +36,7 @@ function LoginForm(props) {
       <form onSubmit={form.handleSubmit(handleSubmit)}>
         <InputField
           placeholder='Nhập email hoặc số điện thoại'
-          name='identifier'
+          name='email'
           form={form}
           label='Email / SĐT'
         />

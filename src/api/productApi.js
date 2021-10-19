@@ -16,6 +16,14 @@ const productApi = {
     const url = '/products';
     return axiosClient.get(url, { params: params });
   },
+  getProductByID(id) {
+    const url = `/products`;
+    return axiosClient.get(url, {
+      params: {
+        id,
+      },
+    });
+  },
 };
 
 export default productApi;
