@@ -35,10 +35,12 @@ function UserInformationForm(props) {
       .oneOf([yup.ref('newPassword')], 'New password does not match'),
   });
 
+
+
   const form = useForm({
     defaultValues: {
       name: 'Nguyễn Hồng Hữu',
-      email: 'honghuu.nguyen@gumiviet.com',
+      email: 'honghuu.nguye@gumiviet.com',
       phone: '0379339693',
       gender: '1',
       birthday: '2021-08-22',
