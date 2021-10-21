@@ -8,7 +8,7 @@ Tên: Nguyễn Hồng Hữu
 MSSV: 18119084
 GVHD: ThS Huỳnh Hoàng Hà
 Đề tài: Xây dựng Website bán thuốc
-Công nghệ: Front-End(REACTJS)-Back-End(C#)
+Công nghệ: Front-End(REACTJS)-Back-End(PHP)
 ```
 ## Thời gian thực hiện :rofl: :rofl: :rofl:
 ```
