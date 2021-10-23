@@ -57,6 +57,22 @@
       }
     }
 
+    .slide-skeleton {
+      @include flex();
+      justify-content: center;
+      align-items: center;
+
+      .skeleton {
+        display: block;
+        height: 283px;
+        width: 360px;
+      }
+
+      .skeleton:nth-child(3) {
+        margin: 0 35px;
+      }
+    }
+
     .hot-promotion__list {
       @include flex();
       flex-flow: row nowrap;
