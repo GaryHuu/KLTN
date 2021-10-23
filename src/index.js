@@ -3,12 +3,10 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-
 import { store } from 'app/store';
 import ScrollToTop from 'components/ScrollToTop';
-
 import App from './App';
-
+import 'react-loading-skeleton/dist/skeleton.css';
 import './assets/scss/styles.scss';
 
 ReactDOM.render(

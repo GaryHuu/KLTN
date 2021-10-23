@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
-
 import productApi from 'api/productApi';
 import iconHotPromotion from 'assets/img/icon-hot-promotion.svg';
+import Skeleton from 'react-loading-skeleton';
 
 function HotPromotion() {
   const [hotPromoList, setHotPromoList] = useState([]);
+  const [loading, setLoading] = useState(true);
   const settings = {
     dots: true,
     infinite: true,
@@ -18,12 +19,14 @@ function HotPromotion() {
 
   useEffect(() => {
     (async () => {
+      setLoading(true);
       try {
         const { data } = await productApi.getHotPromo();
         setHotPromoList(data.slice(0, 9));
       } catch (error) {
         console.log(error);
       }
+      setLoading(false);
     })();
   }, []);
 
@@ -40,21 +43,29 @@ function HotPromotion() {
               Xem tất cả &nbsp; &gt;
             </Link>
           </div>
-          <Slider {...settings} className='hot-promotion__list'>
-            {hotPromoList.map((item) => (
-              <Link
-                key={item.id}
-                className='hot-promotion__item'
-                to={`/product/${item.id}`}
-              >
-                <img
-                  style={{ height: '283px', objectFit: 'cover' }}
-                  src={item.images[0].url}
-                  alt=''
-                />
-              </Link>
-            ))}
-          </Slider>
+          {loading ? (
+            <Skeleton
+              className='skeleton'
+              containerClassName='slide-skeleton'
+              count={3}
+            />
+          ) : (
+            <Slider {...settings} className='hot-promotion__list'>
+              {hotPromoList.map((item) => (
+                <Link
+                  key={item.id}
+                  className='hot-promotion__item'
+                  to={`/product/${item.id}`}
+                >
+                  <img
+                    style={{ height: '283px', objectFit: 'cover' }}
+                    src={item.images[0].url}
+                    alt=''
+                  />
+                </Link>
+              ))}
+            </Slider>
+          )}
         </div>
       </div>
     </section>
