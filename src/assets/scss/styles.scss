@@ -38,19 +38,17 @@
 // Page specific styles
 // Home Page
 
-@import 'pages/home/_banner-slide.scss';
-//
-//
-@import 'pages/home/_hot-promotion.scss';
-@import 'pages/home/_feature-product.scss';
-@import 'pages/home/_home-product.scss';
+@import 'pages/home1/banner-slide';
+@import 'pages/home1/hot-promotion';
+@import 'pages/home1/feature-product';
+@import 'pages/home1/home-product';
 
 // Cart Page
-@import 'pages/cart/_cart.scss';
+@import 'pages/cart1/cart';
 
 //Product
-@import 'pages/product/_product-page.scss';
-@import 'pages/product/_product-detail-page.scss';
+@import 'pages/product1/product-page';
+@import 'pages/product1/product-detail-page';
 
 //User
-@import 'pages/user/_user.scss';
+@import 'pages/user/user';
