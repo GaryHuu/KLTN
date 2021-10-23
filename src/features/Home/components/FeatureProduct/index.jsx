@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import Slider from 'react-slick';
-
 import productApi from 'api/productApi';
 import featureProductBanner from 'assets/img/feature-product-banner.png';
-import featureProduct from 'assets/img/feature-product-img.png';
 import iconFeatureProductBanner from 'assets/img/icon-feature-product.svg';
+import React, { useEffect, useState } from 'react';
+import Skeleton from 'react-loading-skeleton';
+import { Link } from 'react-router-dom';
+import Slider from 'react-slick';
 
 function FeatureProduct() {
   const [hotProductList, setHotProductList] = useState([]);
@@ -22,16 +21,16 @@ function FeatureProduct() {
   };
 
   useEffect(() => {
-    setLoading(true);
     (async () => {
+      setLoading(true);
       try {
         const { data } = await productApi.getHotProduct();
+        console.log(data);
         setHotProductList(data);
-        setLoading(false);
       } catch (error) {
         console.log(error);
-        setLoading(false);
       }
+      setLoading(false);
     })();
   }, []);
 
@@ -44,8 +43,58 @@ function FeatureProduct() {
             <span className='feature-product__title'>Sản Phẩm Nổi Bật</span>
           </div>
           <div className='feature-product__main'>
-            <Slider {...settings} className='feature-product__list'>
-              <div className='feature-product__container'>
+            {loading ? (
+              <Skeleton
+                className='skeleton'
+                containerClassName='slide-skeleton'
+                count={4}
+              />
+            ) : (
+              <Slider {...settings} className='feature-product__list'>
+                <div className='feature-product__container'>
+                  {hotProductList.slice(0, 4).map((product) => {
+                    console.log(product);
+                    const url = product.images[0].url;
+                    return (
+                      <Link
+                        key={product.id}
+                        to={`/product/${product.id}`}
+                        className='feature-product__item'
+                      >
+                        <img src={url} alt='' />
+                      </Link>
+                    );
+                  })}
+                </div>
+                <div className='feature-product__container'>
+                  {hotProductList.slice(4, 8).map((product) => {
+                    const url = product.images[0].url;
+                    return (
+                      <Link
+                        key={product.id}
+                        to={`/product/${product.id}`}
+                        className='feature-product__item'
+                      >
+                        <img src={url} alt='' />
+                      </Link>
+                    );
+                  })}
+                </div>
+                <div className='feature-product__container'>
+                  {hotProductList.slice(8, 12).map((product) => {
+                    const url = product.images[0].url;
+                    return (
+                      <Link
+                        key={product.id}
+                        to={`/product/${product.id}`}
+                        className='feature-product__item'
+                      >
+                        <img src={url} alt='' />
+                      </Link>
+                    );
+                  })}
+                </div>
+                {/* <div className='feature-product__container'>
                 <Link to='/product' className='feature-product__item'>
                   <img src={featureProduct} alt='' />
                 </Link>
@@ -55,42 +104,22 @@ function FeatureProduct() {
                 <Link to='/product' className='feature-product__item'>
                   <img src={featureProduct} alt='' />
                 </Link>
-                <Link to='/produc`t' className='feature-product__item'>
+                <Link to='/product' className='feature-product__item'>
                   <img src={featureProduct} alt='' />
                 </Link>
+              </div> */}
+              </Slider>
+            )}
+            {loading ? (
+              <Skeleton
+                className='skeleton'
+                containerClassName='feature-product__banner'
+              />
+            ) : (
+              <div className='feature-product__banner'>
+                <img src={featureProductBanner} alt='' />
               </div>
-              <div className='feature-product__container'>
-                <Link to='/product' className='feature-product__item'>
-                  <img src={featureProduct} alt='' />
-                </Link>
-                <Link to='/product' className='feature-product__item'>
-                  <img src={featureProduct} alt='' />
-                </Link>
-                <Link to='/product' className='feature-product__item'>
-                  <img src={featureProduct} alt='' />
-                </Link>
-                <Link to='/product' className='feature-product__item'>
-                  <img src={featureProduct} alt='' />
-                </Link>
-              </div>
-              <div className='feature-product__container'>
-                <Link to='/product' className='feature-product__item'>
-                  <img src={featureProduct} alt='' />
-                </Link>
-                <Link to='/product' className='feature-product__item'>
-                  <img src={featureProduct} alt='' />
-                </Link>
-                <Link to='/product' className='feature-product__item'>
-                  <img src={featureProduct} alt='' />
-                </Link>
-                <Link to='/product' className='feature-product__item'>
-                  <img src={featureProduct} alt='' />
-                </Link>
-              </div>
-            </Slider>
-            <div className='feature-product__banner'>
-              <img src={featureProductBanner} alt='' />
-            </div>
+            )}
           </div>
         </div>
       </div>

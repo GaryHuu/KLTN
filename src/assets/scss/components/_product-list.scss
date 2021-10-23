@@ -2,6 +2,10 @@
   @include flex();
   flex-flow: row wrap;
 
+  &.skeleton-container {
+    justify-content: space-between;
+  }
+
   .product__item {
     width: calc(100% / 5);
     position: relative;
@@ -15,6 +19,16 @@
 
       .header__product {
         transform: translateY(-5px);
+      }
+    }
+
+    &.skeleton {
+      width: calc(100% / 5 - 10px);
+      height: 278px;
+      margin-bottom: 4px;
+
+      &:nth-child(10n + 1) {
+        margin-left: 4px;
       }
     }
 

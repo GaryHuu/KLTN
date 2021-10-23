@@ -35,6 +35,7 @@ function Header() {
     const action = logout();
     dispatch(action);
     toast.success('Đã Đăng Xuất!');
+    history.replace('/');
   };
   const handleCloseModal = () => {
     const action = closeModal();
