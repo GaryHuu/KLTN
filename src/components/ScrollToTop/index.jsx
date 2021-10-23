@@ -40,6 +40,7 @@ export default function ScrollToTop() {
         right: '50px',
         bottom: '50px',
         cursor: 'pointer',
+        zIndex: 99,
       }}
       className='scroll-to-top'
     >
