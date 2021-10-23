@@ -24,6 +24,7 @@ function ProductDetailPage() {
         const { data } = await productApi.getProductByID(id);
         setImgURL(data[0].images[0].url);
         setProduct(data[0]);
+        console.log(data[0]);
         setLoading(false);
       } catch (error) {}
     })();
@@ -71,7 +72,8 @@ function ProductDetailPage() {
               <p>SKU: TP002455</p>
             </div>
             <div className='info-detail'>
-              <p>
+              <p>{product?.content || ''}</p>
+              {/* <p>
                 Trọng lượng: &nbsp; <span>300 g</span>
               </p>
               <p>
@@ -82,7 +84,7 @@ function ProductDetailPage() {
               </p>
               <p>
                 Xuất sứ: &nbsp; <span>USA</span>
-              </p>
+              </p> */}
             </div>
             <div className='main-info'>
               <p className='price'>
