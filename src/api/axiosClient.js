@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { StorageKeys } from 'constant';
 
 const axiosClient = axios.create({
   baseURL: 'https://phanolink.herokuapp.com/api/',
@@ -12,6 +13,11 @@ const axiosClient = axios.create({
 axiosClient.interceptors.request.use(
   function (config) {
     // Do something before request is sent
+    const URLS = ['/user/user-profile', '/user/change-profile'];
+    if (URLS.includes(config.url)) {
+      const token = localStorage.getItem(StorageKeys.TOKEN);
+      config.headers.Authorization = token ? `Bearer ${token}` : '';
+    }
     return config;
   },
   function (error) {

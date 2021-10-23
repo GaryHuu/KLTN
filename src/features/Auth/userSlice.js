@@ -10,10 +10,14 @@ export const register = createAsyncThunk('auth/register', async (payload) => {
 
 export const login = createAsyncThunk('auth/login', async (payload) => {
   //call API to login
-  const data = await userApi.login(payload);
+  const { data } = await userApi.login(payload);
+  const user = {
+    name: data.user_name,
+    id: data.user_id,
+  }
   //save data to local storage
   localStorage.setItem(StorageKeys.TOKEN, data.access_token);
-  localStorage.setItem(StorageKeys.USER, JSON.stringify(data));
+  localStorage.setItem(StorageKeys.USER, JSON.stringify(user));
   return data;
 });
 
@@ -37,14 +41,22 @@ export const userSlice = createSlice({
       localStorage.removeItem(StorageKeys.TOKEN);
       localStorage.removeItem(StorageKeys.USER);
     },
+    change: (state, action) => {
+      state.current = action.payload;
+      localStorage.setItem(StorageKeys.USER, JSON.stringify(action.payload));
+    }
   },
   extraReducers: {
     [login.fulfilled]: (state, action) => {
-      state.current = action.payload;
+      const user = {
+        name: action.payload.user_name,
+        id: action.payload.user_id,
+      }
+      state.current = user;
     },
   },
 });
 
-export const { openModal, closeModal, logout } = userSlice.actions;
+export const { openModal, closeModal, logout, change } = userSlice.actions;
 
 export default userSlice.reducer;

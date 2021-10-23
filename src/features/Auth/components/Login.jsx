@@ -3,7 +3,6 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { closeModal, login } from '../userSlice';
-
 import LoginForm from './LoginForm';
 
 function Login() {
@@ -12,12 +11,13 @@ function Login() {
     try {
       const action = login(values);
       const resultAction = await dispatch(action);
-      dispatch(closeModal());
-      unwrapResult(resultAction);
+      const res = unwrapResult(resultAction);
+      if (res.user_id) {
+        dispatch(closeModal());
+      }
       toast.success('Đặng Nhập Thành Công!');
     } catch (error) {
-      console.log(error);
-      toast.error(error.message);
+      toast.error('Tài Khoản Không Hợp Lệ!');
     }
   };
   return <LoginForm onSubmit={handleSubmit} />;
