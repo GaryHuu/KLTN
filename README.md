@@ -10,6 +10,12 @@ GVHD: ThS Huỳnh Hoàng Hà
 Đề tài: Xây dựng Website bán thuốc
 Công nghệ: FrontEnd(REACTJS)-BackEnd(PHP)
 ```
+
+## Đường dẫn sản phẩm :rofl: :rofl: :rofl:
+```
+https://phano-link.vercel.app/
+```
+
 ## Thời gian thực hiện :rofl: :rofl: :rofl:
 ```
 Từ Tuần 6 (ngày 30/09/2021)  đến Tuần 17 (ngày 16/12/2021)
