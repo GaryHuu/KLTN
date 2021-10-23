@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
@@ -9,7 +9,7 @@ import InputField from 'components/form-controls/InputField';
 import PasswordField from 'components/form-controls/PasswordField';
 
 function UserInformationForm(props) {
-  const { onSubmit } = props;
+  const { user, onSubmit } = props;
   const schema = yup.object().shape({
     name: yup.string().required('Please enter your name'),
     email: yup
@@ -17,40 +17,45 @@ function UserInformationForm(props) {
       .required('Please enter your email')
       .email('Please enter a valid email'),
     phone: yup.string().required('Please enter your phone number').min(10),
-    gender: yup.string().required('Please enter your sex'),
-    birthday: yup.string().required('Please enter your birthday'),
+    gender: yup.number().required('Please enter your phone gender'),
+    birthday: yup.string().required('Please enter your phone birthday'),
     isChangePassword: yup.boolean(),
-    old_password: yup.string().required('Please enter your password'),
-
-    newPassword: yup.string().when('isChangePassword', {
+    old_password: yup.string().when('isChangePassword', {
+      is: true,
+      then: yup.string().required('Please enter your password'),
+    }),
+    new_password: yup.string().when('isChangePassword', {
       is: true,
       then: yup.string().required('Please enter your new password'),
     }),
-    retypeNewPassword: yup
+    new_password_confirmation: yup
       .string()
       .when('isChangePassword', {
         is: true,
         then: yup.string().required('Please retype your new password'),
       })
-      .oneOf([yup.ref('newPassword')], 'New password does not match'),
+      .oneOf([yup.ref('new_password')], 'New password does not match'),
   });
-
-
 
   const form = useForm({
     defaultValues: {
-      name: 'Nguyễn Hồng Hữu',
-      email: 'honghuu.nguye@gumiviet.com',
-      phone: '0379339693',
-      gender: '1',
-      birthday: '2021-08-22',
-      isChangePassword: false,
-      old_password: undefined,
-      newPassword: undefined,
-      retypeNewPassword: undefined,
+      // isChangePassword: false,
     },
     resolver: yupResolver(schema),
   });
+
+  useEffect(() => {
+    user &&
+      form.reset({
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        gender: user.gender,
+        birthday: user.birthday,
+        isChangePassword: false,
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   const handleSubmit = (values) => {
     if (!onSubmit) return;
@@ -78,17 +83,17 @@ function UserInformationForm(props) {
         <PasswordField
           name='old_password'
           form={form}
-          label='Mật khẩu cũ'
-          placeholder='Nhập mật khẩu cũ'
+          label='Mật khẩu'
+          placeholder='Nhập mật khẩu'
         />
         <PasswordField
-          name='newPassword'
+          name='new_password'
           form={form}
           label='Mật khẩu mới'
           placeholder='Mật khẩu từ 6 đến 32 ký tự'
         />
         <PasswordField
-          name='retypeNewPassword'
+          name='new_password_confirmation'
           form={form}
           label='Xác nhận mật khẩu mới'
           placeholder='Mật khẩu từ 6 đến 32 ký tự'

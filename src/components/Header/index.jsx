@@ -16,8 +16,7 @@ function Header() {
   const dispatch = useDispatch();
   const [inputSearch, setInputSearch] = useState('');
   const modalIsOpen = useSelector((state) => state.user.modalIsOpen);
-  const isLoggedIn = useSelector((state) => state.user.current);
-
+  const user = useSelector((state) => state.user.current);
   useEffect(() => {
     (async function () {
       try {
@@ -28,7 +27,7 @@ function Header() {
   }, []);
 
   const handleButtonLoginLogoutClick = () => {
-    if (!isLoggedIn) {
+    if (!user) {
       const action = openModal();
       dispatch(action);
       return;
@@ -51,7 +50,7 @@ function Header() {
   };
 
   const handleCartClick = () => {
-    if (!isLoggedIn) {
+    if (!user) {
       const action = openModal();
       dispatch(action);
       toast.warn('Đăng Nhập Để Xem Giỏ Hàng!');
@@ -61,7 +60,7 @@ function Header() {
   };
 
   const handleUserClick = () => {
-    if (!isLoggedIn) {
+    if (!user) {
       const action = openModal();
       dispatch(action);
       toast.warn('Đăng nhập để xem thông tin!');
@@ -107,12 +106,10 @@ function Header() {
             <img src={userIcon} alt='user logo' />
             <div className='user-log'>
               <div onClick={handleButtonLoginLogoutClick}>
-                {!isLoggedIn ? 'Đăng Nhập' : 'Đăng Xuất'}
+                {!user ? 'Đăng Nhập' : 'Đăng Xuất'}
               </div>
               <div onClick={handleUserClick}>
-                {!isLoggedIn
-                  ? 'Tài khoản'
-                  : isLoggedIn.user_name.split(' ').pop()}
+                {!user ? 'Tài khoản' : user?.name?.split(' ')?.pop()}
               </div>
             </div>
           </div>
