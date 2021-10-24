@@ -1,8 +1,8 @@
 import React from 'react';
-import FeatureProduct from './components/FeatureProduct';
-import HomeProduct from './components/HomeProduct';
-import HotPromotion from './components/HotPromotion';
 import SlideHome from './components/SlideHome';
+import HomeProduct from './components/HomeProduct';
+import FeatureProduct from './components/FeatureProduct';
+import HotPromotion from './components/HotPromotion';
 
 function Home() {
   return (

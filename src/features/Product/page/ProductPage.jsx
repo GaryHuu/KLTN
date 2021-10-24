@@ -35,8 +35,8 @@ function ProductPage() {
         const result = await productApi.getProductList(queryParams);
         setProductList(result.data);
         setPagination(result.pagination);
-        setLoading(false);
       } catch (error) {}
+      setLoading(false);
     })();
   }, [queryParams]);
 
