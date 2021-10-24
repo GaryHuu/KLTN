@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import productApi from 'api/productApi';
+import Quantity from 'components/Quantity';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
-import productDetailImg from 'assets/img/product-detail.png';
-import Quantity from 'components/Quantity';
-
-import 'react-toastify/dist/ReactToastify.css';
-import productApi from 'api/productApi';
+import Skeleton from 'react-loading-skeleton';
+import { useSelector, useDispatch } from 'react-redux';
+import { openModal } from 'features/Auth/userSlice';
+import { addToCart } from 'features/Cart/cartSlice';
 
 function ProductDetailPage() {
   const {
@@ -16,6 +16,9 @@ function ProductDetailPage() {
   const [product, setProduct] = useState({});
   const [imgURL, setImgURL] = useState();
   const [quantity, setQuantity] = useState(1);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.current);
+  console.log(user);
 
   useEffect(() => {
     (async function () {
@@ -25,8 +28,8 @@ function ProductDetailPage() {
         setImgURL(data[0].images[0].url);
         setProduct(data[0]);
         console.log(data[0]);
-        setLoading(false);
       } catch (error) {}
+      setLoading(false);
     })();
   }, [id]);
 
@@ -36,7 +39,20 @@ function ProductDetailPage() {
   };
 
   const handleAddToCartClick = () => {
-    toast.success('Thêm vào giỏ hàng thành công!');
+    if (user) {
+      //add to cart by user id
+
+      const action = addToCart({
+        idProduct: product.id,
+        quantity,
+      });
+      dispatch(action);
+      toast.success('Thêm vào giỏ hàng thành công!');
+      return;
+    }
+    toast.warn('Đăng nhập để thêm vào giỏ hàng!');
+    const action = openModal();
+    dispatch(action);
   };
 
   const isPromo = product?.discount !== 'No';
@@ -54,63 +70,106 @@ function ProductDetailPage() {
         <div className='product-detail-page__content'>
           <div className='product-detail-page__thumbnail'>
             <div className='thumbnail-main'>
-              <img src={imgURL || ''} alt='' />
+              {loading ? (
+                <Skeleton height={420} width={350} />
+              ) : (
+                <img src={imgURL || ''} alt='' />
+              )}
             </div>
             <div className='list'>
-              <img src={imgURL || ''} alt='' />
-              <img src={imgURL || ''} alt='' />
-              <img src={imgURL || ''} alt='' />
+              {loading ? (
+                <Skeleton count={3} height={50} width={50} />
+              ) : (
+                <Fragment>
+                  <img src={imgURL || ''} alt='' />
+                  <img src={imgURL || ''} alt='' />
+                  <img src={imgURL || ''} alt='' />
+                </Fragment>
+              )}
             </div>
           </div>
           <div className='product-detail-page__info'>
-            <p className='short-desc'>{product.name}</p>
+            {loading ? (
+              <Skeleton
+                height={26}
+                width={'95%'}
+                style={{ margin: '0 20px' }}
+              />
+            ) : (
+              <p className='short-desc'>{product.name}</p>
+            )}
             <div className='trademark'>
-              <p>
-                Thương hiệu: &nbsp;
-                <span>Blackmores</span>
-              </p>
-              <p>SKU: TP002455</p>
+              {loading ? (
+                <Skeleton
+                  height={26}
+                  width={184}
+                  style={{ margin: '0 20px' }}
+                />
+              ) : (
+                <p>
+                  Danh Mục Sản phẩm: &nbsp;
+                  <span>Blackmores</span>
+                </p>
+              )}
+
+              {loading ? (
+                <Skeleton height={26} width={150} />
+              ) : (
+                <p>SKU: TP002455</p>
+              )}
             </div>
             <div className='info-detail'>
-              <p>{product?.content || ''}</p>
-              {/* <p>
-                Trọng lượng: &nbsp; <span>300 g</span>
-              </p>
-              <p>
-                Kích thước: &nbsp; <span>15 x 15 x 15 cm</span>
-              </p>
-              <p>
-                Quy cách: &nbsp; <span>Chai 60 viên</span>
-              </p>
-              <p>
-                Xuất sứ: &nbsp; <span>USA</span>
-              </p> */}
+              {loading ? (
+                <Skeleton height={75} width={'95%'} />
+              ) : (
+                <p>{product?.content}</p>
+              )}
             </div>
             <div className='main-info'>
-              <p className='price'>
-                Giá: &nbsp;{' '}
-                <span>
-                  {isPromo && priceAfterDiscount
-                    ? priceAfterDiscount.toLocaleString()
-                    : price
-                    ? price.toLocaleString()
-                    : ''}{' '}
-                  đ
-                </span>
-              </p>
-              <p className='status'>
-                Tình trạng:&nbsp; <span>Còn Hàng</span>
-              </p>
-              <div className='buy'>
-                <div className='buy__quantity'>
-                  <span>Số Lượng &nbsp;</span>
-                  <Quantity count={quantity} onChange={handleQuantityChange} />
+              {loading ? (
+                <Skeleton height={24} width={150} />
+              ) : (
+                <p className='price'>
+                  Giá: &nbsp;{' '}
+                  <span>
+                    {isPromo && priceAfterDiscount
+                      ? priceAfterDiscount.toLocaleString()
+                      : price
+                      ? price.toLocaleString()
+                      : ''}{' '}
+                    đ
+                  </span>
+                </p>
+              )}
+              {loading ? (
+                <Skeleton height={22} width={130} />
+              ) : (
+                <p className='status'>
+                  Tình trạng:&nbsp; <span>Còn Hàng</span>
+                </p>
+              )}
+
+              {loading ? (
+                <Skeleton
+                  style={{ marginTop: '10px' }}
+                  height={50}
+                  width={'90%'}
+                />
+              ) : (
+                <div className='buy'>
+                  <div className='buy__quantity'>
+                    <span>Số Lượng &nbsp;</span>
+                    <Quantity
+                      count={quantity}
+                      onChange={handleQuantityChange}
+                    />
+                  </div>
+                  <div onClick={handleAddToCartClick} className='buy__btn'>
+                    <i className='fas fa-shopping-cart'></i>
+                    <span>Chọn Mua</span>
+                  </div>
                 </div>
-                <div onClick={handleAddToCartClick} className='buy__btn'>
-                  <i className='fas fa-shopping-cart'></i>
-                  <span>Chọn Mua</span>
-                </div>
-              </div>
+              )}
             </div>
           </div>
         </div>

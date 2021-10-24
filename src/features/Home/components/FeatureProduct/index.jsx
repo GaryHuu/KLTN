@@ -25,7 +25,6 @@ function FeatureProduct() {
       setLoading(true);
       try {
         const { data } = await productApi.getHotProduct();
-        console.log(data);
         setHotProductList(data);
       } catch (error) {
         console.log(error);
@@ -53,7 +52,6 @@ function FeatureProduct() {
               <Slider {...settings} className='feature-product__list'>
                 <div className='feature-product__container'>
                   {hotProductList.slice(0, 4).map((product) => {
-                    console.log(product);
                     const url = product.images[0].url;
                     return (
                       <Link

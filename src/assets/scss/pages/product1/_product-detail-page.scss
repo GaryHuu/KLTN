@@ -24,6 +24,14 @@
         @include flex();
         justify-content: center;
 
+        & > span {
+          display: flex;
+
+          span {
+            margin: 0 20px;
+          }
+        }
+
         img {
           width: 50px;
           border-radius: 5px;

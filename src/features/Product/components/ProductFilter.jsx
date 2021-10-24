@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 
-function ProductFilter({ onChange, params, disabled }) {
+function ProductFilter({ onChange, params }) {
   const handleSaleClick = () => {
     if (!onChange) return;
     if (params['sort-by-sale'] === 'true') {
@@ -48,28 +48,28 @@ function ProductFilter({ onChange, params, disabled }) {
   return (
     <div className='product-filter'>
       <span>Ưu tiên xem: &nbsp;</span>
-      <ul className={disabled ? 'disabled' : ''}>
+      <ul>
         <li
           className={params['sort-by-sale'] === 'true' ? 'active' : ''}
-          onClick={disabled || handleSaleClick}
+          onClick={handleSaleClick}
         >
           Khuyến Mãi
         </li>
         <li
           className={params['date-update'] === 'true' ? 'active' : ''}
-          onClick={disabled || handleNewProductClick}
+          onClick={handleNewProductClick}
         >
           Hàng mới
         </li>
         <li
           className={params.asc === 'true' ? 'active' : ''}
-          onClick={disabled || handleSortASCClick}
+          onClick={handleSortASCClick}
         >
           Giá Thấp
         </li>
         <li
           className={params.desc === 'true' ? 'active' : ''}
-          onClick={disabled || handleSortDESCClick}
+          onClick={handleSortDESCClick}
         >
           Giá Cao
         </li>
