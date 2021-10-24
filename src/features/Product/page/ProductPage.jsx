@@ -1,10 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import { useHistory, useLocation } from 'react-router-dom';
-
 import productApi from 'api/productApi';
 import BannerSlide from 'features/Home/components/BannerSlide';
-
 import ProductFilter from '../components/ProductFilter';
 import ProductList from '../components/ProductList';
 import ProductLoading from '../components/ProductLoading';
@@ -76,7 +74,11 @@ function ProductPage() {
           </div>
           <div className='product-page__right'>
             <BannerSlide />
-            <ProductFilter params={queryParams} onChange={handleFilterChange} />
+            <ProductFilter
+              disabled={loading}
+              params={queryParams}
+              onChange={handleFilterChange}
+            />
             {loading ? (
               <ProductLoading />
             ) : iSNotFoundProduct ? (

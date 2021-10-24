@@ -1,28 +1,26 @@
 import React from 'react';
+import Skeleton from 'react-loading-skeleton';
 
 function ProductLoading(props) {
-  const BGCOLOR = '#CCC';
   return (
-    <>
-      <div
+    <div>
+      <Skeleton
+        className='skeleton product__item'
+        containerClassName='skeleton-container home-product__list'
+        count={20}
+      />
+
+      <Skeleton
+        count={1}
+        width={150}
+        height={25}
         style={{
-          width: '100%',
-          height: '1930px',
-          marginTop: '20px',
-          backgroundColor: BGCOLOR,
-        }}
-      ></div>
-      <div
-        style={{
-          width: '271px',
-          height: '25px',
-          marginTop: '12px',
-          paddingRight: '10px',
+          marginTop: 10,
+          border: '2px solid #fff',
           float: 'right',
-          backgroundColor: BGCOLOR,
         }}
-      ></div>
-    </>
+      />
+    </div>
   );
 }
 
