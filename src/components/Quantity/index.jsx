@@ -11,7 +11,12 @@ function Quantity({ count, onChange }) {
       >
         -
       </button>
-      <span>{count}</span>
+      <input
+        onChange={(e) => onChange(e.target.value)}
+        type='number'
+        value={count}
+      />
+      {/* <span>{count}</span> */}
       <button
         onClick={() => {
           onChange(count + 1);

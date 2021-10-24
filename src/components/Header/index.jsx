@@ -9,6 +9,7 @@ import headerLogo from 'assets/img/header-logo.svg';
 import userIcon from 'assets/img/user-icon.svg';
 import ModalAuth from 'features/Auth/components/ModalAuth';
 import { closeModal, logout, openModal } from 'features/Auth/userSlice';
+import { logoutCart } from 'features/Cart/cartSlice';
 
 function Header() {
   const [categoryList, setCategoryList] = useState([]);
@@ -34,6 +35,8 @@ function Header() {
     }
     const action = logout();
     dispatch(action);
+    const actionCart = logoutCart();
+    dispatch(actionCart);
     toast.success('Đã Đăng Xuất!');
     history.replace('/');
   };

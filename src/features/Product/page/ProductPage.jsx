@@ -1,8 +1,14 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import ReactPaginate from 'react-paginate';
-import { useHistory, useLocation } from 'react-router-dom';
 import productApi from 'api/productApi';
 import BannerSlide from 'features/Home/components/BannerSlide';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import ReactPaginate from 'react-paginate';
+import { useHistory, useLocation } from 'react-router-dom';
 import ProductFilter from '../components/ProductFilter';
 import ProductList from '../components/ProductList';
 import ProductLoading from '../components/ProductLoading';
@@ -18,25 +24,35 @@ function ProductPage() {
   const [pagination, setPagination] = useState(1);
   const [loading, setLoading] = useState(true);
   const location = useLocation();
+  const filterTimeoutRef = useRef(null);
 
   const queryParams = useMemo(() => {
+    console.log('change a');
     const params = queryString.parse(location.search);
     return {
       ...params,
     };
   }, [location.search]);
 
-  useEffect(() => {
-    (async function () {
-      setLoading(true);
-      try {
-        const result = await productApi.getProductList(queryParams);
-        setProductList(result.data);
-        setPagination(result.pagination);
-      } catch (error) {}
-      setLoading(false);
-    })();
+  const getData = useCallback(async () => {
+    console.log('call api');
+    setLoading(true);
+    try {
+      const result = await productApi.getProductList(queryParams);
+      setProductList(result.data);
+      setPagination(result.pagination);
+    } catch (error) {}
+    setLoading(false);
   }, [queryParams]);
+
+  useEffect(() => {
+    console.log('change b');
+    // debouce
+    if (filterTimeoutRef.current) clearTimeout(filterTimeoutRef.current);
+    filterTimeoutRef.current = setTimeout(() => {
+      getData();
+    }, 2000);
+  }, [queryParams, getData]);
 
   const iSNotFoundProduct = useMemo(() => {
     return productList.length <= 0;
@@ -74,11 +90,7 @@ function ProductPage() {
           </div>
           <div className='product-page__right'>
             <BannerSlide />
-            <ProductFilter
-              disabled={loading}
-              params={queryParams}
-              onChange={handleFilterChange}
-            />
+            <ProductFilter params={queryParams} onChange={handleFilterChange} />
             {loading ? (
               <ProductLoading />
             ) : iSNotFoundProduct ? (

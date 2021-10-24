@@ -1,4 +1,5 @@
 import { unwrapResult } from '@reduxjs/toolkit';
+import { changeUserId } from 'features/Cart/cartSlice';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -14,6 +15,7 @@ function Login() {
       const res = unwrapResult(resultAction);
       if (res.user_id) {
         dispatch(closeModal());
+        dispatch(changeUserId(res.user_id));
       }
       toast.success('Đặng Nhập Thành Công!');
     } catch (error) {
