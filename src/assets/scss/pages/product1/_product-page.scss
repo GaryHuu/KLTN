@@ -52,6 +52,16 @@
         ul {
           @include flex();
 
+          &.disabled li {
+            opacity: 0.6;
+            cursor: default;
+
+            &:hover {
+              background-color: #ffffff;
+              color: inherit;
+            }
+          }
+
           li {
             cursor: pointer;
             background-color: $white-text;
@@ -66,6 +76,11 @@
               background-color: #fa434e;
               color: $white-text;
             }
+
+            &.active:hover {
+              background-color: #fa434e;
+              color: $white-text;
+            }
           }
         }
       }
@@ -76,6 +91,20 @@
 
         .product__item {
           width: calc(100% / 4);
+        }
+
+        .product__item.skeleton {
+          width: calc(100% / 4 - 5px);
+          margin-top: 4px;
+          margin-bottom: 0;
+
+          &:nth-child(10n + 1) {
+            margin-left: 0;
+          }
+
+          &:nth-child(8n + 1) {
+            margin-left: 4px;
+          }
         }
       }
     }
