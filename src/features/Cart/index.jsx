@@ -1,15 +1,16 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Redirect, Route, Switch, useRouteMatch } from 'react-router';
-
 import CartEmpty from './components/CartEmpty';
 import CartHeader from './components/CartHeader';
 import CartLocationConfirm from './components/CartLocationConfirm';
 import CartProductList from './components/CartProductList';
 import CartTotal from './components/CartTotal';
 import PaymentSuccess from './components/PaymentSuccess';
+import { cartItemsCountSelector } from './selector';
 
 function Cart() {
-  const isCartEmpty = false;
+  const countCart = useSelector(cartItemsCountSelector);
   const isLoggedIn = true;
   const { url } = useRouteMatch();
   return (
@@ -23,7 +24,7 @@ function Cart() {
               <Switch>
                 <Route path={`${url}`} exact>
                   <CartHeader />
-                  {isCartEmpty ? <CartEmpty /> : <CartProductList />}
+                  {countCart <= 0 ? <CartEmpty /> : <CartProductList />}
                 </Route>
                 <Route path={`${url}/confirm`} exact>
                   <CartLocationConfirm />
@@ -34,7 +35,7 @@ function Cart() {
               </Switch>
             </div>
 
-            {isCartEmpty || (
+            {countCart <= 0 || (
               <div className='cart__right'>
                 <CartTotal />
               </div>

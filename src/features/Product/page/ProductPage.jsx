@@ -1,4 +1,5 @@
 import productApi from 'api/productApi';
+import withLoading from 'components/HOC/withLoading';
 import BannerSlide from 'features/Home/components/BannerSlide';
 import React, {
   useCallback,
@@ -18,16 +19,14 @@ import ProductNotFound from './ProductNotFound';
 
 const queryString = require('query-string');
 
-function ProductPage() {
+function ProductPage({hideLoading, showLoading}) {
   const history = useHistory();
   const [productList, setProductList] = useState([]);
   const [pagination, setPagination] = useState(1);
   const [loading, setLoading] = useState(true);
   const location = useLocation();
-  const filterTimeoutRef = useRef(null);
 
   const queryParams = useMemo(() => {
-    console.log('change a');
     const params = queryString.parse(location.search);
     return {
       ...params,
@@ -35,23 +34,19 @@ function ProductPage() {
   }, [location.search]);
 
   const getData = useCallback(async () => {
-    console.log('call api');
     setLoading(true);
+    showLoading();
     try {
       const result = await productApi.getProductList(queryParams);
       setProductList(result.data);
       setPagination(result.pagination);
     } catch (error) {}
     setLoading(false);
+    hideLoading();
   }, [queryParams]);
 
   useEffect(() => {
-    console.log('change b');
-    // debouce
-    if (filterTimeoutRef.current) clearTimeout(filterTimeoutRef.current);
-    filterTimeoutRef.current = setTimeout(() => {
-      getData();
-    }, 2000);
+    getData();
   }, [queryParams, getData]);
 
   const iSNotFoundProduct = useMemo(() => {
@@ -116,4 +111,4 @@ function ProductPage() {
   );
 }
 
-export default ProductPage;
+export default withLoading(ProductPage);

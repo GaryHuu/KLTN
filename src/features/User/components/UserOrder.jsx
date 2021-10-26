@@ -1,8 +1,9 @@
+import withLoading from 'components/HOC/withLoading';
 import React from 'react';
 import ReactPaginate from 'react-paginate';
 import OrderItem from './Order/OrderItem';
 
-function UserOrder(props) {
+function UserOrder({ hideLoading, showLoading }) {
   const handlePageClick = (e) => {
     const currentPage = e.selected + 1;
     console.log(currentPage);
@@ -38,4 +39,4 @@ function UserOrder(props) {
   );
 }
 
-export default UserOrder;
+export default withLoading(UserOrder);

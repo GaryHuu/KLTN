@@ -5,11 +5,13 @@ import { useDispatch } from 'react-redux';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { MODE } from './ModalAuth';
+import withLoading from 'components/HOC/withLoading';
 
 function Register(props) {
-  const { setMode } = props;
+  const { setMode, showLoading, hideLoading } = props;
   const dispatch = useDispatch();
   const handleSubmit = async (values) => {
+    showLoading();
     try {
       const action = register(values);
       const resultAction = await dispatch(action);
@@ -20,8 +22,9 @@ function Register(props) {
       console.log(error);
       toast.error(error.message);
     }
+    hideLoading();
   };
   return <RegisterForm onSubmit={handleSubmit} />;
 }
 
-export default Register;
+export default withLoading(Register);

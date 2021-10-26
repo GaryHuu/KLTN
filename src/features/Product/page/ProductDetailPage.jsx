@@ -7,8 +7,9 @@ import Skeleton from 'react-loading-skeleton';
 import { useSelector, useDispatch } from 'react-redux';
 import { openModal } from 'features/Auth/userSlice';
 import { addToCart } from 'features/Cart/cartSlice';
+import withLoading from 'components/HOC/withLoading';
 
-function ProductDetailPage() {
+function ProductDetailPage({hideLoading, showLoading}) {
   const {
     params: { id },
   } = useRouteMatch();
@@ -23,6 +24,7 @@ function ProductDetailPage() {
   useEffect(() => {
     (async function () {
       setLoading(true);
+      showLoading();
       try {
         const { data } = await productApi.getProductByID(id);
         setImgURL(data[0].images[0].url);
@@ -30,6 +32,7 @@ function ProductDetailPage() {
         console.log(data[0]);
       } catch (error) {}
       setLoading(false);
+      hideLoading();
     })();
   }, [id]);
 
@@ -41,11 +44,20 @@ function ProductDetailPage() {
   const handleAddToCartClick = () => {
     if (user) {
       //add to cart by user id
-
-      const action = addToCart({
+      let action = addToCart({
         idProduct: product.id,
         quantity,
+        price,
+        priceAfterDiscount: price,
       });
+      if(isPromo && priceAfterDiscount) {
+        action = addToCart({
+          idProduct: product.id,
+          quantity,
+          price,
+          priceAfterDiscount: priceAfterDiscount,
+        });
+      } 
       dispatch(action);
       toast.success('Thêm vào giỏ hàng thành công!');
       return;
@@ -168,21 +180,35 @@ function ProductDetailPage() {
                     <i className='fas fa-shopping-cart'></i>
                     <span>Chọn Mua</span>
                   </div>
+                  <div style={{marginLeft: '10px'}} className='buy__btn heart'>
+                    <i className='fas fa-heart'></i>
+                    <span>Yêu Thích</span>
+                  </div>
                 </div>
               )}
             </div>
           </div>
         </div>
         <div className='content-info'>
-          <h4>Thông tin sản phẩm</h4>
-          <p
+          {loading ? (
+            <Skeleton style={{ margin: '10px' }} height={30} width={'20%'} />
+          ) : (
+            <h4>Thông tin sản phẩm</h4>
+          )}
+
+          {loading ? (
+            <Skeleton style={{ margin: '10px' }} height={300} width={'95%'} />
+          ) : (
+            <p
             className='content'
             dangerouslySetInnerHTML={{ __html: product.description }}
           ></p>
+          )}
+          
         </div>
       </div>
     </div>
   );
 }
 
-export default ProductDetailPage;
+export default withLoading(ProductDetailPage);

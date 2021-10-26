@@ -146,6 +146,10 @@
             padding: 0 10px;
             border-radius: 10px;
 
+            &.heart {
+              background-color: $color-primary;
+            }
+
             i {
               line-height: 40px;
               font-size: 22px;

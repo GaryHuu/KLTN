@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation, useRouteMatch } from 'react-router';
 import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
+import { cartDiscountSelector, cartTotalSelector } from '../selector';
 
 function CartTotal() {
   const location = useLocation();
   const path = useRouteMatch();
   const history = useHistory();
+  const price = useSelector(cartTotalSelector)
+  const discount = useSelector(cartDiscountSelector)
 
   const [isConfirm, setIsConfirm] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -45,13 +49,14 @@ function CartTotal() {
 
       <div className='checkout'>
         <p>
-          <span>Tạm Tính:</span> <span>1.080.000 đ</span>
+          <span>Tạm Tính:</span>
+          <span>{price && discount && (price + discount).toLocaleString()} đ</span>
         </p>
         <p>
-          <span>Giảm Giá:</span> <span>80.000 đ</span>
+          <span>Giảm Giá:</span> <span>{discount && discount.toLocaleString()} đ</span>
         </p>
         <p>
-          <span>Thành Tiền:</span> <span>1.000.000 đ</span>
+          <span>Thành Tiền:</span> <span>{price && price.toLocaleString()} đ</span>
         </p>
         <span>(Đã bao gồm VAT nếu có)</span>
       </div>
