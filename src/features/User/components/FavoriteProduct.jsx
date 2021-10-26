@@ -2,8 +2,9 @@ import React from 'react';
 import ReactPaginate from 'react-paginate';
 
 import ProductList from 'features/Product/components/ProductList';
+import withLoading from 'components/HOC/withLoading';
 
-function FavoriteProduct(props) {
+function FavoriteProduct({ hideLoading, showLoading }) {
   const handlePageClick = (e) => {
     // const currentPage = e.selected + 1;
     // console.log(currentPage);
@@ -24,4 +25,4 @@ function FavoriteProduct(props) {
   );
 }
 
-export default FavoriteProduct;
+export default withLoading(FavoriteProduct);

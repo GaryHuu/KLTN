@@ -10,6 +10,7 @@ import userIcon from 'assets/img/user-icon.svg';
 import ModalAuth from 'features/Auth/components/ModalAuth';
 import { closeModal, logout, openModal } from 'features/Auth/userSlice';
 import { logoutCart } from 'features/Cart/cartSlice';
+import { cartItemsCountSelector } from 'features/Cart/selector';
 
 function Header() {
   const [categoryList, setCategoryList] = useState([]);
@@ -18,6 +19,7 @@ function Header() {
   const [inputSearch, setInputSearch] = useState('');
   const modalIsOpen = useSelector((state) => state.user.modalIsOpen);
   const user = useSelector((state) => state.user.current);
+  const countCart = useSelector(cartItemsCountSelector);
   useEffect(() => {
     (async function () {
       try {
@@ -102,7 +104,7 @@ function Header() {
             </div>
           </div>
           <div onClick={handleCartClick} className='header__cart'>
-            <span className='cart__noti-number'>69</span>
+            <span className='cart__noti-number'>{countCart || 0}</span>
             <i className='fas fa-shopping-cart'></i>
             <p>Giỏ hàng</p>
           </div>
