@@ -1,4 +1,5 @@
 import { unwrapResult } from '@reduxjs/toolkit';
+import withLoading from 'components/HOC/withLoading';
 import { changeUserId } from 'features/Cart/cartSlice';
 import React from 'react';
 import { useDispatch } from 'react-redux';
@@ -6,9 +7,10 @@ import { toast } from 'react-toastify';
 import { closeModal, login } from '../userSlice';
 import LoginForm from './LoginForm';
 
-function Login() {
+function Login({showLoading, hideLoading}) {
   const dispatch = useDispatch();
   const handleSubmit = async (values) => {
+    showLoading();
     try {
       const action = login(values);
       const resultAction = await dispatch(action);
@@ -21,8 +23,9 @@ function Login() {
     } catch (error) {
       toast.error('Tài Khoản Không Hợp Lệ!');
     }
+    hideLoading();
   };
   return <LoginForm onSubmit={handleSubmit} />;
 }
 
-export default Login;
+export default withLoading(Login);

@@ -1,25 +1,30 @@
 import React from 'react';
 
 function Quantity({ count, onChange }) {
+  const countInt = parseInt(count);
   return (
     <div className='quantity'>
       <button
-        disabled={count <= 1 ? true : false}
+        disabled={countInt <= 1 ? true : false}
         onClick={() => {
-          onChange(count - 1);
+          onChange(countInt - 1);
         }}
       >
         -
       </button>
       <input
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => {
+          const value = parseInt(e.target.value)
+          if (value <= 0 || !value) return onChange(countInt)
+          return onChange(value)
+        }
+        } 
         type='number'
-        value={count}
+        value={countInt}
       />
-      {/* <span>{count}</span> */}
       <button
         onClick={() => {
-          onChange(count + 1);
+          onChange(countInt + 1);
         }}
       >
         +

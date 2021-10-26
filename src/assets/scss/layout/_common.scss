@@ -49,6 +49,7 @@ img {
 
 body {
   color: #3c3c3c;
+  position: relative;
 }
 
 .container {
@@ -57,3 +58,41 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
+
+body.loading-data::after {
+  position: absolute;
+  content: '';
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  top: -100px;
+}
+
+@keyframes animation-loading {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+body.loading-data::before {
+  position: fixed;
+  content: '';
+  top: 0;
+  height: 8px;
+  width: 100%;
+  z-index: 1001;
+  animation-duration: 0.4s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: animation-loading;
+  animation-timing-function: linear;
+  background: #f6f7f8;
+  background: linear-gradient(to right, $color-primary 8%, #dddddd 18%, #eeeeee 33%);
+  background-size: 800px 104px;
+  height: 4px;
+}
+
+
