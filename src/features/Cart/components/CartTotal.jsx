@@ -50,7 +50,7 @@ function CartTotal() {
       <div className='checkout'>
         <p>
           <span>Tạm Tính:</span>
-          <span>{price && discount && (price + discount).toLocaleString()} đ</span>
+          <span>{price  && (price + (discount || 0)).toLocaleString()} đ</span>
         </p>
         <p>
           <span>Giảm Giá:</span> <span>{discount && discount.toLocaleString()} đ</span>
