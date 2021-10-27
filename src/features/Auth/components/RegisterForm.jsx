@@ -14,12 +14,17 @@ function RegisterForm(props) {
       .string()
       .required('Please enter your email')
       .email('Please enter a valid email'),
-    password: yup.string().required('Please enter your password'),
+    password: yup.string().required('Please enter your password').min(6),
     password_confirmation: yup
       .string()
       .required('Please enter your password')
+      .min(6)
       .oneOf([yup.ref('password')], 'Password does not match'),
-    phone: yup.string().required('Please enter your phone number').min(10),
+    phone: yup
+      .string()
+      .required('Please enter your phone number')
+      .min(10)
+      .max(11),
   });
 
   const form = useForm({

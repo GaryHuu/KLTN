@@ -11,3 +11,5 @@ const rootReducer = {
 export const store = configureStore({
   reducer: rootReducer,
 });
+
+export const dispatch = store.dispatch;

@@ -13,7 +13,7 @@ const NotFound = React.lazy(() => import('features/NotFound'));
 function App() {
   return (
     <Fragment>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div className='loading-lazy'/>}>
         <Switch>
           <Route path='/admin' component={AdminPage} />
           <Route>

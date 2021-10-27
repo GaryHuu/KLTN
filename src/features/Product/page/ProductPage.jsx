@@ -4,9 +4,7 @@ import BannerSlide from 'features/Home/components/BannerSlide';
 import React, {
   useCallback,
   useEffect,
-  useMemo,
-  useRef,
-  useState,
+  useMemo, useState
 } from 'react';
 import ReactPaginate from 'react-paginate';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -22,7 +20,7 @@ const queryString = require('query-string');
 function ProductPage({hideLoading, showLoading}) {
   const history = useHistory();
   const [productList, setProductList] = useState([]);
-  const [pagination, setPagination] = useState(1);
+  const [pagination, setPagination] = useState({});
   const [loading, setLoading] = useState(true);
   const location = useLocation();
 
@@ -43,6 +41,7 @@ function ProductPage({hideLoading, showLoading}) {
     } catch (error) {}
     setLoading(false);
     hideLoading();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryParams]);
 
   useEffect(() => {

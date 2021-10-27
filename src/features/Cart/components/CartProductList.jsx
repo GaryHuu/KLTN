@@ -5,9 +5,7 @@ import CartItem from './CartItem';
 function CartProductList(props) {
   const cartItem = useSelector((state) => state.cart.cartItems);
   const dispatch = useDispatch();
-  console.log(cartItem);
   const onChange = (idProduct, quantity) => {
-    console.log({idProduct, quantity});
     const action = changeToCart({
       idProduct, quantity
     });

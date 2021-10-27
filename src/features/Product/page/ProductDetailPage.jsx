@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { openModal } from 'features/Auth/userSlice';
 import { addToCart } from 'features/Cart/cartSlice';
 import withLoading from 'components/HOC/withLoading';
+import userApi from 'api/userApi';
 
 function ProductDetailPage({hideLoading, showLoading}) {
   const {
@@ -19,7 +20,6 @@ function ProductDetailPage({hideLoading, showLoading}) {
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.current);
-  console.log(user);
 
   useEffect(() => {
     (async function () {
@@ -29,15 +29,14 @@ function ProductDetailPage({hideLoading, showLoading}) {
         const { data } = await productApi.getProductByID(id);
         setImgURL(data[0].images[0].url);
         setProduct(data[0]);
-        console.log(data[0]);
       } catch (error) {}
       setLoading(false);
       hideLoading();
     })();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const handleQuantityChange = (newValue) => {
-    console.log(newValue);
     setQuantity(newValue);
   };
 
@@ -74,6 +73,22 @@ function ProductDetailPage({hideLoading, showLoading}) {
   if (isPromo) {
     discountPercent = parseInt(product?.discount?.slice(0, -1)) / 100;
     priceAfterDiscount = parseInt(price) - parseInt(price) * discountPercent;
+  }
+
+  const handleFavoriteClick = () => {
+    (async function () {
+      showLoading();
+      try {
+        const res = await userApi.addFavorites({
+          product_id: product.id
+        })
+        console.log(res);
+        toast.success('Đã Yêu Thích Sản Phẩm');
+      } catch (error) {
+        toast.warn('Sản Phẩm Đã Yêu Thích Sẵn');
+      }
+      hideLoading();
+    })();
   }
 
   return (
@@ -120,14 +135,14 @@ function ProductDetailPage({hideLoading, showLoading}) {
               ) : (
                 <p>
                   Danh Mục Sản phẩm: &nbsp;
-                  <span>Blackmores</span>
+                  <span>{product.category_name}</span>
                 </p>
               )}
 
               {loading ? (
                 <Skeleton height={26} width={150} />
               ) : (
-                <p>SKU: TP002455</p>
+                <p>Mã SP: {product.id}</p>
               )}
             </div>
             <div className='info-detail'>
@@ -180,7 +195,7 @@ function ProductDetailPage({hideLoading, showLoading}) {
                     <i className='fas fa-shopping-cart'></i>
                     <span>Chọn Mua</span>
                   </div>
-                  <div style={{marginLeft: '10px'}} className='buy__btn heart'>
+                  <div onClick={handleFavoriteClick} style={{marginLeft: '10px'}} className='buy__btn heart'>
                     <i className='fas fa-heart'></i>
                     <span>Yêu Thích</span>
                   </div>

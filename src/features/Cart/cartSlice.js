@@ -4,8 +4,6 @@ import { StorageKeys } from 'constant';
 export const getCartNameById = (id) => `cart-${id}`;
 
 const user = JSON.parse(localStorage.getItem(StorageKeys.USER));
-console.log(user?.id);
-
 const initialState = {
   userId: user?.id || null,
   cartItems: JSON.parse(localStorage.getItem(getCartNameById(user?.id))) || [],
@@ -39,7 +37,6 @@ export const cartSlice = createSlice({
     deleteItemCart (state, action) {
       //  = { idProduct }
       const idProduct = action.payload;
-      console.log(idProduct);
       state.cartItems = state.cartItems.filter(item => item.idProduct !== idProduct)
       localStorage.setItem(getCartNameById(state?.userId), JSON.stringify(state.cartItems));
     },

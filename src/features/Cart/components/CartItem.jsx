@@ -1,8 +1,8 @@
 import productApi from 'api/productApi';
-import product01 from 'assets/img/product1.jpg';
 import withLoading from 'components/HOC/withLoading';
 import Quantity from 'components/Quantity';
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
+import Skeleton from 'react-loading-skeleton';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { deleteItemCart } from '../cartSlice';
@@ -39,8 +39,9 @@ function CartItem({ item, onChange, hideLoading, showLoading }) {
         const { data } = await productApi.getProductByID(item.idProduct);
         setImgURL(data[0].images[0].url);
         setProduct(data[0]);
-        console.log(data[0]);
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
       setLoading(false);
       hideLoading();
     })();
@@ -48,33 +49,63 @@ function CartItem({ item, onChange, hideLoading, showLoading }) {
 
   return (
     <div className='item'>
-      <Link to={`/product/${item.idProduct}`}>
-        <img src={imgURL} alt='' />
-      </Link>
+      {loading ? (
+        <Skeleton height={65} width={55} />
+      ) : (
+        <Link to={`/product/${item.idProduct}`}>
+          <img src={imgURL} alt='' />
+        </Link>
+      )}
       <div className='item__info'>
         <div className='description'>
-          <p>{product.name}</p>
-          <span onClick={handleButtonDeleteClick}>Xóa</span>
+          {loading ? (
+            <Fragment>
+              <Skeleton
+                style={{ marginTop: '-11px' }}
+                height={17}
+                width={200}
+              />
+              <Skeleton style={{ marginTop: '-11px' }} height={17} width={60} />
+            </Fragment>
+          ) : (
+            <Fragment>
+              <p>{product.name}</p>
+              <span onClick={handleButtonDeleteClick}>Xóa</span>
+            </Fragment>
+          )}
         </div>
         <div className='price'>
-          <p className='price__new'>
-            {isPromo && priceAfterDiscount
-              ? (priceAfterDiscount * item.quantity).toLocaleString()
-              : price * item.quantity
-              ? (price * item.quantity).toLocaleString()
-              : ''}
-           &nbsp;đ
-          </p>
-          {product.discount !== 'No' && (
-            <span className='price__discount'>-{product.discount}</span>
-          )}
-          {isPromo && (
-            <span className='price__old'>
-              {(price * item.quantity).toLocaleString()}&nbsp;đ
-            </span>
+          {loading ? (
+            <Fragment>
+              <Skeleton height={20} width={120} />
+              <Skeleton height={20} width={90} />
+            </Fragment>
+          ) : (
+            <Fragment>
+              <p className='price__new'>
+                {isPromo && priceAfterDiscount
+                  ? (priceAfterDiscount * item.quantity).toLocaleString()
+                  : price * item.quantity
+                  ? (price * item.quantity).toLocaleString()
+                  : ''}
+                &nbsp;đ
+              </p>
+              {product.discount !== 'No' && (
+                <span className='price__discount'>-{product.discount}</span>
+              )}
+              {isPromo && (
+                <span className='price__old'>
+                  {(price * item.quantity).toLocaleString()}&nbsp;đ
+                </span>
+              )}
+            </Fragment>
           )}
         </div>
-        <Quantity count={item.quantity} onChange={handleQuantityChange} />
+        {loading ? (
+          <Skeleton height={25} width={130} />
+        ) : (
+          <Quantity count={item.quantity} onChange={handleQuantityChange} />
+        )}
       </div>
     </div>
   );

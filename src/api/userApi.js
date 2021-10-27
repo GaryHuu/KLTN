@@ -16,6 +16,18 @@ const userApi = {
     const url = '/user/change-profile';
     return axiosClient.patch(url, data);
   },
+  addFavorites(data) {
+    const url = '/user/favorites';
+    return axiosClient.post(url, data);
+  },
+  getFavorites(params) {
+    const url = '/user/favorites';
+    return axiosClient.get(url, { params: params });
+  },
+  // refeshToken () {
+  //   const url = '/user/refresh';
+  //   return axiosClient.post(url);
+  // },
 };
 
 export default userApi;

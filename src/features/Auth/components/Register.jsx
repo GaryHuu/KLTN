@@ -16,11 +16,11 @@ function Register(props) {
       const action = register(values);
       const resultAction = await dispatch(action);
       unwrapResult(resultAction);
-      toast.success('Đặng Ký Thành Công!');
+      toast.success('Đặng ký thành công!');
       setMode(MODE.LOGIN);
     } catch (error) {
       console.log(error);
-      toast.error(error.message);
+      toast.error('Đặng ký thất bại!');
     }
     hideLoading();
   };

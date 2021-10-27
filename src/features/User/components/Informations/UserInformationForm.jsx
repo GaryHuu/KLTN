@@ -16,23 +16,23 @@ function UserInformationForm(props) {
       .string()
       .required('Please enter your email')
       .email('Please enter a valid email'),
-    phone: yup.string().required('Please enter your phone number').min(10),
+    phone: yup.string().required('Please enter your phone number').min(10).max(11),
     gender: yup.number().required('Please enter your phone gender'),
     birthday: yup.string().required('Please enter your phone birthday'),
     isChangePassword: yup.boolean(),
     old_password: yup.string().when('isChangePassword', {
       is: true,
-      then: yup.string().required('Please enter your password'),
+      then: yup.string().required('Please enter your password').min(6),
     }),
     new_password: yup.string().when('isChangePassword', {
       is: true,
-      then: yup.string().required('Please enter your new password'),
+      then: yup.string().required('Please enter your new password').min(6),
     }),
     new_password_confirmation: yup
       .string()
       .when('isChangePassword', {
         is: true,
-        then: yup.string().required('Please retype your new password'),
+        then: yup.string().required('Please retype your new password').min(6),
       })
       .oneOf([yup.ref('new_password')], 'New password does not match'),
   });

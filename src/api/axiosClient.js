@@ -1,5 +1,9 @@
+import { dispatch } from 'app/store';
 import axios from 'axios';
 import { StorageKeys } from 'constant';
+import { logout, openModal } from 'features/Auth/userSlice';
+import { logoutCart } from 'features/Cart/cartSlice';
+import { toast } from 'react-toastify';
 
 const axiosClient = axios.create({
   baseURL: 'https://phanolink.herokuapp.com/api/',
@@ -13,7 +17,7 @@ const axiosClient = axios.create({
 axiosClient.interceptors.request.use(
   function (config) {
     // Do something before request is sent
-    const URLS = ['/user/user-profile', '/user/change-profile'];
+    const URLS = ['/user/user-profile', '/user/change-profile', '/user/refresh', '/user/favorites'];
     if (URLS.includes(config.url)) {
       const token = localStorage.getItem(StorageKeys.TOKEN);
       config.headers.Authorization = token ? `Bearer ${token}` : '';
@@ -33,17 +37,35 @@ axiosClient.interceptors.response.use(
     // Do something with response data
     return response.data;
   },
-  function (error) {
+  async function (error) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
-    const { config, status, data } = error.response;
-    const URLS = ['/auth/local/register', '/auth/local'];
-    if (URLS.includes(config.url) && status === 400) {
-      const errorList = data.data || [];
-      const firstError = errorList.length > 0 ? errorList[0] : {};
-      const messageList = firstError.messages || [];
-      const firstMessage = messageList.length > 0 ? messageList[0] : {};
-      throw new Error(firstMessage.message);
+    const { config, status } = error.response;
+    const URLS = ['/user/user-profile', '/user/change-profile'];
+    if (URLS.includes(config.url) && status === 401) {
+      // logout and back to gome,
+      // toast.warn('Vui Lòng Đặng Nhập Lại');
+      toast.warn('Vui Lòng Đặng Nhập Lại', {
+        position: "top-right",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: 0,
+      });
+      dispatch(logout());
+      dispatch(openModal())
+      dispatch(logoutCart())
+      // console.log('error 401');
+      // try {
+      //   const token = await userApi.refeshToken();
+      //   console.log({token});
+      //   const action = refreshToken(token);
+      //   dispatch(action);
+      // } catch (err) {
+
+      // }
     }
     return Promise.reject(error);
   }

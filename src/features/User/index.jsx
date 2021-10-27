@@ -58,7 +58,7 @@ function User(props) {
                     <Switch>
                       <Route path={url} exact component={UserInfomation} />
                       <Route
-                        path={`${url}/favorite`}
+                        path={`${url}/favorite/`}
                         component={FavoriteProduct}
                       />
                       <Route path={`${url}/order`} component={UserOrder} />

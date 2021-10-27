@@ -77,7 +77,8 @@ body.loading-data::after {
   }
 }
 
-body.loading-data::before {
+body.loading-data::before,
+div.loading-lazy {
   position: fixed;
   content: '';
   top: 0;

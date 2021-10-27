@@ -6,7 +6,7 @@ import OrderItem from './Order/OrderItem';
 function UserOrder({ hideLoading, showLoading }) {
   const handlePageClick = (e) => {
     const currentPage = e.selected + 1;
-    console.log(currentPage);
+    // console.log(currentPage);
   };
 
   return (

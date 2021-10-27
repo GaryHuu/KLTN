@@ -9,7 +9,7 @@ function ProductItem({ product }) {
   const price = parseInt(product.price);
   let discountPercent;
   let priceAfterDiscount;
-  if (isPromo) {
+  if (isPromo && product) {
     discountPercent = parseInt(product.discount.slice(0, -1)) / 100;
     priceAfterDiscount = parseInt(price) - parseInt(price) * discountPercent;
   }

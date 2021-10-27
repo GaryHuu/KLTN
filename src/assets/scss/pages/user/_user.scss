@@ -91,6 +91,16 @@
             .product__item {
               width: 25%;
             }
+
+            .react-loading-skeleton.skeleton.product__item {
+              width: 24%;
+              margin: 0;
+
+              &:nth-child(8n + 1) {
+                margin-left: 4px;
+                margin-bottom: 4px;
+              }
+            }
           }
 
           .user-order {
