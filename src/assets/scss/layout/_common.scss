@@ -65,7 +65,7 @@ body.loading-data::after {
   inset: 0;
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 1000;
-  top: 100px;
+  // top: 100px;
 }
 
 @keyframes animation-loading {
@@ -96,11 +96,11 @@ div.loading-lazy {
   height: 4px;
 }
 
-body.loading-data {
-  header {
-    pointer-events: none;
-  }
-}
+// body.loading-data {
+//   header {
+//     pointer-events: none;
+//   }
+// }
 
 div.loading-lazy {
   top: 0;

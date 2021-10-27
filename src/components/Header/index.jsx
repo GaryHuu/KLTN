@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import Modal from 'react-modal/lib/components/Modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import categoryApi from 'api/categoryApi';
@@ -15,6 +15,8 @@ import { cartItemsCountSelector } from 'features/Cart/selector';
 function Header() {
   const [categoryList, setCategoryList] = useState([]);
   const history = useHistory();
+  const location = useLocation();
+  console.log(location);
   const dispatch = useDispatch();
   const [inputSearch, setInputSearch] = useState('');
   const modalIsOpen = useSelector((state) => state.user.modalIsOpen);
@@ -74,6 +76,20 @@ function Header() {
     }
     history.push('/user');
   };
+
+  const handleCategoryChange = (id) => {
+    if(location.pathname + location.search === `/product?category=${id}`) return;
+    history.push({
+      pathname: '/product',
+      search: `?category=${id}`,
+    });
+  };
+
+  const handleAll = () => {
+    if(location.pathname + location.search === '/product') return;
+    history.push('/product');
+  };
+
   return (
     <Fragment>
       <header>
@@ -95,11 +111,17 @@ function Header() {
               </button>
             </form>
             <div className='header__search-product'>
-              <Link to={'/product'}>Tất cả</Link>
+              <div onClick={handleAll}>Tất cả</div>
               {categoryList.map((item) => (
-                <Link key={item.id} to={`/product?category=${item.id}`}>
+                <div 
+                  key={item.id}
+                  onClick={() => handleCategoryChange(item.id)}
+                >
                   {item.name}
-                </Link>
+                </div>
+                // <Link key={item.id} to={`/product?category=${item.id}`}>
+                //   {item.name}
+                // </Link>
               ))}
             </div>
           </div>

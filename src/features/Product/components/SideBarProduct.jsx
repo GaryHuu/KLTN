@@ -27,23 +27,29 @@ function SideBarProduct(props) {
   }, [location.search]);
 
   const handleCategoryClick = (id) => {
+    if(location.pathname + location.search === `/product?category=${id}`) return;
     history.push({
       pathname: '/product',
       search: `?category=${id}`,
     });
   };
+  const handleAll = () => {
+    if(location.pathname + location.search === '/product') return;
+    history.push('/product');
+  };
+  
   return (
     <div className='side-bar-product'>
       <h5>Danh Mục Sản Phẩm</h5>
       <ul>
-        <Link
-          to='/product'
+        <div
+          onClick={handleAll}
           className={
             categoryActive === 0 ? 'category-item active' : 'category-item'
           }
         >
           Tất cả
-        </Link>
+        </div>
         {categoryList.map((item) => (
           <div
             onClick={() => handleCategoryClick(item.id)}

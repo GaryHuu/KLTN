@@ -64,7 +64,8 @@ header {
         margin-top: 5px;
         line-height: 12px;
 
-        a {
+        div {
+          cursor: pointer;
           display: inline-block;
           @include font-size(13px);
           margin-right: 10px;
