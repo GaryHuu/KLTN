@@ -6,8 +6,16 @@ function withLoading(WrappedComponent) {
       document.body.classList.add('loading-data');
     };
 
+    const scrollToTop = () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    };
+
     const hideLoading = () => {
       document.body.classList.remove('loading-data');
+      scrollToTop();
     };
 
     return (

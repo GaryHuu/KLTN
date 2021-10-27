@@ -41,8 +41,8 @@ axiosClient.interceptors.response.use(
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
     const { config, status } = error.response;
-    const URLS = ['/user/user-profile', '/user/change-profile'];
-    if (URLS.includes(config.url) && status === 401) {
+    // const URLS = ['/user/user-profile', '/user/change-profile'];
+    if (status === 401) {
       // logout and back to gome,
       // toast.warn('Vui Lòng Đặng Nhập Lại');
       toast.warn('Vui Lòng Đặng Nhập Lại', {
