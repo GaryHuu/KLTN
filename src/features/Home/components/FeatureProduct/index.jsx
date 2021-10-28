@@ -5,12 +5,16 @@ import React, { useEffect, useRef, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
+import { useInView } from 'react-intersection-observer';
 
 function FeatureProduct() {
   const [hotProductList, setHotProductList] = useState([]);
   const [loading, setLoading] = useState(true);
   const mouted = useRef(true);
-
+  const isLoaded = useRef(false);
+  const [ref, inView] = useInView({
+    threshold: 0,
+  });
   const settings = {
     dots: true,
     infinite: true,
@@ -23,23 +27,26 @@ function FeatureProduct() {
 
   useEffect(() => {
     mouted.current = true;
-    (async () => {
-      setLoading(true);
-      try {
-        const { data } = await productApi.getHotProduct();
-        if (mouted.current) setHotProductList(data);
-      } catch (error) {
-        console.log(error);
-      }
-      setLoading(false);
-    })();
+    if (!isLoaded.current && inView) {
+      (async () => {
+        setLoading(true);
+        try {
+          const { data } = await productApi.getHotProduct();
+          if (mouted.current) setHotProductList(data);
+        } catch (error) {
+          console.log(error);
+        }
+        setLoading(false);
+      })();
+      isLoaded.current = true;
+    }
     return () => {
       mouted.current = false;
     };
-  }, []);
+  }, [inView]);
 
   return (
-    <section className='feature-product'>
+    <section ref={ref} className='feature-product'>
       <div className='container'>
         <div className='feature-product__content'>
           <div className='feature-product__top'>

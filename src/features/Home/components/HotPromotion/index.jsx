@@ -4,11 +4,16 @@ import Slider from 'react-slick';
 import productApi from 'api/productApi';
 import iconHotPromotion from 'assets/img/icon-hot-promotion.svg';
 import Skeleton from 'react-loading-skeleton';
+import { useInView } from 'react-intersection-observer';
 
 function HotPromotion() {
   const [hotPromoList, setHotPromoList] = useState([]);
   const [loading, setLoading] = useState(true);
   const mouted = useRef(true);
+  const isLoaded = useRef(false);
+  const [ref, inView] = useInView({
+    threshold: 0,
+  });
   const settings = {
     dots: true,
     infinite: true,
@@ -20,23 +25,26 @@ function HotPromotion() {
 
   useEffect(() => {
     mouted.current = true;
-    (async () => {
-      setLoading(true);
-      try {
-        const { data } = await productApi.getHotPromo();
-        if(mouted.current) setHotPromoList(data.slice(0, 9));
-      } catch (error) {
-        console.log(error);
-      }
-      setLoading(false);
-    })();
+    if (!isLoaded.current && inView) {
+      (async () => {
+        setLoading(true);
+        try {
+          const { data } = await productApi.getHotPromo();
+          if (mouted.current) setHotPromoList(data.slice(0, 9));
+        } catch (error) {
+          console.log(error);
+        }
+        setLoading(false);
+      })();
+      isLoaded.current = true;
+    }
     return () => {
       mouted.current = false;
     };
-  }, []);
+  }, [inView]);
 
   return (
-    <section className='hot-promotion'>
+    <section ref={ref} className='hot-promotion'>
       <div className='container'>
         <div className='hot-promotion__content'>
           <div className='hot-promotion__top'>

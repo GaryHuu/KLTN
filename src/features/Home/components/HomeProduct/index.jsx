@@ -5,31 +5,39 @@ import productApi from 'api/productApi';
 import iconHomeProduct from 'assets/img/icon-home-product.png';
 import ProductList from 'features/Product/components/ProductList';
 import { useRef } from 'react';
+import { useInView } from "react-intersection-observer";
 
 function HomeProduct(props) {
   const [productList, setProductList] = useState([]);
   const [loading, setLoading] = useState(true);
   const mouted = useRef(true);
-
+  const isLoaded = useRef(false);
+  const [ref, inView] = useInView({
+    threshold: 0
+  });
   useEffect(() => {
     mouted.current = true;
-    (async function () {
-      setLoading(true);
-      try {
-        const { data } = await productApi.getProductList();
-        if(mouted.current) setProductList(data);
-      } catch (error) {
-        console.log(error);
-      }
-      setLoading(false);
-    })();
+    if(!isLoaded.current && inView) {
+      (async function () {
+        setLoading(true);
+        try {
+          const { data } = await productApi.getProductList();
+          if(mouted.current) setProductList(data);
+        } catch (error) {
+          console.log(error);
+        }
+        setLoading(false);
+      })();
+      isLoaded.current = true;
+    }
     return () => {
       mouted.current = false;
+      console.log(mouted.current);
     }
-  }, []);
+  }, [inView]);
 
   return (
-    <section className='home-product'>
+    <section ref={ref} className='home-product'>
       <div className='container'>
         <div className='home-product__content'>
           <div className='home-product__top'>
