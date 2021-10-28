@@ -12,7 +12,7 @@ import './assets/scss/styles.scss';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
+    <Provider store={store} >
       <BrowserRouter>
         <ScrollToTop />
         <App />

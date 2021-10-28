@@ -87,68 +87,69 @@
     }
   }
 
-  .content {
-    .section-login {
-      &__title {
-        margin-top: 6px;
-        text-align: center;
-        font-size: 26px;
-        font-weight: normal;
-        color: #434343;
-      }
+  // .content {
+  // }
+}
 
-      .forget-password {
-        margin-top: 5px;
-        font-size: 14px;
+.section-login {
+  &__title {
+    margin-top: 6px;
+    text-align: center;
+    font-size: 26px;
+    font-weight: normal;
+    color: #434343;
+  }
 
-        input {
-          margin-right: 5px;
-          line-height: 17px;
-        }
+  .forget-password {
+    margin-top: 5px;
+    font-size: 14px;
 
-        strong {
-          color: #ff6262;
-          cursor: pointer;
-        }
-      }
+    input {
+      margin-right: 5px;
+      line-height: 17px;
+    }
 
-      .button-submit {
-        width: 100%;
-        height: 40px;
-        font-size: 16px;
-        outline: none;
-        border: none;
-        margin-top: 10px;
-        background-color: #01adab;
-        color: #fff;
-        cursor: pointer;
-        border-radius: 5px;
+    strong {
+      color: #ff6262;
+      cursor: pointer;
+    }
+  }
 
-        &:hover {
-          opacity: 0.85;
-        }
+  .button-submit {
+    width: 100%;
+    height: 40px;
+    font-size: 16px;
+    outline: none;
+    border: none;
+    margin-top: 10px;
+    background-color: #01adab;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
 
-        & + .button-submit {
-          margin-top: 10px;
-        }
+    &:hover {
+      opacity: 0.85;
+    }
 
-        &--fb {
-          background-color: #3b5998;
-        }
+    & + .button-submit {
+      margin-top: 10px;
+    }
 
-        &--gg {
-          background-color: #e94a32;
-        }
-      }
+    &--fb {
+      background-color: #3b5998;
+    }
 
-      .noti {
-        font-size: 13px;
-        margin-top: 8px;
+    &--gg {
+      background-color: #e94a32;
+    }
+  }
 
-        strong {
-          color: #ff6262;
-        }
-      }
+  .noti {
+    font-size: 13px;
+    margin-top: 8px;
+
+    strong {
+      color: #ff6262;
     }
   }
 }
