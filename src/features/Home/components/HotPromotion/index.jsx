@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import productApi from 'api/productApi';
@@ -8,6 +8,7 @@ import Skeleton from 'react-loading-skeleton';
 function HotPromotion() {
   const [hotPromoList, setHotPromoList] = useState([]);
   const [loading, setLoading] = useState(true);
+  const mouted = useRef(true);
   const settings = {
     dots: true,
     infinite: true,
@@ -18,16 +19,20 @@ function HotPromotion() {
   };
 
   useEffect(() => {
+    mouted.current = true;
     (async () => {
       setLoading(true);
       try {
         const { data } = await productApi.getHotPromo();
-        setHotPromoList(data.slice(0, 9));
+        if(mouted.current) setHotPromoList(data.slice(0, 9));
       } catch (error) {
         console.log(error);
       }
       setLoading(false);
     })();
+    return () => {
+      mouted.current = false;
+    };
   }, []);
 
   return (

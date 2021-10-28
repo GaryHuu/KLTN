@@ -16,7 +16,6 @@ function Header() {
   const [categoryList, setCategoryList] = useState([]);
   const history = useHistory();
   const location = useLocation();
-  console.log(location);
   const dispatch = useDispatch();
   const [inputSearch, setInputSearch] = useState('');
   const modalIsOpen = useSelector((state) => state.user.modalIsOpen);

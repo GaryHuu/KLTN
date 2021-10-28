@@ -4,22 +4,28 @@ import Skeleton from 'react-loading-skeleton';
 import productApi from 'api/productApi';
 import iconHomeProduct from 'assets/img/icon-home-product.png';
 import ProductList from 'features/Product/components/ProductList';
+import { useRef } from 'react';
 
 function HomeProduct(props) {
   const [productList, setProductList] = useState([]);
   const [loading, setLoading] = useState(true);
+  const mouted = useRef(true);
 
   useEffect(() => {
+    mouted.current = true;
     (async function () {
       setLoading(true);
       try {
         const { data } = await productApi.getProductList();
-        setProductList(data);
+        if(mouted.current) setProductList(data);
       } catch (error) {
         console.log(error);
       }
       setLoading(false);
     })();
+    return () => {
+      mouted.current = false;
+    }
   }, []);
 
   return (

@@ -38,12 +38,9 @@ function FavoriteProduct({ hideLoading, showLoading }) {
       setLoading(true);
       try {
         const rs = await userApi.getFavorites(queryParams);
-        console.log(rs);
         const data = rs.data.map((item) => item.product);
-        console.log(data);
         setProductList(data);
         setPagination(rs.pagination);
-        console.log(rs.pagination);
       } catch (err) {
         console.log(err);
       }

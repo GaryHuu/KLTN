@@ -1,7 +1,7 @@
 import productApi from 'api/productApi';
 import featureProductBanner from 'assets/img/feature-product-banner.png';
 import iconFeatureProductBanner from 'assets/img/icon-feature-product.svg';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
@@ -9,6 +9,7 @@ import Slider from 'react-slick';
 function FeatureProduct() {
   const [hotProductList, setHotProductList] = useState([]);
   const [loading, setLoading] = useState(true);
+  const mouted = useRef(true);
 
   const settings = {
     dots: true,
@@ -21,16 +22,20 @@ function FeatureProduct() {
   };
 
   useEffect(() => {
+    mouted.current = true;
     (async () => {
       setLoading(true);
       try {
         const { data } = await productApi.getHotProduct();
-        setHotProductList(data);
+        if (mouted.current) setHotProductList(data);
       } catch (error) {
         console.log(error);
       }
       setLoading(false);
     })();
+    return () => {
+      mouted.current = false;
+    };
   }, []);
 
   return (
