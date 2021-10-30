@@ -7,7 +7,7 @@ function ProductLoading(props) {
       <Skeleton
         className='skeleton product__item'
         containerClassName='skeleton-container home-product__list'
-        count={20}
+        count={props.count || 20}
       />
 
       <Skeleton

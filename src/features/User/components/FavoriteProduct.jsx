@@ -54,20 +54,24 @@ function FavoriteProduct({ hideLoading, showLoading }) {
     <div className='favorite-product'>
       {loading ? (
         <Fragment>
-          <ProductLoading />
+          <ProductLoading count={8} />
         </Fragment>
       ) : (
         <Fragment>
-          <ProductList data={productList} />
-          <ReactPaginate
-            forcePage={parseInt(queryParams.page) - 1}
-            pageCount={pagination.totalPages}
-            onPageChange={handlePageClick}
-            activeClassName='active'
-            containerClassName='product-pagi'
-            nextLabel='>'
-            previousLabel='<'
-          />
+          {productList ? (
+            <Fragment>
+              <ProductList data={productList} />
+              <ReactPaginate
+                forcePage={parseInt(queryParams.page) - 1}
+                pageCount={pagination.totalPages}
+                onPageChange={handlePageClick}
+                activeClassName='active'
+                containerClassName='product-pagi'
+                nextLabel='>'
+                previousLabel='<'
+              />
+            </Fragment>
+          ) : <h1 style={{color: '#3c3c3c', textAlign: 'center', fontWeight: 'normal' }}>Không có sản phẩm yêu thích</h1>}
         </Fragment>
       )}
     </div>

@@ -3,7 +3,6 @@ import Modal from 'react-modal/lib/components/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
 import categoryApi from 'api/categoryApi';
 import headerLogo from 'assets/img/header-logo.svg';
 import userIcon from 'assets/img/user-icon.svg';

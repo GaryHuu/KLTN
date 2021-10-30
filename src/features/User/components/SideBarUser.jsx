@@ -29,7 +29,7 @@ function SideBarUser(props) {
     {
       id: 4,
       path: '/user/favorite',
-      search: '?page=1&with=product',
+      search: '?page=1&perPage=8&with=product.images',
       title: 'Sản phẩm yêu thích',
       className: 'category-item',
     },
