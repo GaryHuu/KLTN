@@ -19,7 +19,7 @@ function Register(props) {
       toast.success('Đặng ký thành công!');
       setMode(MODE.LOGIN);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error('Đặng ký thất bại!');
     }
     hideLoading();

@@ -42,7 +42,7 @@ function FavoriteProduct({ hideLoading, showLoading }) {
         setProductList(data);
         setPagination(rs.pagination);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
       hideLoading();
       setLoading(false);

@@ -23,7 +23,7 @@ function HotPromotion() {
     slidesToScroll: 3,
   };
 
-  console.log(hotPromoList)
+  // console.log(hotPromoList)
 
   useEffect(() => {
     // fetch('https://phanolink.herokuapp.com/api/products?feature')
@@ -37,7 +37,7 @@ function HotPromotion() {
           const { data } = await productApi.getHotPromo();
           if (mouted.current) setHotPromoList(data.slice(0, 9));
         } catch (error) {
-          console.log(error);
+          // console.log(error);
         }
         setLoading(false);
       })();

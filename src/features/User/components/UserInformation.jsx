@@ -20,7 +20,7 @@ function UserInformation({ hideLoading, showLoading }) {
         const { data } = await userApi.getProfile();
         setUser(data);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
       hideLoading();
     })();

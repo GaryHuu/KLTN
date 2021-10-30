@@ -24,7 +24,7 @@ function HomeProduct(props) {
           const { data } = await productApi.getProductList();
           if(mouted.current) setProductList(data);
         } catch (error) {
-          console.log(error);
+          // console.log(error);
         }
         setLoading(false);
       })();
@@ -32,7 +32,7 @@ function HomeProduct(props) {
     }
     return () => {
       mouted.current = false;
-      console.log(mouted.current);
+      // console.log(mouted.current);
     }
   }, [inView]);
 

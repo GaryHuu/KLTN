@@ -82,7 +82,7 @@ function ProductDetailPage({hideLoading, showLoading}) {
         const res = await userApi.addFavorites({
           product_id: product.id
         })
-        console.log(res);
+        // console.log(res);
         toast.success('Đã Yêu Thích Sản Phẩm');
       } catch (error) {
         toast.warn('Sản Phẩm Đã Yêu Thích Sẵn');

@@ -34,7 +34,7 @@ function FeatureProduct() {
           const { data } = await productApi.getHotProduct();
           if (mouted.current) setHotProductList(data);
         } catch (error) {
-          console.log(error);
+          // console.log(error);
         }
         setLoading(false);
       })();
