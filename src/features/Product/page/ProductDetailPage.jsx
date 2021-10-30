@@ -16,7 +16,6 @@ function ProductDetailPage({hideLoading, showLoading}) {
   } = useRouteMatch();
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState({});
-  const [imgURL, setImgURL] = useState();
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.current);
@@ -27,8 +26,7 @@ function ProductDetailPage({hideLoading, showLoading}) {
       showLoading();
       try {
         const { data } = await productApi.getProductByID(id);
-        setImgURL(data[0].images[0].url);
-        setProduct(data[0]);
+        setProduct(data);
       } catch (error) {}
       setLoading(false);
       hideLoading();
@@ -100,7 +98,7 @@ function ProductDetailPage({hideLoading, showLoading}) {
               {loading ? (
                 <Skeleton height={420} width={350} />
               ) : (
-                <img src={imgURL || ''} alt='' />
+                <img src={product.images[0].url || ''} alt='' />
               )}
             </div>
             <div className='list'>
@@ -108,9 +106,9 @@ function ProductDetailPage({hideLoading, showLoading}) {
                 <Skeleton count={3} height={50} width={50} />
               ) : (
                 <Fragment>
-                  <img src={imgURL || ''} alt='' />
-                  <img src={imgURL || ''} alt='' />
-                  <img src={imgURL || ''} alt='' />
+                  <img src={product.images[0].url || ''} alt='' />
+                  <img src={product.images[0].url || ''} alt='' />
+                  <img src={product.images[0].url || ''} alt='' />
                 </Fragment>
               )}
             </div>

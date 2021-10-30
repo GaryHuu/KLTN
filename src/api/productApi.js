@@ -17,12 +17,8 @@ const productApi = {
     return axiosClient.get(url, { params: { ...params, perPage: 20, } });
   },
   getProductByID (id) {
-    const url = `/products`;
-    return axiosClient.get(url, {
-      params: {
-        id,
-      },
-    });
+    const url = `/products/${id}`;
+    return axiosClient.get(url);
   },
 };
 

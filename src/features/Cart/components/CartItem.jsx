@@ -11,7 +11,6 @@ function CartItem({ item, onChange, hideLoading, showLoading }) {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const [product, setProduct] = useState({});
-  const [imgURL, setImgURL] = useState();
   const isPromo = product?.discount !== 'No';
   const price = parseInt(product?.price);
   let discountPercent;
@@ -37,14 +36,14 @@ function CartItem({ item, onChange, hideLoading, showLoading }) {
       showLoading();
       try {
         const { data } = await productApi.getProductByID(item.idProduct);
-        setImgURL(data[0].images[0].url);
-        setProduct(data[0]);
+        setProduct(data);
       } catch (error) {
         console.log(error);
       }
       setLoading(false);
       hideLoading();
     })();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [item.idProduct]);
 
   return (
@@ -53,7 +52,7 @@ function CartItem({ item, onChange, hideLoading, showLoading }) {
         <Skeleton height={65} width={55} />
       ) : (
         <Link to={`/product/${item.idProduct}`}>
-          <img src={imgURL} alt='' />
+          <img src={product.images[0].url} alt='' />
         </Link>
       )}
       <div className='item__info'>
