@@ -50,7 +50,6 @@ function FavoriteProduct({ hideLoading, showLoading }) {
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryParams]);
-
   return (
     <div className='favorite-product'>
       {loading ? (
@@ -59,7 +58,7 @@ function FavoriteProduct({ hideLoading, showLoading }) {
         </Fragment>
       ) : (
         <Fragment>
-          {productList.lenght >= 1 ? (
+          {productList && productList.length >= 1 ? (
             <Fragment>
               <ProductList data={productList} />
               <ReactPaginate
