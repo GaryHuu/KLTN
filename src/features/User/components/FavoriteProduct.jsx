@@ -39,6 +39,7 @@ function FavoriteProduct({ hideLoading, showLoading }) {
       try {
         const rs = await userApi.getFavorites(queryParams);
         const data = rs.data.map((item) => item.product);
+        console.log(data);
         setProductList(data);
         setPagination(rs.pagination);
       } catch (err) {
@@ -58,7 +59,7 @@ function FavoriteProduct({ hideLoading, showLoading }) {
         </Fragment>
       ) : (
         <Fragment>
-          {productList ? (
+          {productList.lenght >= 1 ? (
             <Fragment>
               <ProductList data={productList} />
               <ReactPaginate
