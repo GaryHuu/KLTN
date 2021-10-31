@@ -1,38 +1,29 @@
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup.js';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-
 import InputField from 'components/form-controls/InputField';
 import TextAreaField from 'components/form-controls/TextAreaField';
 import Button from 'components/form-controls/Button';
+import ReactTooltip from 'react-tooltip';
 
-function UserLocationForm({ onSubmit }) {
+function UserLocationForm({ onSubmit, info, address }) {
   const schema = yup.object().shape({
-    fullName: yup.string().required('Please enter your name'),
-    email: yup
-      .string()
-      .required('Please enter your email')
-      .email('Please enter a valid email'),
-    phoneNumber: yup.string().required('Please enter your phone number'),
     province: yup.string().required('Please enter your provice'),
     district: yup.string().required('Please enter your district'),
-    subDistrict: yup.string().required('Please enter your sub district'),
-    location: yup.string().required('Please enter your location'),
+    ward: yup.string().required('Please enter your sub district'),
+    street_name: yup.string().required('Please enter your location'),
   });
 
   const form = useForm({
-    defaultValues: {
-      fullName: 'Nguyễn Hồng Hữu',
-      email: 'honghuu.nguyen@gumiviet.com',
-      phoneNumber: '0379339693',
-      province: 'TP Hồ Chí Minh',
-      district: 'Quận 9',
-      subDistrict: 'Tăng Nhơn Phú A',
-      location: '15/244 Đường Man Thiện',
-    },
+    defaultValues: {},
     resolver: yupResolver(schema),
   });
+
+  useEffect(() => {
+    address && form.reset(address);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [address]);
 
   const handleSubmit = (values) => {
     if (!onSubmit) return;
@@ -40,13 +31,34 @@ function UserLocationForm({ onSubmit }) {
   };
   return (
     <form onSubmit={form.handleSubmit(handleSubmit)} className='user-location'>
-      <InputField name='fullName' form={form} label='Họ Tên' />
-      <InputField name='email' form={form} label='Email' />
-      <InputField name='phoneNumber' form={form} label='Số điện thoại' />
+      <div data-tip data-for='name'>
+        <InputField value={info && info.name} label='Họ Tên' />
+        <ReactTooltip place='top' id='name' type='info' effect='solid'>
+          <span style={{ display: 'block', textAlign: 'center' }}>
+            Vui lòng vào Thông tin tài khoản <br /> để sửa Họ Tên
+          </span>
+        </ReactTooltip>
+      </div>
+      <div data-tip data-for='email'>
+        <InputField value={info && info.email} label='Email' />
+        <ReactTooltip place='top' id='email' type='info' effect='solid'>
+          <span style={{ display: 'block', textAlign: 'center' }}>
+            Vui lòng vào Thông tin tài khoản <br /> để sửa Email
+          </span>
+        </ReactTooltip>
+      </div>
+      <div data-tip data-for='phone'>
+        <InputField value={info && info.phone} label='Số điện thoại' />
+        <ReactTooltip place='top' id='phone' type='info' effect='solid'>
+          <span style={{ display: 'block', textAlign: 'center' }}>
+            Vui lòng vào Thông tin tài khoản <br /> để sửa Số điện thoại
+          </span>
+        </ReactTooltip>
+      </div>
       <InputField name='province' form={form} label='Tỉnh' />
       <InputField name='district' form={form} label='Quận / Huyện' />
-      <InputField name='subDistrict' form={form} label='Phường / Xã' />
-      <TextAreaField name='location' form={form} label='Địa Chỉ' />
+      <InputField name='ward' form={form} label='Phường / Xã' />
+      <TextAreaField name='street_name' form={form} label='Địa Chỉ' />
       <Button type='submit' className='submit'>
         CẬP NHẬT THAY ĐỔI
       </Button>

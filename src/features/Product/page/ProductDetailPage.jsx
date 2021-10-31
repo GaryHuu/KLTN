@@ -10,7 +10,7 @@ import { addToCart } from 'features/Cart/cartSlice';
 import withLoading from 'components/HOC/withLoading';
 import userApi from 'api/userApi';
 
-function ProductDetailPage({hideLoading, showLoading}) {
+function ProductDetailPage({ hideLoading, showLoading }) {
   const {
     params: { id },
   } = useRouteMatch();
@@ -31,7 +31,7 @@ function ProductDetailPage({hideLoading, showLoading}) {
       setLoading(false);
       hideLoading();
     })();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const handleQuantityChange = (newValue) => {
@@ -46,15 +46,17 @@ function ProductDetailPage({hideLoading, showLoading}) {
         quantity,
         price,
         priceAfterDiscount: price,
+        name: product.name,
       });
-      if(isPromo && priceAfterDiscount) {
+      if (isPromo && priceAfterDiscount) {
         action = addToCart({
           idProduct: product.id,
           quantity,
           price,
           priceAfterDiscount: priceAfterDiscount,
+          name: product.name,
         });
-      } 
+      }
       dispatch(action);
       toast.success('Thêm vào giỏ hàng thành công!');
       return;
@@ -78,8 +80,8 @@ function ProductDetailPage({hideLoading, showLoading}) {
       showLoading();
       try {
         const res = await userApi.addFavorites({
-          product_id: product.id
-        })
+          product_id: product.id,
+        });
         // console.log(res);
         toast.success('Đã Yêu Thích Sản Phẩm');
       } catch (error) {
@@ -87,7 +89,7 @@ function ProductDetailPage({hideLoading, showLoading}) {
       }
       hideLoading();
     })();
-  }
+  };
 
   return (
     <div className='product-detail-page'>
@@ -152,19 +154,37 @@ function ProductDetailPage({hideLoading, showLoading}) {
             </div>
             <div className='main-info'>
               {loading ? (
-                <Skeleton height={24} width={150} />
+                <Fragment>
+                  <Skeleton height={24} width={150} />
+                  <Skeleton height={24} width={150} />
+                </Fragment>
               ) : (
-                <p className='price'>
-                  Giá: &nbsp;{' '}
-                  <span>
-                    {isPromo && priceAfterDiscount
-                      ? priceAfterDiscount.toLocaleString()
-                      : price
-                      ? price.toLocaleString()
-                      : ''}{' '}
-                    đ
-                  </span>
-                </p>
+                <Fragment>
+                  <p className='price'>
+                    Giá: &nbsp;
+                    <span>
+                      {isPromo && priceAfterDiscount
+                        ? priceAfterDiscount.toLocaleString()
+                        : price
+                        ? price.toLocaleString()
+                        : ''}
+                      đ
+                    </span>
+                  </p>
+                  {isPromo && (
+                    <p className='price'>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <span
+                        style={{
+                          textDecoration: 'line-through',
+                          opacity: '0.4'
+                        }}
+                      >
+                        {price.toLocaleString()}đ
+                      </span>
+                    </p>
+                  )}
+                </Fragment>
               )}
               {loading ? (
                 <Skeleton height={22} width={130} />
@@ -193,7 +213,11 @@ function ProductDetailPage({hideLoading, showLoading}) {
                     <i className='fas fa-shopping-cart'></i>
                     <span>Chọn Mua</span>
                   </div>
-                  <div onClick={handleFavoriteClick} style={{marginLeft: '10px'}} className='buy__btn heart'>
+                  <div
+                    onClick={handleFavoriteClick}
+                    style={{ marginLeft: '10px' }}
+                    className='buy__btn heart'
+                  >
                     <i className='fas fa-heart'></i>
                     <span>Yêu Thích</span>
                   </div>
@@ -213,11 +237,10 @@ function ProductDetailPage({hideLoading, showLoading}) {
             <Skeleton style={{ margin: '10px' }} height={300} width={'95%'} />
           ) : (
             <p
-            className='content'
-            dangerouslySetInnerHTML={{ __html: product.description }}
-          ></p>
+              className='content'
+              dangerouslySetInnerHTML={{ __html: product.description }}
+            ></p>
           )}
-          
         </div>
       </div>
     </div>

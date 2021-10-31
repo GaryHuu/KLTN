@@ -15,6 +15,7 @@ export const login = createAsyncThunk('auth/login', async (payload) => {
     name: data.user_name,
     id: data.user_id,
     access_token: data.access_token,
+    addressId: null,
   }
   //save data to local storage
   localStorage.setItem(StorageKeys.TOKEN, data.access_token);
@@ -50,7 +51,15 @@ export const userSlice = createSlice({
       // sendToken
       state.current.access_token = action.payload;
       localStorage.setItem(StorageKeys.USER, JSON.stringify(action.payload));
-    }
+    },
+    addAddressId: (state, action) => {
+      const user = {
+        ...state.current,
+        addressId: action.payload,
+      }
+      state.current = {...user};
+      localStorage.setItem(StorageKeys.USER, JSON.stringify(user));
+    },
   },
   extraReducers: {
     [login.fulfilled]: (state, action) => {
@@ -64,6 +73,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { openModal, closeModal, logout, change, refreshToken } = userSlice.actions;
+export const { openModal, closeModal, logout, change, refreshToken, addAddressId } = userSlice.actions;
 
 export default userSlice.reducer;

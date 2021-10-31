@@ -234,6 +234,7 @@
         @include flex();
         flex-direction: row;
         justify-content: center;
+        padding-bottom: 30px;
 
         .info {
           text-align: center;

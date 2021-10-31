@@ -28,6 +28,22 @@ const userApi = {
   //   const url = '/user/refresh';
   //   return axiosClient.post(url);
   // },
+  getAddress() {
+    const url = '/user/user-profile?with=address';
+    return axiosClient.get(url);
+  },
+  changeAddress(data) {
+    const url = '/user/change-address';
+    return axiosClient.patch(url, data);
+  },
+  order(data) {
+    const url = '/user/orders';
+    return axiosClient.post(url, data);
+  },
+  getOrders(params) {
+    const url = '/user/orders';
+    return axiosClient.get(url, {params : params});
+  }
 };
 
 export default userApi;

@@ -22,7 +22,7 @@ function SideBarUser(props) {
     {
       id: 3,
       path: '/user/order',
-      search: '',
+      search: '?page=1&with=address,order_details.product.images&perPage=6',
       title: 'Quản lý đơn hàng',
       className: 'category-item',
     },

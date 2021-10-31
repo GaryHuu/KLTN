@@ -17,7 +17,15 @@ const axiosClient = axios.create({
 axiosClient.interceptors.request.use(
   function (config) {
     // Do something before request is sent
-    const URLS = ['/user/user-profile', '/user/change-profile', '/user/refresh', '/user/favorites'];
+    const URLS = [
+      '/user/user-profile',
+      '/user/change-profile',
+      '/user/refresh',
+      '/user/favorites',
+      '/user/user-profile?with=address',
+      '/user/change-address',
+      '/user/orders',
+    ];
     if (URLS.includes(config.url)) {
       const token = localStorage.getItem(StorageKeys.TOKEN);
       config.headers.Authorization = token ? `Bearer ${token}` : '';
@@ -46,7 +54,7 @@ axiosClient.interceptors.response.use(
       // logout and back to gome,
       // toast.warn('Vui Lòng Đặng Nhập Lại');
       toast.warn('Vui Lòng Đặng Nhập Lại', {
-        position: "top-right",
+        position: 'top-right',
         autoClose: 2500,
         hideProgressBar: false,
         closeOnClick: true,
@@ -55,8 +63,8 @@ axiosClient.interceptors.response.use(
         progress: 0,
       });
       dispatch(logout());
-      dispatch(openModal())
-      dispatch(logoutCart())
+      dispatch(openModal());
+      dispatch(logoutCart());
       // console.log('error 401');
       // try {
       //   const token = await userApi.refeshToken();
