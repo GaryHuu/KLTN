@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 function PaymentSuccess(props) {
+  const {location : { state }} = props;
   return (
     <div className='payment-success'>
       <div className='header'>Đặt Hàng Thành Công</div>
@@ -9,8 +10,8 @@ function PaymentSuccess(props) {
         <p>Xin cảm ơn quý khách đã mua hàng tại PhanoLink</p>
         <p>
           Đơn hàng
-          <Link to='/user/order'>
-            <span>&nbsp;#34817&nbsp;</span>
+          <Link to='/user/order?page=1&with=address,order_details.product.images&perPage=6'>
+            <span>&nbsp;#{state}&nbsp;</span>
           </Link>
           của bạn đã được đặt thành công!
         </p>
@@ -22,4 +23,4 @@ function PaymentSuccess(props) {
   );
 }
 
-export default PaymentSuccess;
+export default withRouter(PaymentSuccess);

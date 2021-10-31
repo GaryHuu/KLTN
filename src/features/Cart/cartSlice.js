@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 import { StorageKeys } from 'constant';
 
 export const getCartNameById = (id) => `cart-${id}`;
-
 const user = JSON.parse(localStorage.getItem(StorageKeys.USER));
 const initialState = {
   userId: user?.id || null,
@@ -44,9 +43,15 @@ export const cartSlice = createSlice({
       state.userId = null;
       state.cartItems = null;
     },
+    paymentSuccess: (state) => {
+      console.log(state);
+      state.cartItems = [];
+      console.log(state?.userId);
+      localStorage.removeItem(getCartNameById(state?.userId));
+    }
   },
 });
 
-export const { addToCart, changeUserId, logoutCart, changeToCart, deleteItemCart } = cartSlice.actions;
+export const { addToCart, changeUserId, logoutCart, changeToCart, deleteItemCart, paymentSuccess } = cartSlice.actions;
 
 export default cartSlice.reducer;

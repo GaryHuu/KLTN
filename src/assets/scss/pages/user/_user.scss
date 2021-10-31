@@ -111,6 +111,7 @@
               @include flex();
               justify-content: space-between;
               text-align: center;
+              line-height: 20px;
 
               .code {
                 width: 100%;
@@ -119,27 +120,37 @@
 
               .day {
                 width: 100%;
-                max-width: 90px;
+                max-width: 80px;
               }
 
               .order-product {
                 width: 100%;
-                max-width: 325px;
+                max-width: 300px;
               }
 
               .total-price {
                 width: 100%;
                 max-width: 70px;
+                white-space: nowrap;
+
+                &.price {
+                  color: #01adab;
+                }
               }
 
               .order-status {
                 width: 100%;
-                max-width: 140px;
+                max-width: 70px;
+              }
+
+              .order-address {
+                width: 100%;
+                max-width: 165px;
               }
             }
 
             &__head {
-              padding: 12px 30px;
+              padding: 12px 10px;
               border-top: 1px solid #e5e5e4;
               border-bottom: 1px solid #e5e5e4;
 
@@ -150,7 +161,7 @@
             }
 
             .order-item {
-              padding: 16px 30px;
+              padding: 16px 10px;
               font-size: 14px;
 
               .code {
@@ -159,12 +170,12 @@
 
               .day,
               .order-product,
-              .total-price,
               .order-status {
                 color: #434343;
               }
 
-              .order-product {
+              .order-product,
+              .order-address {
                 text-align: left;
               }
 

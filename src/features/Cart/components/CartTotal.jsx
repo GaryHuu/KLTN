@@ -3,14 +3,20 @@ import { useHistory, useLocation, useRouteMatch } from 'react-router';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import { cartDiscountSelector, cartTotalSelector } from '../selector';
+import userApi from 'api/userApi';
+import { useDispatch } from 'react-redux';
+import { paymentSuccess } from '../cartSlice';
+import withLoading from 'components/HOC/withLoading';
 
-function CartTotal() {
+function CartTotal({ showLoading, hideLoading }) {
+  const dispatch = useDispatch();
   const location = useLocation();
   const path = useRouteMatch();
   const history = useHistory();
-  const price = useSelector(cartTotalSelector)
-  const discount = useSelector(cartDiscountSelector)
-
+  const price = useSelector(cartTotalSelector);
+  const discount = useSelector(cartDiscountSelector);
+  const user = useSelector((state) => state.user.current);
+  const cart = useSelector((state) => state.cart.cartItems);
   const [isConfirm, setIsConfirm] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -22,7 +28,7 @@ function CartTotal() {
     else setIsSuccess(false);
   }, [location.pathname]);
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (!isConfirm) {
       history.push(`${path.url}/confirm`);
       setIsConfirm(true);
@@ -30,9 +36,44 @@ function CartTotal() {
     }
 
     // Delete Cart
-
-    toast.success('Đặt Hàng Thành Công!');
-    history.replace(`${path.url}/success`);
+    if (
+      user &&
+      user.addressId !== null &&
+      user.addressId !== undefined &&
+      cart
+    ) {
+      const cartTotal = cart.map((item) => {
+        const i = { ...item };
+        if (i.priceAfterDiscount) delete i.priceAfterDiscount;
+        if (i.idProduct) {
+          i.id = i.idProduct;
+          delete i.idProduct;
+        }
+        return i;
+      });
+      const dataSend = {
+        total: price,
+        payment_method: 'Cash on Delivery',
+        status: 1,
+        address_id: user.addressId,
+        products: [...cartTotal],
+      };
+      showLoading();
+      try {
+        const rs = await userApi.order(dataSend);
+        if (rs.status === 200) {
+          const action = paymentSuccess();
+          dispatch(action);
+          toast.success('Đặt Hàng Thành Công!');
+          history.replace(`${path.url}/success`, rs.data.id);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+      hideLoading();
+    } else {
+      toast.error('Vui lòng cập nhật thông tin đặt hàng');
+    }
   };
 
   return (
@@ -50,13 +91,15 @@ function CartTotal() {
       <div className='checkout'>
         <p>
           <span>Tạm Tính:</span>
-          <span>{price  && (price + (discount || 0)).toLocaleString()} đ</span>
+          <span>{price && (price + (discount || 0)).toLocaleString()} đ</span>
         </p>
         <p>
-          <span>Giảm Giá:</span> <span>{discount && discount.toLocaleString()} đ</span>
+          <span>Giảm Giá:</span>{' '}
+          <span>{discount && discount.toLocaleString()} đ</span>
         </p>
         <p>
-          <span>Thành Tiền:</span> <span>{price && price.toLocaleString()} đ</span>
+          <span>Thành Tiền:</span>{' '}
+          <span>{price && price.toLocaleString()} đ</span>
         </p>
         <span>(Đã bao gồm VAT nếu có)</span>
       </div>
@@ -80,4 +123,4 @@ function CartTotal() {
   );
 }
 
-export default CartTotal;
+export default withLoading(CartTotal);

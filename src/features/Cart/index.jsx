@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Redirect, Route, Switch, useRouteMatch } from 'react-router';
+import { Redirect, Route, Switch, useRouteMatch, useLocation } from 'react-router';
 import CartEmpty from './components/CartEmpty';
 import CartHeader from './components/CartHeader';
 import CartLocationConfirm from './components/CartLocationConfirm';
@@ -11,7 +11,7 @@ import { cartItemsCountSelector } from './selector';
 
 function Cart() {
   const countCart = useSelector(cartItemsCountSelector);
-  const isLoggedIn = true;
+  const isLoggedIn = useSelector(state => state.user.current);
   const { url } = useRouteMatch();
   return (
     <>
@@ -24,7 +24,7 @@ function Cart() {
               <Switch>
                 <Route path={`${url}`} exact>
                   <CartHeader />
-                  {countCart <= 0 ? <CartEmpty /> : <CartProductList />}
+                  {(countCart <= 0 || countCart === undefined )? <CartEmpty /> : <CartProductList />}
                 </Route>
                 <Route path={`${url}/confirm`} exact>
                   <CartLocationConfirm />
@@ -35,7 +35,7 @@ function Cart() {
               </Switch>
             </div>
 
-            {countCart <= 0 || (
+            {(countCart <= 0 || countCart === undefined  )|| (
               <div className='cart__right'>
                 <CartTotal />
               </div>

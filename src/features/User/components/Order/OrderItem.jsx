@@ -1,16 +1,18 @@
 import React from 'react';
 
-function OrderItem(props) {
+function OrderItem({ order }) {
   return (
     <li className='order-item'>
-      <span className='code'>697318275</span>
-      <span className='day'>18/08/2018</span>
-      <p className='order-product'>
-        Blockchain: Bản Chất Của Blockchain, Bitcoin, Tiền Điện Tử, Hợp Đồng
-        Thông Minh Và Tương Lai Của Tiền Tệ...và 03 sản phẩm khác
-      </p>
-      <span className='total-price'>239.200 đ</span>
-      <span className='order-status'>Giao hàng thành công</span>
+      <span className='code'>{order.id}</span>
+      <span className='day'>
+        {order.dateOder[1]}
+        <br />
+        {order.dateOder[0]}
+      </span>
+      <p className='order-product'>{order.product}</p>
+      <p className='order-address'>{order.address}</p>
+      <span className='total-price price'>{order.price.toLocaleString() + ' '} đ</span>
+      <span className='order-status'>{order.status}</span>
     </li>
   );
 }
