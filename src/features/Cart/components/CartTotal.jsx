@@ -64,7 +64,7 @@ function CartTotal({ showLoading, hideLoading }) {
         if (rs.status === 200) {
           const action = paymentSuccess();
           dispatch(action);
-          toast.success('Đặt Hàng Thành Công!');
+          toast.success('Đặt hàng thành công!');
           history.replace(`${path.url}/success`, rs.data.id);
         }
       } catch (error) {

@@ -51,9 +51,9 @@ function UserInformation({ hideLoading, showLoading }) {
       };
       const action = change(user);
       dispatch(action);
-      toast.success('Cập Nhật Thành Công!');
+      toast.success('Cập nhật thành công!');
     } catch (error) {
-      toast.error('Cập Nhật Thất Bại!');
+      toast.error('Cập nhật thất bại!');
     }
     hideLoading();
   };

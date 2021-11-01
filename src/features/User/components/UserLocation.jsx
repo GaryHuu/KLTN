@@ -59,7 +59,7 @@ function UserLocation({ hideLoading, showLoading }) {
     showLoading();
     try {
       const res = await userApi.changeAddress(values);
-      res.status === 200 && toast.success('Cập nhật thông tin thành công');
+      res.status === 200 && toast.success('Cập nhật thông tin thành công!');
       if(res.data) {
         const data = res.data[0];
         data.id && dispatch(addAddressId(data.id))

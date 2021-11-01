@@ -99,7 +99,7 @@ function ProductDetailPage({ hideLoading, showLoading }) {
         });
         if(res.status === 200 && res.success === true) {
           setIsFavorite(true);
-          toast.success('Đã Yêu Thích Sản Phẩm');
+          toast.success('Đã yêu thích sản phẩm');
         }
       } catch (error) {
       }
@@ -114,7 +114,7 @@ function ProductDetailPage({ hideLoading, showLoading }) {
         const res = await userApi.deteleFavoriteProduct(product.id);
         if(res.status === 200 && res.success === true) {
           setIsFavorite(false);
-          toast.success('Đã Xóa Yêu Thích Sản Phẩm');
+          toast.success('Đã xóa yêu thích sản phẩm');
         }
       } catch (error) {
       }

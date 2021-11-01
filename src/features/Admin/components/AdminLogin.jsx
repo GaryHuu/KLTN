@@ -15,9 +15,9 @@ function AdminLogin (props) {
       const action = login(values);
       const resultAction = await dispatch(action);
       unwrapResult(resultAction);
-      toast.success('Đặng Nhập Thành Công!');
+      toast.success('Đặng nhập thành công!');
     } catch (error) {
-      toast.error('Tài Khoản Không Hợp Lệ!');
+      toast.error('Tài khoản không hợp lệ!');
     }
     hideLoading();
   };
