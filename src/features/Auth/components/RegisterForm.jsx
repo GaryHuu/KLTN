@@ -23,8 +23,7 @@ function RegisterForm(props) {
     phone: yup
       .string()
       .required('Please enter your phone number')
-      .min(10)
-      .max(11),
+      .matches(/^(0[3|5|7|8|9])+([0-9]{8})$/, 'Phone number is not valid'),
   });
 
   const form = useForm({

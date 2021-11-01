@@ -17,6 +17,7 @@ function ProductDetailPage({ hideLoading, showLoading }) {
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
+  const [isFavorite, setIsFavorite] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.current);
 
@@ -33,6 +34,20 @@ function ProductDetailPage({ hideLoading, showLoading }) {
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
+
+  useEffect(() => {
+    if (user) {
+      (async function () {
+        try {
+          const rs = await userApi.getIsFavoriteProduct(id);
+          if (rs === 'nope') setIsFavorite(false);
+          if (rs === 'yes') setIsFavorite(true);
+        } catch (error) {}
+      })();
+    } else {
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   const handleQuantityChange = (newValue) => {
     setQuantity(newValue);
@@ -79,13 +94,29 @@ function ProductDetailPage({ hideLoading, showLoading }) {
     (async function () {
       showLoading();
       try {
-        const res = await userApi.addFavorites({
+        const res =await userApi.addFavorites({
           product_id: product.id,
         });
-        // console.log(res);
-        toast.success('Đã Yêu Thích Sản Phẩm');
+        if(res.status === 200 && res.success === true) {
+          setIsFavorite(true);
+          toast.success('Đã Yêu Thích Sản Phẩm');
+        }
       } catch (error) {
-        toast.warn('Sản Phẩm Đã Yêu Thích Sẵn');
+      }
+      hideLoading();
+    })();
+  };
+
+  const handleDeleteFavorite = () => {
+    (async function () {
+      showLoading();
+      try {
+        const res = await userApi.deteleFavoriteProduct(product.id);
+        if(res.status === 200 && res.success === true) {
+          setIsFavorite(false);
+          toast.success('Đã Xóa Yêu Thích Sản Phẩm');
+        }
+      } catch (error) {
       }
       hideLoading();
     })();
@@ -177,7 +208,7 @@ function ProductDetailPage({ hideLoading, showLoading }) {
                       <span
                         style={{
                           textDecoration: 'line-through',
-                          opacity: '0.4'
+                          opacity: '0.4',
                         }}
                       >
                         {price.toLocaleString()}đ
@@ -213,14 +244,25 @@ function ProductDetailPage({ hideLoading, showLoading }) {
                     <i className='fas fa-shopping-cart'></i>
                     <span>Chọn Mua</span>
                   </div>
-                  <div
-                    onClick={handleFavoriteClick}
-                    style={{ marginLeft: '10px' }}
-                    className='buy__btn heart'
-                  >
-                    <i className='fas fa-heart'></i>
-                    <span>Yêu Thích</span>
-                  </div>
+                  {isFavorite ? (
+                    <divs
+                      onClick={handleDeleteFavorite}
+                      style={{ marginLeft: '10px' }}
+                      className='buy__btn heart'
+                    >
+                      <i className='fas fa-heart-broken'></i>
+                      <span>Xóa Yêu Thích</span>
+                    </divs>
+                  ) : (
+                    <div
+                      onClick={handleFavoriteClick}
+                      style={{ marginLeft: '10px' }}
+                      className='buy__btn heart'
+                    >
+                      <i className='fas fa-heart'></i>
+                      <span>Yêu Thích</span>
+                    </div>
+                  )}
                 </div>
               )}
             </div>

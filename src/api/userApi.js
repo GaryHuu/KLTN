@@ -24,6 +24,16 @@ const userApi = {
     const url = '/user/favorites';
     return axiosClient.get(url, { params: params });
   },
+  getIsFavoriteProduct (id) {
+    const url = '/is-favorite';
+    return axiosClient.post(url, {
+      product_id: id
+    });
+  },
+  deteleFavoriteProduct (id) {
+    const url = `/user/favorites/${id}`;
+    return axiosClient.delete(url);
+  },
   // refeshToken () {
   //   const url = '/user/refresh';
   //   return axiosClient.post(url);

@@ -39,7 +39,6 @@ function Header() {
     dispatch(action);
     const actionCart = logoutCart();
     dispatch(actionCart);
-    toast.success('Đã Đăng Xuất!');
     history.replace('/');
   };
   const handleCloseModal = () => {
