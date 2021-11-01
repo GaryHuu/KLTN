@@ -63,7 +63,7 @@ axiosClient.interceptors.response.use(
     if (status === 401) {
       // logout and back to gome,
       // toast.warn('Vui Lòng Đặng Nhập Lại');
-      toast.warn('Vui Lòng Đặng Nhập Lại', {
+      toast.warn('Vui lòng đặng nhập lại!', {
         position: 'top-right',
         autoClose: 2500,
         hideProgressBar: false,

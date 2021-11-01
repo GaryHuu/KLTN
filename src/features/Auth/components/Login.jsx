@@ -19,9 +19,9 @@ function Login({showLoading, hideLoading}) {
         dispatch(closeModal());
         dispatch(changeUserId(res.user_id));
       }
-      toast.success('Đặng Nhập Thành Công!');
+      toast.success('Đặng nhập thành công!');
     } catch (error) {
-      toast.error('Tài Khoản Không Hợp Lệ!');
+      toast.error('Tài khoản không hợp lệ!');
     }
     hideLoading();
   };

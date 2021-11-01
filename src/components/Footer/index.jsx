@@ -1,6 +1,3 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-
 import bctIcon from 'assets/img/BCT-icon.svg';
 import expressIcon from 'assets/img/express-icon.svg';
 import fbIcon from 'assets/img/fb-icon.svg';
@@ -13,8 +10,15 @@ import presentIcon from 'assets/img/present-icon.svg';
 import transactionIcon from 'assets/img/transaction-icon.svg';
 import ytIcon from 'assets/img/youtube-icon.svg';
 import zaloIcon from 'assets/img/zalo-icon.svg';
+import { openModal } from 'features/Auth/userSlice';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function Footer() {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.current);
   return (
     <footer>
       <div className='container footer__commit'>
@@ -68,13 +72,13 @@ function Footer() {
             <div className='locate__address'>
               <p>CÔNG TY CỔ PHẦN DƯỢC PHẨM PHANO</p>
               <Link to='/'>
-                Địa chỉ: 31 Hồ Biểu Chánh, P.12, Q.Phú Nhuận, TP.HCM
+                Địa chỉ: 01 Võ Văn Ngân, P.Linh Chiểu, TP.Thủ Đức, TP.HCM
               </Link>
             </div>
             <div className='locate__contact'>
               <p>MST: 0304860663</p>
-              <Link to='/'>Email: cskh@phanolink.com</Link>
-              <Link to='/'>Tel: 1800 6768</Link>
+              <Link to='/'>Email: nguyenhuu220800@gmail.com</Link>
+              <Link to='/'>Tel: 0379 339 693</Link>
             </div>
           </div>
           <div className='content__assist'>
@@ -107,13 +111,43 @@ function Footer() {
             <h4>TÀI KHOẢN</h4>
             <ul className='account__list'>
               <li>
-                <Link to='/'>Đăng ký</Link>
+                <Link
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const action = openModal();
+                    dispatch(action);
+                  }}
+                  to='/'
+                >
+                  Đăng ký
+                </Link>
               </li>
               <li>
-                <Link to='/'>Đăng nhập</Link>
+                <Link
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const action = openModal();
+                    dispatch(action);
+                  }}
+                  to='/'
+                >
+                  Đăng nhập
+                </Link>
               </li>
               <li>
-                <Link to='/'>Kiểm tra đơn hàng</Link>
+                <Link
+                  onClick={(e) => {
+                    if (!user) {
+                      e.preventDefault();
+                      toast.warn('Vui lòng đăng nhập!');
+                      const action = openModal();
+                      dispatch(action);
+                    }
+                  }}
+                  to='/user/order?page=1&with=address,order_details.product.images&perPage=6'
+                >
+                  Kiểm tra đơn hàng
+                </Link>
               </li>
             </ul>
           </div>
@@ -123,7 +157,13 @@ function Footer() {
               <Link to='/'>
                 <img src={zaloIcon} alt='zalo logo' />
               </Link>
-              <Link to='/'>
+              <Link
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.open('https://www.facebook.com/garyhuu2000', '_blank');
+                }}
+                to='/'
+              >
                 <img src={fbIcon} alt='facebook logo' />
               </Link>
               <Link to='/'>

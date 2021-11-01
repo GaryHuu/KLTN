@@ -58,7 +58,7 @@ function Header() {
     if (!user) {
       const action = openModal();
       dispatch(action);
-      toast.warn('Đăng Nhập Để Xem Giỏ Hàng!');
+      toast.warn('Đăng nhập để xem giỏ hàng!');
       return;
     }
     history.push('/cart');
