@@ -16,9 +16,18 @@ function UserInformationForm(props) {
       .string()
       .required('Please enter your email')
       .email('Please enter a valid email'),
-    phone: yup.string().required('Please enter your phone number').min(10).max(11),
-    gender: yup.number().required('Please enter your phone gender'),
-    birthday: yup.string().required('Please enter your phone birthday'),
+    phone: yup
+      .string()
+      .required('Please enter your phone number')
+      .matches(/^(0[3|5|7|8|9])+([0-9]{8})$/, 'Phone number is not valid'),
+    gender: yup
+      .number()
+      .required('Please enter your phone gender')
+      .typeError('Please enter your phone gender'),
+    birthday: yup
+      .string()
+      .required('Please enter your phone birthday')
+      .typeError('Please enter your phone birthday'),
     isChangePassword: yup.boolean(),
     old_password: yup.string().when('isChangePassword', {
       is: true,

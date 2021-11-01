@@ -25,8 +25,18 @@ axiosClient.interceptors.request.use(
       '/user/user-profile?with=address',
       '/user/change-address',
       '/user/orders',
+      '/is-favorite',
     ];
-    if (URLS.includes(config.url)) {
+
+    const dynamicURL = [
+      '/user/favorites/',
+    ]
+
+    const dynamicURLNeedToken = dynamicURL.some(item => {
+      return config.url.includes(item)
+    })
+
+    if (URLS.includes(config.url) || dynamicURLNeedToken) {
       const token = localStorage.getItem(StorageKeys.TOKEN);
       config.headers.Authorization = token ? `Bearer ${token}` : '';
     }

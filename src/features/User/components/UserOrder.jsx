@@ -45,8 +45,8 @@ function UserOrder({ hideLoading, showLoading }) {
         dateOder: item.date_order.split(' '),
         product: item.order_details.reduce((acc, i, index) => {
           if (index === item.order_details.length - 1)
-            return acc + i.product.name;
-          return acc + i.product.name + ', ';
+            return acc + i.product.name + ' (Số lượng: ' + i.product_quantity + ').';
+          return acc + i.product.name + ' (Số lượng: ' + i.product_quantity + '), ';
         }, ''),
         address:
           item.address.street_name +
@@ -101,40 +101,10 @@ function UserOrder({ hideLoading, showLoading }) {
       {loading ? (
         <Fragment>
           <Skeleton
-            containerClassName='order-item'
             style={{ margin: '10px 0 0 2.5%' }}
             height={50}
             width={'95%'}
-          />
-          <Skeleton
-            containerClassName='order-item'
-            style={{ margin: '10px 0 0 2.5%' }}
-            height={50}
-            width={'95%'}
-          />
-          <Skeleton
-            containerClassName='order-item'
-            style={{ margin: '10px 0 0 2.5%' }}
-            height={50}
-            width={'95%'}
-          />
-          <Skeleton
-            containerClassName='order-item'
-            style={{ margin: '10px 0 0 2.5%' }}
-            height={50}
-            width={'95%'}
-          />
-          <Skeleton
-            containerClassName='order-item'
-            style={{ margin: '10px 0 0 2.5%' }}
-            height={50}
-            width={'95%'}
-          />
-          <Skeleton
-            containerClassName='order-item'
-            style={{ margin: '10px 0 0 2.5%' }}
-            height={50}
-            width={'95%'}
+            count={6}
           />
         </Fragment>
       ) : (
@@ -147,7 +117,7 @@ function UserOrder({ hideLoading, showLoading }) {
 
       {loading ? (
         <Skeleton
-          style={{ float: 'right', marginRight: '2.5%' }}
+          style={{ float: 'right', marginRight: '2.5%', marginTop: '20px' }}
           height={20}
           width={'10%'}
         />
