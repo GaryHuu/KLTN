@@ -31,7 +31,6 @@ axiosClient.interceptors.request.use(
     const dynamicURL = [
       '/user/favorites/',
     ]
-
     const dynamicURLNeedToken = dynamicURL.some(item => {
       return config.url.includes(item)
     })
@@ -40,6 +39,21 @@ axiosClient.interceptors.request.use(
       const token = localStorage.getItem(StorageKeys.TOKEN);
       config.headers.Authorization = token ? `Bearer ${token}` : '';
     }
+
+    const URLSADMIN = [
+      'admin/product-list',
+      '/admin/products',
+    ]
+    const dynamicURLAdminNeedToken = URLSADMIN.some(item => {
+      return config.url.includes(item)
+    })
+    
+    if(dynamicURLAdminNeedToken) {
+      const admin = JSON.parse(localStorage.getItem(StorageKeys.ADMIN));
+      const token = admin.access_token;
+      config.headers.Authorization = token ? `Bearer ${token}` : '';
+    }
+
     return config;
   },
   function (error) {

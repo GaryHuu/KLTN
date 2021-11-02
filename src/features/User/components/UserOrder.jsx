@@ -42,7 +42,7 @@ function UserOrder({ hideLoading, showLoading }) {
     const newOrder = dataList.map((item) => {
       const newData = {
         id: item.id,
-        dateOder: item.date_order.split(' '),
+        dateOder: item.date_order,
         product: item.order_details.reduce((acc, i, index) => {
           if (index === item.order_details.length - 1)
             return acc + i.product.name + ' (Số lượng: ' + i.product_quantity + ').';

@@ -91,15 +91,33 @@ function CartTotal({ showLoading, hideLoading }) {
       <div className='checkout'>
         <p>
           <span>Tạm Tính:</span>
-          <span>{price && (price + (discount || 0)).toLocaleString()} đ</span>
+          <span>
+            {price &&
+              (price + (discount || 0)).toLocaleString('it-IT', {
+                style: 'currency',
+                currency: 'VND',
+              })}
+          </span>
         </p>
         <p>
           <span>Giảm Giá:</span>{' '}
-          <span>{discount && discount.toLocaleString()} đ</span>
+          <span>
+            {discount &&
+              discount.toLocaleString('it-IT', {
+                style: 'currency',
+                currency: 'VND',
+              })}
+          </span>
         </p>
         <p>
           <span>Thành Tiền:</span>{' '}
-          <span>{price && price.toLocaleString()} đ</span>
+          <span>
+            {price &&
+              price.toLocaleString('it-IT', {
+                style: 'currency',
+                currency: 'VND',
+              })}
+          </span>
         </p>
         <span>(Đã bao gồm VAT nếu có)</span>
       </div>

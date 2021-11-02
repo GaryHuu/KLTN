@@ -1,6 +1,6 @@
 section.admin {
-  height: 100vh;
-  overflow: hidden;
+  height: 100%;
+  width: 100%;
 
   header.header-admin {
     height: 70px;
@@ -28,21 +28,6 @@ section.admin {
           font-weight: normal;
           color: #fff;
         }
-
-        span {
-          cursor: pointer;
-          display: block;
-          width: 90px;
-          height: 50px;
-          line-height: 50px;
-          background-color: #fff;
-          text-align: center;
-          border-radius: 4px;
-
-          &:hover {
-            opacity: 0.8;
-          }
-        }
       }
     }
   }
@@ -50,13 +35,13 @@ section.admin {
   .wrapper-admin {
     margin-top: 70px;
     display: flex;
-    height: calc(100vh - 70px);
 
     .sidebar-admin {
       width: 12%;
       background-color: #fff;
       padding: 20px 0;
-      box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 5%);
+      border-right: 1px solid rgba(0, 0, 0, 5%);
+      min-height: 100vh;
 
       h4 {
         height: 40px;
@@ -79,7 +64,14 @@ section.admin {
           margin-right: 10px;
         }
 
-        &.active {
+        &:hover {
+          padding-left: 40px;
+          color: #01adab;
+          background-color: #f1f1f1b3;
+        }
+
+        &.active,
+        &.active:hover {
           padding-left: 40px;
           color: #01adab;
           background-color: #dcdcdcb3;
@@ -89,6 +81,34 @@ section.admin {
 
     .content {
       flex: 1;
+
+      .product-admin {
+        padding: 10px 10px 10px 0;
+        .product__head {
+          display: flex;
+          text-align: center;
+          justify-content: space-between;
+          padding: 0 10px;
+          margin-bottom: 12px;
+
+          & > div {
+            display: flex;
+          }
+        }
+      }
+
     }
+  }
+}
+
+.create-product {  
+  width: 60vw;
+  padding: 10px;
+
+  h3 {
+    text-align: center;
+    font-size: 25px;
+    font-weight: 400;
+    color: #01adab;
   }
 }
