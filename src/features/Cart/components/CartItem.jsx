@@ -43,7 +43,7 @@ function CartItem({ item, onChange, hideLoading, showLoading }) {
       setLoading(false);
       hideLoading();
     })();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [item.idProduct]);
 
   return (
@@ -83,18 +83,31 @@ function CartItem({ item, onChange, hideLoading, showLoading }) {
             <Fragment>
               <p className='price__new'>
                 {isPromo && priceAfterDiscount
-                  ? (priceAfterDiscount * item.quantity).toLocaleString()
+                  ? (priceAfterDiscount * item.quantity).toLocaleString(
+                      'it-IT',
+                      {
+                        style: 'currency',
+                        currency: 'VND',
+                      }
+                    )
                   : price * item.quantity
-                  ? (price * item.quantity).toLocaleString()
+                  ? (price * item.quantity).toLocaleString('it-IT', {
+                      style: 'currency',
+                      currency: 'VND',
+                    })
                   : ''}
-                &nbsp;đ
+                &nbsp;
               </p>
               {product.discount !== 'No' && (
                 <span className='price__discount'>-{product.discount}</span>
               )}
               {isPromo && (
                 <span className='price__old'>
-                  {(price * item.quantity).toLocaleString()}&nbsp;đ
+                  {(price * item.quantity).toLocaleString('it-IT', {
+                    style: 'currency',
+                    currency: 'VND',
+                  })}
+                  &nbsp;
                 </span>
               )}
             </Fragment>

@@ -3,6 +3,7 @@ import headerLogo from 'assets/img/header-logo.svg';
 import { useDispatch } from 'react-redux';
 import { logout } from '../adminSlice';
 import { toast } from 'react-toastify';
+import { Button } from 'antd';
 
 function HeaderAdmin() {
   const dispatch = useDispatch()
@@ -18,7 +19,7 @@ function HeaderAdmin() {
             <img src={headerLogo} alt='' />
           </div>
           <h1 className='title'>Admin</h1>
-          <span onClick={handleLogout}>Logout</span>
+          <Button onClick={handleLogout}>Logout</Button>
         </div>
       </div>
     </header>

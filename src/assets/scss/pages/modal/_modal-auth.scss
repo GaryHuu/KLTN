@@ -46,6 +46,10 @@
       &:hover {
         opacity: 0.8;
         color: #01adab;
+
+        h4 {
+          color: #01adab;
+        }
       }
 
       h4 {
@@ -64,6 +68,10 @@
     &__right.active {
       background-color: #01adab;
       color: #fff;
+
+      h4 {
+        color: #fff;
+      }
 
       &::before {
         height: 0;
@@ -93,7 +101,6 @@
 
 .section-login {
   &__title {
-    margin-top: 6px;
     text-align: center;
     font-size: 26px;
     font-weight: normal;
