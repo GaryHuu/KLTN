@@ -10,19 +10,19 @@ function SidebarAdmin() {
         id: 1,
         iconClassName: 'fas fa-pills',
         title: 'Sản Phẩm',
-        path: '/admin/product',
+        path: '/admin/products',
       },
       {
         id: 2,
         iconClassName: 'fas fa-file-invoice-dollar',
         title: 'Đơn hàng',
-        path: '/admin/bill',
+        path: '/admin/bills',
       },
       {
         id: 3,
         iconClassName: 'far fa-user',
         title: 'Người dùng',
-        path: '/admin/user',
+        path: '/admin/users',
       },
     ];
   }, []);

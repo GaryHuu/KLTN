@@ -17,7 +17,8 @@ function AdminPage() {
         <SidebarAdmin/>
         <div className='content'>
           <Switch>
-            <Route path={`${path}/product`} component={AdminProduct} />
+            <Route path={`${path}`} exact component={AdminProduct} />
+            <Route path={`${path}/products`} component={AdminProduct} />
             <Route />
           </Switch>
         </div>

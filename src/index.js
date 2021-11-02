@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import { store } from 'app/store';
 import ScrollToTop from 'components/ScrollToTop';
 import App from './App';
+import 'antd/dist/antd.css';
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-loading-skeleton/dist/skeleton.css';
 import './assets/scss/styles.scss';

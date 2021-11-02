@@ -104,13 +104,28 @@ function ProductItem({ product }) {
         </h5>
 
         {isPromo && priceAfterDiscount ? (
-          <p>{priceAfterDiscount.toLocaleString()} đ</p>
+          <p>
+            {priceAfterDiscount.toLocaleString('it-IT', {
+              style: 'currency',
+              currency: 'VND',
+            })}
+          </p>
         ) : (
-          <p>{price.toLocaleString()} đ</p>
+          <p>
+            {price.toLocaleString('it-IT', {
+              style: 'currency',
+              currency: 'VND',
+            })}
+          </p>
         )}
 
         {isPromo && priceAfterDiscount && (
-          <p className='footer__discount'>{price.toLocaleString()} đ</p>
+          <p className='footer__discount'>
+            {price.toLocaleString('it-IT', {
+              style: 'currency',
+              currency: 'VND',
+            })}
+          </p>
         )}
       </div>
       <div

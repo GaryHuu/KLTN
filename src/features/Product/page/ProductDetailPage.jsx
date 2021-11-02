@@ -94,15 +94,14 @@ function ProductDetailPage({ hideLoading, showLoading }) {
     (async function () {
       showLoading();
       try {
-        const res =await userApi.addFavorites({
+        const res = await userApi.addFavorites({
           product_id: product.id,
         });
-        if(res.status === 200 && res.success === true) {
+        if (res.status === 200 && res.success === true) {
           setIsFavorite(true);
           toast.success('Đã yêu thích sản phẩm');
         }
-      } catch (error) {
-      }
+      } catch (error) {}
       hideLoading();
     })();
   };
@@ -112,15 +111,16 @@ function ProductDetailPage({ hideLoading, showLoading }) {
       showLoading();
       try {
         const res = await userApi.deteleFavoriteProduct(product.id);
-        if(res.status === 200 && res.success === true) {
+        if (res.status === 200 && res.success === true) {
           setIsFavorite(false);
           toast.success('Đã xóa yêu thích sản phẩm');
         }
-      } catch (error) {
-      }
+      } catch (error) {}
       hideLoading();
     })();
   };
+
+  console.log(product);
 
   return (
     <div className='product-detail-page'>
@@ -166,7 +166,7 @@ function ProductDetailPage({ hideLoading, showLoading }) {
               ) : (
                 <p>
                   Danh Mục Sản phẩm: &nbsp;
-                  <span>{product.category_name}</span>
+                  <span>{product.category.name}</span>
                 </p>
               )}
 
@@ -195,11 +195,16 @@ function ProductDetailPage({ hideLoading, showLoading }) {
                     Giá: &nbsp;
                     <span>
                       {isPromo && priceAfterDiscount
-                        ? priceAfterDiscount.toLocaleString()
+                        ? priceAfterDiscount.toLocaleString('it-IT', {
+                            style: 'currency',
+                            currency: 'VND',
+                          })
                         : price
-                        ? price.toLocaleString()
+                        ? price.toLocaleString('it-IT', {
+                            style: 'currency',
+                            currency: 'VND',
+                          })
                         : ''}
-                      đ
                     </span>
                   </p>
                   {isPromo && (
@@ -211,7 +216,10 @@ function ProductDetailPage({ hideLoading, showLoading }) {
                           opacity: '0.4',
                         }}
                       >
-                        {price.toLocaleString()}đ
+                        {price.toLocaleString('it-IT', {
+                          style: 'currency',
+                          currency: 'VND',
+                        })}
                       </span>
                     </p>
                   )}
