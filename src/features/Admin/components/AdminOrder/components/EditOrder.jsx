@@ -1,31 +1,20 @@
 import { Button } from 'antd';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useState } from 'react';
 import Modal from 'react-modal/lib/components/Modal';
-import CreateProduct from './components/CreateProduct';
+import EditOrderContainer from './EditOrderContainer';
 
-function ProductHeader(props) {
+function EditOrder(props) {
   const [openModal, setOpenModal] = useState(false);
   return (
-    <div className='product__head'>
-      <div
-        style={{
-          height: '40px',
-          textAlign: 'center',
-          fontSize: '19px',
-          color: '#505050',
+    <Fragment>
+      <Button
+        onClick={() => {
+          setOpenModal(true);
         }}
       >
-        Sản phẩm
-      </div>
-      <div>
-        <Button onClick={() => props.reload()} style={{ marginRight: '10px' }}>
-          <i className='fas fa-sync'></i>
-        </Button>
-        <Button onClick={() => setOpenModal(true)} className='create-btn'>
-          <i className='fas fa-plus'></i>
-        </Button>
-      </div>
+        <i className='fas fa-edit'></i>
+      </Button>
       <Modal
         isOpen={openModal}
         ariaHideApp={false}
@@ -67,15 +56,15 @@ function ProductHeader(props) {
           }}
           onClick={() => {
             setOpenModal(false);
-            props.reload();
+            props.onEdit();
           }}
         >
           X
         </div>
-        <CreateProduct />
+        <EditOrderContainer data={props.data} />
       </Modal>
-    </div>
+    </Fragment>
   );
 }
 
-export default ProductHeader;
+export default EditOrder;

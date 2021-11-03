@@ -109,7 +109,7 @@ function ProductConent(props) {
       title: 'Nội dung',
       dataIndex: 'content',
       key: 'content',
-      width: 260,
+      width: 250,
     },
     {
       title: 'Giảm giá',
@@ -204,7 +204,7 @@ function ProductConent(props) {
           })}
         </Fragment>
       ),
-      width: 150,
+      width: 100,
 
       filterDropdown: ({
         setSelectedKeys,
@@ -263,6 +263,7 @@ function ProductConent(props) {
           </div>
         );
       },
+      width: 120,
     },
   ];
 

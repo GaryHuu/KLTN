@@ -43,6 +43,7 @@ axiosClient.interceptors.request.use(
     const URLSADMIN = [
       'admin/product-list',
       '/admin/products',
+      '/admin/orders'
     ]
     const dynamicURLAdminNeedToken = URLSADMIN.some(item => {
       return config.url.includes(item)
