@@ -226,7 +226,6 @@ function AdminOrder() {
       filterMode: 'tree',
       filterSearch: true,
       onFilter: (value, record) => {
-        console.log(value);
         return record.status === value;
       },
       width: 100,

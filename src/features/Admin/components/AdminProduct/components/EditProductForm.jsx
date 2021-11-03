@@ -12,7 +12,6 @@ import draftToHtml from 'draftjs-to-html';
 import { convertToRaw, convertFromHTML, ContentState } from 'draft-js';
 
 function EditProductForm({ onSubmit, product }) {
-  console.log(product);
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [isEditImg, setIsEditImg] = useState(false);
   const [imgProduct, setImgProduct] = useState();
@@ -72,8 +71,6 @@ function EditProductForm({ onSubmit, product }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [product]);
 
-  // console.log(draftToHtml(convertToRaw(editorState.getCurrentContent())));
-
   // const handleImgChange = () => {
   //   const file = imgRef.current.files[0];
   // };
@@ -103,10 +100,10 @@ function EditProductForm({ onSubmit, product }) {
     formData.append('category_id', values.category_id);
     formData.append('feature', values.feature);
     formData.append('sale', values.sale);
-    
-    if(isEditImg) {
-       const file =
-      imgRef.current && imgRef.current.files && imgRef.current.files[0];
+
+    if (isEditImg) {
+      const file =
+        imgRef.current && imgRef.current.files && imgRef.current.files[0];
       if (!file) {
         setErrorImage('Please enter product image');
         return;
@@ -152,7 +149,9 @@ function EditProductForm({ onSubmit, product }) {
         <TextEditor
           label='Nhập mô tả sản phẩm'
           state={editorState}
-          onChange={(values) => setEditorState(values)}
+          onChange={(values) => {
+            setEditorState(values);
+          }}
         />
         <CategoryField label='Chọn danh mục' form={form} name='category_id' />
         <GenderField
@@ -186,9 +185,16 @@ function EditProductForm({ onSubmit, product }) {
             }}
             onChange={handleInputImgChange}
           />
-          {imgProduct && <img style={{
-            marginTop: '10px',
-          }} width={'25%'} src={imgProduct.preview} alt='' />}
+          {imgProduct && (
+            <img
+              style={{
+                marginTop: '10px',
+              }}
+              width={'25%'}
+              src={imgProduct.preview}
+              alt=''
+            />
+          )}
           {errorImage && (
             <span
               style={{
