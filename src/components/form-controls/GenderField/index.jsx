@@ -2,7 +2,7 @@ import React from 'react';
 import { Controller } from 'react-hook-form';
 
 function GenderField(props) {
-  const { form, name, label, disable } = props;
+  const { form, name, label, disable, title } = props;
   return (
     <Controller
       name={name}
@@ -26,7 +26,7 @@ function GenderField(props) {
                 type='radio'
                 name={name}
               />
-              <label htmlFor='user-sex-male'>Nam</label>
+              <label htmlFor='user-sex-male'>{title ? title[0] : 'Nam'}</label>
               <input
                 id='user-sex-female'
                 value={0}
@@ -38,7 +38,9 @@ function GenderField(props) {
                 type='radio'
                 name={name}
               />
-              <label htmlFor='user-sex-female'>Nữ</label>
+              <label htmlFor='user-sex-female'>
+                {title ? title[1] : 'Nữ'}
+              </label>
               {/* <input
                 id='user-sex-other'
                 value='other'

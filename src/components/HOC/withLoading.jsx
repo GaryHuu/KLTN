@@ -2,8 +2,9 @@ import React from 'react';
 
 function withLoading(WrappedComponent) {
   return (props) => {
-    const showLoading = () => {
+    const showLoading = (className) => {
       document.body.classList.add('loading-data');
+      if (className) document.body.classList.add('top');
     };
 
     const scrollToTop = () => {
@@ -15,6 +16,7 @@ function withLoading(WrappedComponent) {
 
     const hideLoading = () => {
       document.body.classList.remove('loading-data');
+      document.body.classList.remove('top');
       scrollToTop();
     };
 

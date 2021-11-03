@@ -2,12 +2,14 @@ import { Button, Input, Tag } from 'antd';
 import adminApi from 'api/adminApi';
 import AdminTable from 'features/Admin/common/AdminTable';
 import React, { Fragment, useCallback, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import DeleteProduct from './components/DeleteProduct';
 import EditProduct from './components/EditProduct';
 
 function ProductConent(props) {
   const [loading, setLoading] = useState(true);
   const [productList, setProductList] = useState([]);
+  const [data, setData] = useState([]);
 
   const mapData = useCallback((data) => {
     const newProductList = data.map((item) => {
@@ -25,7 +27,6 @@ function ProductConent(props) {
       if (item.feature === 'Yes') dataMap.tags.push('Nổi bật');
       return dataMap;
     });
-    console.log(newProductList);
     setProductList(newProductList);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -36,15 +37,16 @@ function ProductConent(props) {
       const res = await adminApi.getAllProduct();
       if (res.status === 200 && res.success === true) {
         mapData(res.data);
+        setData(res.data);
       }
     } catch (error) {
-      console.log(error);
+      toast.error('Error');
     } finally {
       setLoading(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  
   const columns = [
     {
       title: 'Mã',
@@ -153,7 +155,6 @@ function ProductConent(props) {
       key: 'date_update',
       width: 150,
       sorter: (a, b) => {
-        console.log(a, b);
         return a.date_update - b.date_update;
       },
       render: (date) => {
@@ -254,9 +255,10 @@ function ProductConent(props) {
       title: 'Hành động',
       key: 'action',
       render: (i) => {
+        const editData = data.find(item => item.id === i.id); 
         return (
           <div>
-            <EditProduct id={i.id} />
+            <EditProduct onEdit={fetchProductList} data={editData} />
             <DeleteProduct onDelete={fetchProductList} id={i.id} />
           </div>
         );
