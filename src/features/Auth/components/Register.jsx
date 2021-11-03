@@ -11,7 +11,7 @@ function Register(props) {
   const { setMode, showLoading, hideLoading } = props;
   const dispatch = useDispatch();
   const handleSubmit = async (values) => {
-    showLoading();
+    showLoading('top');
     try {
       const action = register(values);
       const resultAction = await dispatch(action);

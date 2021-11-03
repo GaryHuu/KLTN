@@ -9,10 +9,12 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import draftToHtml from 'draftjs-to-html';
-import { convertToRaw } from 'draft-js';
+import { convertToRaw, convertFromHTML, ContentState } from 'draft-js';
 
-function CreateProductForm(props) {
+function EditProductForm({ onSubmit, product }) {
+  console.log(product);
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  const [isEditImg, setIsEditImg] = useState(false);
   const [imgProduct, setImgProduct] = useState();
   const imgRef = useRef();
   const [errorImage, setErrorImage] = useState(null);
@@ -39,16 +41,36 @@ function CreateProductForm(props) {
   });
 
   const form = useForm({
-    defaultValues: {
-      name: '',
-      price: '',
-      content: '',
-      category_id: 1,
-      feature: 0,
-      sale: 0,
-    },
+    defaultValues: {},
     resolver: yupResolver(schema),
   });
+
+  useEffect(() => {
+    product &&
+      form.reset({
+        name: product.name,
+        price: product.price,
+        content: product.content,
+        category_id: product.category_id,
+        feature: product.feature,
+        sale: product.sale,
+      });
+    product &&
+      product.images &&
+      setImgProduct({
+        preview: product.images,
+      });
+
+    if (product) {
+      const blocksFromHTML = convertFromHTML(product.description);
+      const state = ContentState.createFromBlockArray(
+        blocksFromHTML.contentBlocks,
+        blocksFromHTML.entityMap
+      );
+      setEditorState(EditorState.createWithContent(state));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [product]);
 
   // console.log(draftToHtml(convertToRaw(editorState.getCurrentContent())));
 
@@ -57,6 +79,7 @@ function CreateProductForm(props) {
   // };
 
   const handleInputImgChange = () => {
+    setIsEditImg(true);
     const file = imgRef.current.files[0];
     file.preview = URL.createObjectURL(file);
     setImgProduct(file);
@@ -65,16 +88,10 @@ function CreateProductForm(props) {
   useEffect(() => {
     return () => {
       imgProduct && URL.revokeObjectURL(imgProduct.preview);
-    }
-  },[imgProduct])
+    };
+  }, [imgProduct]);
 
   const handleSubmit = (values) => {
-    const file =
-      imgRef.current && imgRef.current.files && imgRef.current.files[0];
-    if (!file) {
-      setErrorImage('Please enter product image');
-      return;
-    }
     const formData = new FormData();
     formData.append('name', values.name);
     formData.append('price', values.price);
@@ -86,24 +103,33 @@ function CreateProductForm(props) {
     formData.append('category_id', values.category_id);
     formData.append('feature', values.feature);
     formData.append('sale', values.sale);
-    formData.append('images', imgRef.current.files[0]);
-    if (!props.onSubmit) return;
-    props.onSubmit(formData);
-    form.reset({
-      name: '',
-      price: '',
-      content: '',
-      category_id: 1,
-      feature: 0,
-      sale: 0,
-    });
-    imgRef.current.value = '';
-    setEditorState(EditorState.createEmpty());
-    setImgProduct(null);
+    
+    if(isEditImg) {
+       const file =
+      imgRef.current && imgRef.current.files && imgRef.current.files[0];
+      if (!file) {
+        setErrorImage('Please enter product image');
+        return;
+      }
+      formData.append('images', imgRef.current.files[0]);
+    }
+    if (!onSubmit) return;
+    onSubmit(formData);
+    // form.reset({
+    //   name: '',
+    //   price: '',
+    //   content: '',
+    //   category_id: 1,
+    //   feature: 0,
+    //   sale: 0,
+    // });
+    // imgRef.current.value = '';
+    // setEditorState(EditorState.createEmpty());
+    // setImgProduct(null);
   };
   return (
     <div className='create-product'>
-      <h3>Tạo mới sản phẩm</h3>
+      <h3>Chỉnh sửa sản phẩm</h3>
       <form onSubmit={form.handleSubmit(handleSubmit)}>
         <InputField
           placeholder='Phong tê thấp Bà Giằng'
@@ -160,7 +186,9 @@ function CreateProductForm(props) {
             }}
             onChange={handleInputImgChange}
           />
-          {imgProduct && <img width={'25%'} src={imgProduct.preview} alt='' />}
+          {imgProduct && <img style={{
+            marginTop: '10px',
+          }} width={'25%'} src={imgProduct.preview} alt='' />}
           {errorImage && (
             <span
               style={{
@@ -189,11 +217,11 @@ function CreateProductForm(props) {
             },
           }}
         >
-          Thêm sản phẩm
+          Chỉnh sửa sản phẩm
         </button>
       </form>
     </div>
   );
 }
 
-export default CreateProductForm;
+export default EditProductForm;

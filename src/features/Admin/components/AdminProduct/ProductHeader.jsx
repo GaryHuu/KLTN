@@ -1,4 +1,4 @@
-import { Button, Input } from 'antd';
+import { Button } from 'antd';
 import React from 'react';
 import { useState } from 'react';
 import Modal from 'react-modal/lib/components/Modal';
@@ -56,11 +56,14 @@ function ProductHeader(props) {
             right: '0',
             color: '#01adab',
           }}
-          onClick={() => setOpenModal(false)}
+          onClick={() => {
+            setOpenModal(false)
+            props.reload()
+          }}
         >
           X
         </div>
-        <CreateProduct />
+        <CreateProduct/>
       </Modal>
     </div>
   );

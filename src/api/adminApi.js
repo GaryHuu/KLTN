@@ -16,6 +16,10 @@ const adminApi = {
   deleteProduct(id) {
     const url = `/admin/products/${id}`;
     return axiosClient.delete(url);
+  },
+  editProduct(id, data) {
+    const url = `/admin/products/${id}?_method=PATCH`;
+    return axiosClient.post(url, data);
   }
 }
 
