@@ -7,20 +7,28 @@ const adminApi = {
   },
   getAllProduct (params) {
     const url = 'admin/product-list';
-    return axiosClient.get(url, { params: { ...params, with: 'category,images', }})
+    return axiosClient.get(url, { params: { ...params, with: 'category,images', } })
   },
   addProduct (data) {
     const url = '/admin/products?with=images';
     return axiosClient.post(url, data);
   },
-  deleteProduct(id) {
+  deleteProduct (id) {
     const url = `/admin/products/${id}`;
     return axiosClient.delete(url);
   },
-  editProduct(id, data) {
+  editProduct (id, data) {
     const url = `/admin/products/${id}?_method=PATCH`;
     return axiosClient.post(url, data);
-  }
+  },
+  getAllOrder () {
+    const url = '/admin/orders?with=user.address,order_details.product.images';
+    return axiosClient.get(url);
+  },
+  editStatusOrder (id, data) {
+    const url = `/admin/orders/${id}`;
+    return axiosClient.patch(url, data);
+  },
 }
 
 export default adminApi;

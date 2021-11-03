@@ -4,7 +4,8 @@ import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import AdminLogin from './components/AdminLogin';
 import HeaderAdmin from './components/HeaderAdmin';
 import SidebarAdmin from './components/SidebarAdmin';
-import AdminProduct from './components/AdminProduct/index';
+import AdminProduct from './components/AdminProduct';
+import AdminOrder from './components/AdminOrder';
 
 function AdminPage() {
   const { path } = useRouteMatch();
@@ -19,6 +20,7 @@ function AdminPage() {
           <Switch>
             <Route path={`${path}`} exact component={AdminProduct} />
             <Route path={`${path}/products`} component={AdminProduct} />
+            <Route path={`${path}/orders`} component={AdminOrder} />
             <Route />
           </Switch>
         </div>
