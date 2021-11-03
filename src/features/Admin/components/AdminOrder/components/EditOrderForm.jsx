@@ -32,7 +32,6 @@ function EditOrderForm(props) {
   const { data } = props;
 
   const typeCount = data.order_details.length;
-  console.log(typeCount);
 
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
