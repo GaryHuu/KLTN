@@ -16,7 +16,7 @@ function SidebarAdmin() {
         id: 2,
         iconClassName: 'fas fa-file-invoice-dollar',
         title: 'Đơn hàng',
-        path: '/admin/bills',
+        path: '/admin/orders',
       },
       {
         id: 3,

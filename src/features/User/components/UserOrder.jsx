@@ -11,6 +11,7 @@ import OrderItem from './Order/OrderItem';
 import { useLocation, useHistory } from 'react-router-dom';
 import userApi from 'api/userApi';
 import Skeleton from 'react-loading-skeleton';
+import { statusOrder } from 'constant';
 const queryString = require('query-string');
 
 function UserOrder({ hideLoading, showLoading }) {
@@ -59,12 +60,12 @@ function UserOrder({ hideLoading, showLoading }) {
         price: item.total,
         status:
           item.status === 1
-            ? 'Chờ xử lý'
+            ? statusOrder.PENDING
             : item.status === 2
-            ? 'Đang xử lý'
+            ? statusOrder.PROCESSING
             : item.status === 3
-            ? 'Đã giao hàng'
-            : 'Đã hủy',
+            ? statusOrder.COMPLETED
+            : statusOrder.DECLINE,
       };
       return newData;
     });
