@@ -10,7 +10,6 @@ function CreateProduct(props) {
     showLoading('top');
     try {
       const res = await adminApi.addProduct(formData);
-      console.log(res);
       if(res.status === 200 && res.success === true){
         toast.success('Thêm sản phẩm thành công!');
       }
