@@ -236,7 +236,8 @@ function AdminOrder() {
       key: 'action',
       render: (i) => {
         const data = orderData.find((item) => item.id === i.id);
-        return <EditOrder data={data} onEdit={() => fetchData()} />;
+        return <EditOrder data={data} onEdit={() => {}} />;
+        // return <EditOrder data={data} onEdit={fetchData} />;
       },
       width: 150,
     },

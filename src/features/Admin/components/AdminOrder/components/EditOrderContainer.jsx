@@ -6,7 +6,6 @@ import withLoading from 'components/HOC/withLoading';
 
 function EditOrderContainer(props) {
   const handleSubmit = async (id, orderStatus) => {
-    console.log({ id, orderStatus });
     props.showLoading('top');
     try {
       const res = await adminApi.editStatusOrder(id, {
