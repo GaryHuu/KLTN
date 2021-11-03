@@ -10,7 +10,7 @@ import LoginForm from './LoginForm';
 function Login({showLoading, hideLoading}) {
   const dispatch = useDispatch();
   const handleSubmit = async (values) => {
-    showLoading();
+    showLoading('top');
     try {
       const action = login(values);
       const resultAction = await dispatch(action);

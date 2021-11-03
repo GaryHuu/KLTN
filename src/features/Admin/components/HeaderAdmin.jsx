@@ -1,15 +1,13 @@
 import React from 'react';
 import headerLogo from 'assets/img/header-logo.svg';
 import { useDispatch } from 'react-redux';
-import { logout } from '../adminSlice';
-import { toast } from 'react-toastify';
+import { adminLogout } from '../adminSlice';
 import { Button } from 'antd';
 
 function HeaderAdmin() {
   const dispatch = useDispatch()
   const handleLogout = () => {
-    toast.success('Đăng xuất thàng công');
-    dispatch(logout())
+    dispatch(adminLogout())
   }
   return (
     <header className='header-admin'>

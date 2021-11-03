@@ -1,6 +1,7 @@
 section.admin {
-  height: 100%;
+  height: 100vh;
   width: 100%;
+  overflow: hidden;
 
   header.header-admin {
     height: 70px;
@@ -37,7 +38,8 @@ section.admin {
     display: flex;
 
     .sidebar-admin {
-      width: 12%;
+      width: 100%;
+      max-width: 190px;
       background-color: #fff;
       padding: 20px 0;
       border-right: 1px solid rgba(0, 0, 0, 5%);
@@ -81,6 +83,8 @@ section.admin {
 
     .content {
       flex: 1;
+      height: calc(100vh - 70px);
+      overflow-y: scroll;
 
       .product-admin {
         padding: 10px 10px 10px 0;
@@ -96,14 +100,15 @@ section.admin {
           }
         }
       }
-
     }
   }
 }
 
-.create-product {  
+.create-product {
   width: 60vw;
-  padding: 10px;
+  padding: 30px;
+  height: 90vh;
+  overflow-y: scroll;
 
   h3 {
     text-align: center;

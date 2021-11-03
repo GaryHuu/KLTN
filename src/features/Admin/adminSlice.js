@@ -16,7 +16,7 @@ export const userSlice = createSlice({
   name: 'admin',
   initialState,
   reducers: {
-    logout(state) {
+    adminLogout(state) {
       state.current = null;
       localStorage.removeItem(StorageKeys.ADMIN);
     }
@@ -28,6 +28,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { logout } = userSlice.actions;
+export const { adminLogout } = userSlice.actions;
 
 export default userSlice.reducer;

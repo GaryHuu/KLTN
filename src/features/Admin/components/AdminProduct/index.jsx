@@ -9,13 +9,10 @@ function AdminProduct(props) {
     doRefresh(prev => prev + 1);
   }
 
-  const handleOnSearch = () => {
-
-  }
 
   return (
     <div className='product-admin'>
-      <ProductHeader onSearch={handleOnSearch} reload={handleReload} />
+      <ProductHeader reload={handleReload} />
       <ProductConent refresh={refresh} />
     </div>
   );
