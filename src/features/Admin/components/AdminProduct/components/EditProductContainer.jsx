@@ -9,7 +9,6 @@ function EditProductContainer({ data, showLoading, hideLoading }) {
   const [product, setProduct] = useState();
 
   const mapData = (d) => {
-    console.log(d);
     const dataMap = {
       name: d.name,
       price: d.price,
@@ -21,7 +20,6 @@ function EditProductContainer({ data, showLoading, hideLoading }) {
       images: d.images[0].url,
       date_update: d.date_update,
     };
-    console.log({ dataMap });
     setProduct(dataMap);
   };
 
