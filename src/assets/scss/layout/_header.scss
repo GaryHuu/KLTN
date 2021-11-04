@@ -38,6 +38,7 @@ header {
           padding: 0 17px;
           font-style: italic;
           border-radius: 0;
+          font-size: small;
         }
 
         button {
@@ -148,5 +149,40 @@ header {
         }
       }
     }
+  }
+
+  @include breakpoint-custom-max(1024px) {
+    .header {
+      justify-content: space-between;
+
+      &__logo {
+        min-width: 150px;
+      }
+
+      &__cart {
+        width: 50px;
+        p {
+          display: none;
+        }
+      }
+
+      &__search {
+
+        &-main {
+
+          button {
+            width: 60px;
+
+            span {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @include breakpoint-custom-max(768px) {
+    display: none;
   }
 }

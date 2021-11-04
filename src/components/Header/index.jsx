@@ -104,7 +104,7 @@ function Header() {
               />
               <button type='submit'>
                 <i className='fas fa-search'></i>
-                Tìm kiếm
+                <span>Tìm kiếm</span>
               </button>
             </form>
             <div className='header__search-product'>

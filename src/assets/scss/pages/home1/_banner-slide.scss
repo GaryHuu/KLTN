@@ -12,7 +12,6 @@
 
       .slider__item {
         outline: none;
-        // height: 271px;
         overflow: hidden;
         border-radius: 18px;
 
@@ -78,4 +77,32 @@
       }
     }
   }
+
+  @include breakpoint-custom-max(1150px) {
+
+    &__content {
+      justify-content: center;
+
+      .slider {
+        width: 950px;
+      }
+
+      .banner__icon {
+        display: none;
+      }
+    }
+  }
+
+  @include breakpoint-custom-max(1024px) {
+  }
+
+  @include breakpoint-custom-max(950px) {
+    &__content {
+
+      .slider {
+        width: 767px;
+      }
+    }
+  }
+  
 }

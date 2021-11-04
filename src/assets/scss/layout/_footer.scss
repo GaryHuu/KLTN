@@ -1,4 +1,9 @@
 footer {
+
+  @include breakpoint-custom-max(1024px) {
+    display: none;
+  }
+  
   .footer__commit {
     @include flex();
     padding: 10px 15px;

@@ -33,7 +33,7 @@ function ProductDetailPage({ hideLoading, showLoading }) {
       hideLoading();
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, []);
 
   useEffect(() => {
     if (user) {
@@ -119,8 +119,6 @@ function ProductDetailPage({ hideLoading, showLoading }) {
       hideLoading();
     })();
   };
-
-  console.log(product);
 
   return (
     <div className='product-detail-page'>
