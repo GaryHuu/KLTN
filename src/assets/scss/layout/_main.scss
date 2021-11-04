@@ -1,3 +1,7 @@
 main {
   margin-top: 100px;
+
+  @include breakpoint-custom-max(768px) {
+    display: none;
+  }
 }

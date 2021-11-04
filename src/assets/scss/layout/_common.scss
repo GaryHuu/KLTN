@@ -1,3 +1,22 @@
+@media only screen and (max-width: 768px) {
+  #no-support-device {
+    padding: 20px 10px;
+    display: flex !important;
+    flex-direction: column;
+    margin-top: 10vh;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+    
+    h2 {
+      font-size: 16px;
+      margin-bottom: 10px;
+      font-weight: 400;
+      color: #01adab;
+    }
+  }
+}
+
 html,
 body {
   scroll-behavior: smooth;
@@ -91,7 +110,12 @@ div.loading-lazy {
   animation-name: animation-loading;
   animation-timing-function: linear;
   background: #f6f7f8;
-  background: linear-gradient(to right, $color-primary 8%, #dddddd 18%, #eeeeee 33%);
+  background: linear-gradient(
+    to right,
+    $color-primary 8%,
+    #dddddd 18%,
+    #eeeeee 33%
+  );
   background-size: 800px 104px;
   height: 4px;
 }
@@ -106,7 +130,3 @@ body.top.loading-data::before,
 div.loading-lazy {
   top: 0;
 }
-
-
-
-
