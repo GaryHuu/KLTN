@@ -1,10 +1,7 @@
+import { Button, Select } from 'antd';
 import InputField from 'components/form-controls/InputField';
-import React, { useRef, useState } from 'react';
-import { TimePicker, Button } from 'antd';
-import moment from 'moment';
-import { DatePicker } from 'antd';
 import { statusOrder } from 'constant';
-import { Select } from 'antd';
+import React, { useRef, useState } from 'react';
 import { useReactToPrint } from 'react-to-print';
 const { Option } = Select;
 
@@ -36,7 +33,7 @@ function EditOrderForm(props) {
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
-    pageStyle: `@page { size: 12in ${12 + typeCount * 2}in }`,
+    pageStyle: `@page { size: 12in ${7 + typeCount * 2}in }`,
   });
 
   function handleChange(value) {
@@ -93,43 +90,44 @@ function EditOrderForm(props) {
             Mã đơn hàng:&nbsp;
             <span>{data.id}</span>
           </p>
-          <Button onClick={handlePrint}>IN</Button>
         </div>
-        <label>Thời gian đặt hàng: </label>
-        <TimePicker
-          defaultValue={moment(new Date(data.date_order * 1000))}
-          size='large'
-          disabled
-        />
-        <DatePicker
-          disabled
-          size='large'
-          defaultValue={moment(new Date(data.date_order * 1000), 'DD/MM/YYYY')}
-          format={'DD/MM/YYYY'}
-        />
-        <InputField label='Họ tên' name='name' value={data.user.name} />
-        <InputField label='Số điện thoại' name='name' value={data.user.phone} />
-        <InputField label='Email' name='name' value={data.user.email} />
-        <InputField
-          label='Địa chỉ'
-          name='name'
-          value={data.user.address.street_name}
-        />
-        <InputField
-          label='Xã/Phường'
-          name='name'
-          value={data.user.address.ward}
-        />
-        <InputField
-          label='Quận/Huyện'
-          name='name'
-          value={data.user.address.district}
-        />
-        <InputField
-          label='Tỉnh/TP'
-          name='name'
-          value={data.user.address.province}
-        />
+        <label>
+          Thời gian đặt hàng:
+          <span>
+            {' ' +
+              new Date(data.date_order * 1000).toLocaleTimeString() +
+              ' - ' +
+              new Date(data.date_order * 1000).toLocaleDateString()}
+          </span>
+        </label>
+        <label>
+          Họ tên:
+          <span>&nbsp;{data.user.name}</span>
+        </label>
+        <label>
+          Số điện thoại:
+          <span>&nbsp;{data.user.phone}</span>
+        </label>
+        <label>
+          Email:
+          <span>&nbsp;{data.user.email}</span>
+        </label>
+        <label>
+          Địa chỉ:
+          <span>&nbsp;{data.user.address.street_name}</span>
+        </label>
+        <label>
+          Phường/Xã:
+          <span>&nbsp;{data.user.address.ward}</span>
+        </label>
+        <label>
+          Quận/Huyện:
+          <span>&nbsp;{data.user.address.district}</span>
+        </label>
+        <label>
+          Tỉnh/TP:
+          <span>&nbsp;{data.user.address.province}</span>
+        </label>
         {productList}
         <div>
           <p className='item'>
@@ -155,10 +153,12 @@ function EditOrderForm(props) {
           </p>
         </div>
       </div>
-      <div style={{
-        padding: '10px 30px',
-        borderTop: '1px solid #ccc'
-      }}>
+      <div
+        style={{
+          padding: '10px 30px',
+          borderTop: '1px solid #ccc',
+        }}
+      >
         <label>Trạng thái đơn hàng: </label>
         <Select
           defaultValue={data.status}
@@ -182,6 +182,9 @@ function EditOrderForm(props) {
           onClick={handleSubmitStatus}
         >
           Thay đổi
+        </Button>
+        <Button style={{ float: 'right' }} size='large' onClick={handlePrint}>
+          IN
         </Button>
       </div>
     </div>

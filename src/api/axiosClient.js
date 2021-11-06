@@ -1,9 +1,10 @@
 import { dispatch } from 'app/store';
 import axios from 'axios';
 import { StorageKeys } from 'constant';
-import { logout, openModal } from 'features/Auth/userSlice';
+import { logout, openModal, refreshToken } from 'features/Auth/userSlice';
 import { logoutCart } from 'features/Cart/cartSlice';
 import { toast } from 'react-toastify';
+import userApi from './userApi';
 
 const axiosClient = axios.create({
   baseURL: 'https://phanolink.herokuapp.com/api/',
@@ -48,8 +49,8 @@ axiosClient.interceptors.request.use(
     const dynamicURLAdminNeedToken = URLSADMIN.some(item => {
       return config.url.includes(item)
     })
-    
-    if(dynamicURLAdminNeedToken) {
+
+    if (dynamicURLAdminNeedToken) {
       const admin = JSON.parse(localStorage.getItem(StorageKeys.ADMIN));
       const token = admin.access_token;
       config.headers.Authorization = token ? `Bearer ${token}` : '';
@@ -74,10 +75,28 @@ axiosClient.interceptors.response.use(
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
     const { config, status } = error.response;
-    // const URLS = ['/user/user-profile', '/user/change-profile'];
+
+
+    // if (status === 401 && !config._retry) {
+    //   config._retry = true;
+    //   try {
+    //     const token = localStorage.getItem(StorageKeys.TOKEN);
+    //     console.log(token);
+    //     const res = await axios.post('https://phanolink.herokuapp.com/api/user/refresh', {
+    //       headers: {
+    //         Authorization: `Bearer ${token}`
+    //       },
+    //     });
+    //     console.log(res.data.access_token);
+    //     const action = refreshToken(res.data.access_token);
+    //     dispatch(action);
+    //     return axiosClient(config);
+    //   } catch (err) {
+    //     return Promise.reject(err);
+    //   }
+    // }
+
     if (status === 401) {
-      // logout and back to gome,
-      // toast.warn('Vui Lòng Đặng Nhập Lại');
       toast.warn('Vui lòng đặng nhập lại!', {
         position: 'top-right',
         autoClose: 2500,
@@ -87,18 +106,11 @@ axiosClient.interceptors.response.use(
         draggable: true,
         progress: 0,
       });
-      dispatch(logout());
-      dispatch(openModal());
-      dispatch(logoutCart());
-      // console.log('error 401');
-      // try {
-      //   const token = await userApi.refeshToken();
-      //   console.log({token});
-      //   const action = refreshToken(token);
-      //   dispatch(action);
-      // } catch (err) {
-
-      // }
+      if (config.url.includes('/user')) {
+        dispatch(logout());
+        dispatch(openModal());
+        dispatch(logoutCart());
+      }
     }
     return Promise.reject(error);
   }
