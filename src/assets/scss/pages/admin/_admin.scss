@@ -129,6 +129,8 @@ section.admin {
   padding: 30px;
   height: 86vh;
   overflow-y: scroll;
+  border: 3px double black;
+  border-radius: 5px;
   
   &::-webkit-scrollbar {
     display: none;
@@ -149,6 +151,7 @@ section.admin {
 
   & > label {
     margin: 10px 10px 10px 0;
+    display: block;
   }
 
   div p span {

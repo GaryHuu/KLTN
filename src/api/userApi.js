@@ -34,10 +34,10 @@ const userApi = {
     const url = `/user/favorites/${id}`;
     return axiosClient.delete(url);
   },
-  // refeshToken () {
-  //   const url = '/user/refresh';
-  //   return axiosClient.post(url);
-  // },
+  refeshToken () {
+    const url = '/user/refresh';
+    return axiosClient.post(url);
+  },
   getAddress() {
     const url = '/user/user-profile?with=address';
     return axiosClient.get(url);
@@ -57,3 +57,5 @@ const userApi = {
 };
 
 export default userApi;
+
+
