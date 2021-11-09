@@ -1,7 +1,9 @@
 import { Button, Input, Tag } from 'antd';
 import adminApi from 'api/adminApi';
+import { adminLogout } from 'features/Admin/adminSlice';
 import AdminTable from 'features/Admin/common/AdminTable';
 import React, { Fragment, useCallback, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import DeleteProduct from './components/DeleteProduct';
 import EditProduct from './components/EditProduct';
@@ -10,6 +12,7 @@ function ProductConent(props) {
   const [loading, setLoading] = useState(true);
   const [productList, setProductList] = useState([]);
   const [data, setData] = useState([]);
+  const dispatch =  useDispatch();
 
   const mapData = useCallback((data) => {
     const newProductList = data.map((item) => {
@@ -41,6 +44,8 @@ function ProductConent(props) {
       }
     } catch (error) {
       toast.error('Error');
+      dispatch(adminLogout());
+
     } finally {
       setLoading(false);
     }

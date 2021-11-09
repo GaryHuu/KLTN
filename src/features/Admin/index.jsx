@@ -6,6 +6,7 @@ import HeaderAdmin from './components/HeaderAdmin';
 import SidebarAdmin from './components/SidebarAdmin';
 import AdminProduct from './components/AdminProduct';
 import AdminOrder from './components/AdminOrder';
+import AdminUser from './components/AdminUser';
 
 function AdminPage() {
   const { path } = useRouteMatch();
@@ -21,6 +22,7 @@ function AdminPage() {
             <Route path={`${path}`} exact component={AdminProduct} />
             <Route path={`${path}/products`} component={AdminProduct} />
             <Route path={`${path}/orders`} component={AdminOrder} />
+            <Route path={`${path}/users`} component={AdminUser} />
             <Route />
           </Switch>
         </div>

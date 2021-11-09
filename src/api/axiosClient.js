@@ -44,7 +44,9 @@ axiosClient.interceptors.request.use(
     const URLSADMIN = [
       'admin/product-list',
       '/admin/products',
-      '/admin/orders'
+      '/admin/orders',
+      '/admin/user',
+      '/admin/users',
     ]
     const dynamicURLAdminNeedToken = URLSADMIN.some(item => {
       return config.url.includes(item)
@@ -106,7 +108,7 @@ axiosClient.interceptors.response.use(
         draggable: true,
         progress: 0,
       });
-      if (config.url.includes('/user')) {
+      if (config.url.includes('/user') && !config.url.includes('/admin')) {
         dispatch(logout());
         dispatch(openModal());
         dispatch(logoutCart());

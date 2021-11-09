@@ -29,6 +29,14 @@ const adminApi = {
     const url = `/admin/orders/${id}`;
     return axiosClient.patch(url, data);
   },
+  getUserList () {
+    const url = `/admin/users?with=address`;
+    return axiosClient.get(url);
+  },
+  deleteUser (id) {
+    const url = `/admin/user/${id}`;
+    return axiosClient.delete(url);
+  },
 }
 
 export default adminApi;

@@ -1,14 +1,17 @@
 import { Button, Input, Tag } from 'antd';
 import adminApi from 'api/adminApi';
 import { statusOrder } from 'constant';
+import { adminLogout } from 'features/Admin/adminSlice';
 import AdminTable from 'features/Admin/common/AdminTable';
 import React, { Fragment, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import EditOrder from './components/EditOrder';
 
 function AdminOrder() {
   const [orderList, setOrderList] = useState([]);
   const [orderData, setOrderData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
 
   const fetchData = async () => {
     setLoading(true);
@@ -19,6 +22,7 @@ function AdminOrder() {
         res.data && setOrderData(res.data);
       }
     } catch (error) {
+      dispatch(adminLogout());
     } finally {
       setLoading(false);
     }
@@ -253,7 +257,7 @@ function AdminOrder() {
         style={{
           display: 'flex',
           justifyContent: 'space-between',
-          padding: '10px'
+          padding: '10px',
         }}
       >
         <div

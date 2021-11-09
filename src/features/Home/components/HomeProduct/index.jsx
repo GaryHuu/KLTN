@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import Skeleton from 'react-loading-skeleton';
 import productApi from 'api/productApi';
 import iconHomeProduct from 'assets/img/icon-home-product.png';
+import SkeletonProduct from 'components/SkeletonProduct';
 import ProductList from 'features/Product/components/ProductList';
-import { useRef } from 'react';
-import { useInView } from "react-intersection-observer";
+import React, { useEffect, useRef, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
+import { Link } from 'react-router-dom';
 
 function HomeProduct(props) {
   const [productList, setProductList] = useState([]);
@@ -13,16 +12,16 @@ function HomeProduct(props) {
   const mouted = useRef(true);
   const isLoaded = useRef(false);
   const [ref, inView] = useInView({
-    threshold: 0
+    threshold: 0,
   });
   useEffect(() => {
     mouted.current = true;
-    if(!isLoaded.current && inView) {
+    if (!isLoaded.current && inView) {
       (async function () {
         setLoading(true);
         try {
           const { data } = await productApi.getProductList();
-          if(mouted.current) setProductList(data);
+          if (mouted.current) setProductList(data);
         } catch (error) {
           // console.log(error);
         }
@@ -33,7 +32,7 @@ function HomeProduct(props) {
     return () => {
       mouted.current = false;
       // console.log(mouted.current);
-    }
+    };
   }, [inView]);
 
   return (
@@ -50,11 +49,7 @@ function HomeProduct(props) {
             </Link>
           </div>
           {loading ? (
-            <Skeleton
-              className='skeleton product__item'
-              containerClassName='skeleton-container home-product__list'
-              count={20}
-            />
+            <SkeletonProduct count={20}/>
           ) : (
             <ProductList data={productList} />
           )}

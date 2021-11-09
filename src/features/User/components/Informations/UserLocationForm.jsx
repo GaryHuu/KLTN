@@ -58,7 +58,7 @@ function UserLocationForm({ onSubmit, info, address }) {
       <InputField name='province' form={form} label='Tỉnh' />
       <InputField name='district' form={form} label='Quận / Huyện' />
       <InputField name='ward' form={form} label='Phường / Xã' />
-      <TextAreaField name='street_name' form={form} label='Địa Chỉ' />
+      <TextAreaField name='street_name' form={form} label='Số nhà, đường' />
       <Button type='submit' className='submit'>
         CẬP NHẬT THAY ĐỔI
       </Button>
