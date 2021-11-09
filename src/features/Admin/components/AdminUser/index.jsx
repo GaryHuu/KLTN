@@ -119,7 +119,7 @@ function AdminUser(props) {
 
   const columns = [
     {
-      title: 'Mã',
+      title: 'STT',
       dataIndex: 'id',
       key: 'id',
       sorter: (a, b) => a.id - b.id,
