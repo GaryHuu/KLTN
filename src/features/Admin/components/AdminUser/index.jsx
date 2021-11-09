@@ -31,7 +31,6 @@ function AdminUser(props) {
           item.address.province
         : 'Chưa cập nhật',
     }));
-    console.log({ newData });
     setUserList(newData);
   };
 
@@ -40,7 +39,6 @@ function AdminUser(props) {
     try {
       const res = await adminApi.getUserList();
       if (res.status === 200 && res.success) {
-        console.log(res.data);
         res.data && mapData(res.data);
       }
     } catch (error) {
@@ -65,7 +63,6 @@ function AdminUser(props) {
       }
     } catch (error) {
       toast.error('Error');
-      console.log(error);
     }
   }
 
