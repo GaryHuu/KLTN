@@ -13,7 +13,8 @@ function AdminUser(props) {
   const [userList, setUserList] = useState([]);
 
   const mapData = (data) => {
-    const newData = data.map((item) => ({
+    const newData = data.map((item, index) => ({
+      idx: index + 1,
       email: item.email,
       id: item.id,
       name: item.name,
@@ -120,9 +121,9 @@ function AdminUser(props) {
   const columns = [
     {
       title: 'STT',
-      dataIndex: 'id',
-      key: 'id',
-      sorter: (a, b) => a.id - b.id,
+      dataIndex: 'idx',
+      key: 'idx',
+      sorter: (a, b) => a.idx - b.idx,
       width: 70,
     },
     {
