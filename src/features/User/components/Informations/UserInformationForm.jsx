@@ -70,6 +70,19 @@ function UserInformationForm(props) {
     if (!onSubmit) return;
     onSubmit(values);
   };
+
+  useEffect(() => {
+    const checkBox = document.querySelector(
+      '.user-information .right .checkbox'
+    );
+    const eventCheck = () => {
+      form.trigger(['old_password', 'new_password', 'new_password_confirmation']);
+    };
+    checkBox && window.addEventListener('change', eventCheck);
+    return () => window.removeEventListener('change', eventCheck);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <form
       onSubmit={form.handleSubmit(handleSubmit)}
@@ -88,6 +101,7 @@ function UserInformationForm(props) {
           name='isChangePassword'
           form={form}
           label='Thay đổi mật khẩu'
+          className='checkbox'
         />
         <PasswordField
           name='old_password'

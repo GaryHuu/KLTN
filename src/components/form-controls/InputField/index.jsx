@@ -10,6 +10,7 @@ function InputField(props) {
     placeholder,
     type = 'text',
     value,
+    className,
   } = props;
 
   // Type Read Only
@@ -43,6 +44,7 @@ function InputField(props) {
             placeholder={placeholder}
             type={type}
             name={name}
+            className={className || ''}
           />
           {invalid && <span>{error?.message}</span>}
         </div>
