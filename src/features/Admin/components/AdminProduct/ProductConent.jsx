@@ -263,10 +263,10 @@ function ProductConent(props) {
         const editData = data.find(item => item.id === i.id); 
         return (
           <div>
-            <EditProduct onEdit={() => {}} data={editData} />
-            {/* <EditProduct onEdit={fetchProductList} data={editData} /> */}
-            <DeleteProduct onDelete={() => {}} id={i.id} />
-            {/* <DeleteProduct onDelete={fetchProductList} id={i.id} /> */}
+            {/* <EditProduct onEdit={() => {}} data={editData} /> */}
+            <EditProduct onEdit={fetchProductList} data={editData} />
+            {/* <DeleteProduct onDelete={() => {}} id={i.id} /> */}
+            <DeleteProduct onDelete={fetchProductList} id={i.id} />
           </div>
         );
       },
