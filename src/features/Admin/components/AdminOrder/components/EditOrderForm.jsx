@@ -1,5 +1,4 @@
 import { Button, Select } from 'antd';
-import InputField from 'components/form-controls/InputField';
 import { statusOrder } from 'constant';
 import React, { useRef, useState } from 'react';
 import { useReactToPrint } from 'react-to-print';

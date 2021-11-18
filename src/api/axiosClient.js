@@ -1,10 +1,9 @@
 import { dispatch } from 'app/store';
 import axios from 'axios';
 import { StorageKeys } from 'constant';
-import { logout, openModal, refreshToken } from 'features/Auth/userSlice';
+import { logout, openModal } from 'features/Auth/userSlice';
 import { logoutCart } from 'features/Cart/cartSlice';
 import { toast } from 'react-toastify';
-import userApi from './userApi';
 
 const axiosClient = axios.create({
   baseURL: 'https://phanolink.herokuapp.com/api/',
