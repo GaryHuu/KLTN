@@ -36,7 +36,8 @@ function EditProductForm({ onSubmit, product }) {
       .number()
       .required('Please enter product feature')
       .typeError('Please enter product feature')
-      .max(1),
+      .max(1)
+      .min(0),
   });
 
   const form = useForm({
