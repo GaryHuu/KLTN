@@ -7,6 +7,7 @@ function AdminProduct(props) {
   
   const handleReload = () => {
     doRefresh(prev => prev + 1);
+    console.log('object');
   }
 
 
