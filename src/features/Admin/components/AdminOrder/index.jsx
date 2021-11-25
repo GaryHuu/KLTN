@@ -1,28 +1,30 @@
 import { Button, Input, Tag } from 'antd';
 import adminApi from 'api/adminApi';
 import { statusOrder } from 'constant';
-import { adminLogout } from 'features/Admin/adminSlice';
+// import { adminLogout } from 'features/Admin/adminSlice';
 import AdminTable from 'features/Admin/common/AdminTable';
 import React, { Fragment, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import EditOrder from './components/EditOrder';
 
 function AdminOrder() {
   const [orderList, setOrderList] = useState([]);
   const [orderData, setOrderData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const fetchData = async () => {
     setLoading(true);
     try {
       const res = await adminApi.getAllOrder();
+      // console.log(res);
       if (res.status === 200 && res.success) {
         res.data && mapData(res.data);
         res.data && setOrderData(res.data);
       }
     } catch (error) {
-      dispatch(adminLogout());
+      // dispatch(adminLogout());
+      // console.log(error);
     } finally {
       setLoading(false);
     }
@@ -49,7 +51,10 @@ function AdminOrder() {
           0
         ),
         nameProductTags: item.order_details.map(
-          (item) => item.product.name + ' (x' + item.product_quantity + ')'
+          (item) =>  {
+            // console.log(item.product);
+            return item?.product?.name + ' (x' + item?.product_quantity + ')';
+          }
         ),
         total: item.total,
         status: item.status,
