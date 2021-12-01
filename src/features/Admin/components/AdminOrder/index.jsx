@@ -51,9 +51,7 @@ function AdminOrder() {
           0
         ),
         nameProductTags: item.order_details.map(
-          (item) =>  {
-            return item?.product?.name + ' (x' + item?.product_quantity + ')';
-          }
+          (item) => item?.product?.name + ' (x' + item?.product_quantity + ')'
         ),
         total: item.total,
         status: item.status,
