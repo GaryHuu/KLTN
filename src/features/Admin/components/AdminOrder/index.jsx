@@ -52,7 +52,6 @@ function AdminOrder() {
         ),
         nameProductTags: item.order_details.map(
           (item) =>  {
-            // console.log(item.product);
             return item?.product?.name + ' (x' + item?.product_quantity + ')';
           }
         ),
