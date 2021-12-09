@@ -33,5 +33,5 @@ Từ Tuần 6 (ngày 30/09/2021)  đến Tuần 17 (ngày 16/12/2021)
 | Tuần 14  | Xây dựng UI Logic trang Admin  |
 | Tuần 15  | Xây dựng Business Logic trang Admin  |
 | Tuần 16  | Viết Báo Cáo |
-| Tuần 17  | Viết Báo Cáo |
+| Tuần 17  | Nộp Báo Cáo |
 
