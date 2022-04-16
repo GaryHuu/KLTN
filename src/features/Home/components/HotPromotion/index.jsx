@@ -77,7 +77,7 @@ function HotPromotion() {
                 >
                   <img
                     style={{ height: '283px', objectFit: 'cover' }}
-                    src={item.images[0].url}
+                    src={item?.images[0]?.url}
                     alt=''
                   />
                 </Link>
