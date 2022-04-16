@@ -52,7 +52,7 @@ function CartItem({ item, onChange, hideLoading, showLoading }) {
         <Skeleton height={65} width={55} />
       ) : (
         <Link to={`/product/${item.idProduct}`}>
-          <img src={product.images[0].url} alt='' />
+          <img src={product?.images[0]?.url} alt='' />
         </Link>
       )}
       <div className='item__info'>

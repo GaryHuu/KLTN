@@ -129,7 +129,7 @@ function ProductDetailPage({ hideLoading, showLoading }) {
               {loading ? (
                 <Skeleton height={420} width={350} />
               ) : (
-                <img src={product.images[0].url || ''} alt='' />
+                <img src={product?.images[0]?.url || ''} alt='' />
               )}
             </div>
             <div className='list'>
@@ -137,9 +137,9 @@ function ProductDetailPage({ hideLoading, showLoading }) {
                 <Skeleton count={3} height={50} width={50} />
               ) : (
                 <Fragment>
-                  <img src={product.images[0].url || ''} alt='' />
-                  <img src={product.images[0].url || ''} alt='' />
-                  <img src={product.images[0].url || ''} alt='' />
+                  <img src={product?.images[0]?.url || ''} alt='' />
+                  <img src={product?.images[0]?.url || ''} alt='' />
+                  <img src={product?.images[0]?.url || ''} alt='' />
                 </Fragment>
               )}
             </div>

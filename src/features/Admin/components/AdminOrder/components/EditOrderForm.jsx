@@ -74,7 +74,7 @@ function EditOrderForm(props) {
           </p>
         </div>
         <p>
-          <img width='120px' src={product.images[0].url} alt='' />
+          <img width='120px' src={product?.images[0]?.url} alt='' />
         </p>
       </div>
     );
