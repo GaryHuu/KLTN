@@ -4,7 +4,7 @@ import React from 'react';
 function ProductLoading(props) {
   return (
     <div className='product-page'>
-      <SkeletonProduct />
+      <SkeletonProduct key={new Date()} />
     </div>
   );
 }
