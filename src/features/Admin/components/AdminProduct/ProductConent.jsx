@@ -17,17 +17,17 @@ function ProductConent(props) {
   const mapData = useCallback((data) => {
     const newProductList = data.map((item) => {
       const dataMap = {
-        key: item.id,
-        id: item.id,
-        name: item.name,
-        content: item.content.substring(0, 100) + ' ...',
-        date_update: item.date_update,
-        price: item.price,
-        image: item.images[0].url,
-        tags: [item.category.name],
-        discount: item.discount,
+        key: item?.id,
+        id: item?.id,
+        name: item?.name,
+        content: item?.content?.substring(0, 100) + ' ...',
+        date_update: item?.date_update,
+        price: item?.price,
+        image: item?.images[0]?.url,
+        tags: [item?.category?.name],
+        discount: item?.discount,
       };
-      if (item.feature === 'Yes') dataMap.tags.push('Nổi bật');
+      if (item?.feature === 'Yes') dataMap?.tags.push('Nổi bật');
       return dataMap;
     });
     setProductList(newProductList);
@@ -43,8 +43,9 @@ function ProductConent(props) {
         setData(res.data);
       }
     } catch (error) {
-      toast.error('Error');
-      dispatch(adminLogout());
+      console.log(error)
+      // toast.error('Error');
+      // dispatch(adminLogout());
 
     } finally {
       setLoading(false);

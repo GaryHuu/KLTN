@@ -49,7 +49,7 @@ function HomeProduct(props) {
             </Link>
           </div>
           {loading ? (
-            <SkeletonProduct count={20}/>
+            <SkeletonProduct key={'a'} count={20}/>
           ) : (
             <ProductList data={productList} />
           )}
