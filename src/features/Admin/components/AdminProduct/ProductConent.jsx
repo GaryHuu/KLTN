@@ -1,18 +1,18 @@
-import { Button, Input, Tag } from 'antd';
-import adminApi from 'api/adminApi';
-import { adminLogout } from 'features/Admin/adminSlice';
-import AdminTable from 'features/Admin/common/AdminTable';
-import React, { Fragment, useCallback, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { toast } from 'react-toastify';
-import DeleteProduct from './components/DeleteProduct';
-import EditProduct from './components/EditProduct';
+import { Button, Input, Tag } from 'antd'
+import adminApi from 'api/adminApi'
+import { adminLogout } from 'features/Admin/adminSlice'
+import AdminTable from 'features/Admin/common/AdminTable'
+import React, { Fragment, useCallback, useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { toast } from 'react-toastify'
+import DeleteProduct from './components/DeleteProduct'
+import EditProduct from './components/EditProduct'
 
 function ProductConent(props) {
-  const [loading, setLoading] = useState(true);
-  const [productList, setProductList] = useState([]);
-  const [data, setData] = useState([]);
-  const dispatch =  useDispatch();
+  const [loading, setLoading] = useState(true)
+  const [productList, setProductList] = useState([])
+  const [data, setData] = useState([])
+  const dispatch = useDispatch()
 
   const mapData = useCallback((data) => {
     const newProductList = data.map((item) => {
@@ -23,36 +23,35 @@ function ProductConent(props) {
         content: item?.content?.substring(0, 100) + ' ...',
         date_update: item?.date_update,
         price: item?.price,
-        image: item?.images[0]?.url,
+        image: item?.images?.[0]?.url,
         tags: [item?.category?.name],
         discount: item?.discount,
-      };
-      if (item?.feature === 'Yes') dataMap?.tags.push('Nổi bật');
-      return dataMap;
-    });
-    setProductList(newProductList);
+      }
+      if (item?.feature === 'Yes') dataMap?.tags.push('Nổi bật')
+      return dataMap
+    })
+    setProductList(newProductList)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [])
 
   const fetchProductList = useCallback(async () => {
-    setLoading(true);
+    setLoading(true)
     try {
-      const res = await adminApi.getAllProduct();
+      const res = await adminApi.getAllProduct()
       if (res.status === 200 && res.success === true) {
-        mapData(res.data);
-        setData(res.data);
+        mapData(res.data)
+        setData(res.data)
       }
     } catch (error) {
       console.log(error)
       // toast.error('Error');
       // dispatch(adminLogout());
-
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  
+  }, [])
+
   const columns = [
     {
       title: 'Mã',
@@ -77,30 +76,28 @@ function ProductConent(props) {
             <Input
               value={selectedKeys[0]}
               onChange={(e) => {
-                return setSelectedKeys(
-                  e.target.value ? [e.target.value] : ['']
-                );
+                return setSelectedKeys(e.target.value ? [e.target.value] : [''])
               }}
               onPressEnter={() => {
-                confirm({ closeDropdown: false });
+                confirm({ closeDropdown: false })
               }}
             />
             <Button
               onClick={() => {
-                confirm({ closeDropdown: false });
+                confirm({ closeDropdown: false })
               }}
             >
               Tìm Kiếm
             </Button>
             <Button
               onClick={() => {
-                clearFilters();
+                clearFilters()
               }}
             >
               Reset
             </Button>
           </div>
-        );
+        )
       },
       onFilter: (value, record) => {
         return record['name']
@@ -108,7 +105,7 @@ function ProductConent(props) {
               .toString()
               .toLowerCase()
               .includes(value.toLowerCase())
-          : '';
+          : ''
       },
     },
     {
@@ -122,21 +119,21 @@ function ProductConent(props) {
       dataIndex: 'discount',
       key: 'discount',
       sorter: (a, b) => {
-        let _a;
-        let _b;
+        let _a
+        let _b
         if (a.discount === 'No') {
-          _a = 0;
+          _a = 0
         } else {
-          _a = parseFloat(a.discount.slice(0, -1));
+          _a = parseFloat(a.discount.slice(0, -1))
         }
 
         if (b.discount === 'No') {
-          _b = 0;
+          _b = 0
         } else {
-          _b = parseFloat(b.discount.slice(0, -1));
+          _b = parseFloat(b.discount.slice(0, -1))
         }
 
-        return _a - _b;
+        return _a - _b
       },
       width: 120,
     },
@@ -161,19 +158,19 @@ function ProductConent(props) {
       key: 'date_update',
       width: 150,
       sorter: (a, b) => {
-        return a.date_update - b.date_update;
+        return a.date_update - b.date_update
       },
       render: (date) => {
         const _date = [
           new Date(date * 1000).toLocaleTimeString(),
           new Date(date * 1000).toLocaleDateString(),
-        ];
+        ]
         return (
           <Fragment>
             <p style={{ textAlign: 'center' }}>{_date[0]}</p>
             <p style={{ textAlign: 'center' }}>{_date[1]}</p>
           </Fragment>
-        );
+        )
       },
     },
     {
@@ -200,13 +197,13 @@ function ProductConent(props) {
       render: (tags) => (
         <Fragment>
           {tags.map((tag) => {
-            let color = 'green';
-            if (tag === 'Nổi bật') color = 'volcano';
+            let color = 'green'
+            if (tag === 'Nổi bật') color = 'volcano'
             return (
               <Tag style={{ marginBottom: '5px' }} color={color} key={tag}>
                 {tag.toUpperCase()}
               </Tag>
-            );
+            )
           })}
         </Fragment>
       ),
@@ -223,30 +220,28 @@ function ProductConent(props) {
             <Input
               value={selectedKeys[0]}
               onChange={(e) => {
-                return setSelectedKeys(
-                  e.target.value ? [e.target.value] : ['']
-                );
+                return setSelectedKeys(e.target.value ? [e.target.value] : [''])
               }}
               onPressEnter={() => {
-                confirm({ closeDropdown: false });
+                confirm({ closeDropdown: false })
               }}
             />
             <Button
               onClick={() => {
-                confirm({ closeDropdown: false });
+                confirm({ closeDropdown: false })
               }}
             >
               Tìm Kiếm
             </Button>
             <Button
               onClick={() => {
-                clearFilters();
+                clearFilters()
               }}
             >
               Reset
             </Button>
           </div>
-        );
+        )
       },
       onFilter: (value, record) => {
         return record['tags']
@@ -254,14 +249,14 @@ function ProductConent(props) {
               .toString()
               .toLowerCase()
               .includes(value.toLowerCase())
-          : '';
+          : ''
       },
     },
     {
       title: 'Hành động',
       key: 'action',
       render: (i) => {
-        const editData = data.find(item => item.id === i.id); 
+        const editData = data.find((item) => item.id === i.id)
         return (
           <div>
             {/* <EditProduct onEdit={() => {}} data={editData} /> */}
@@ -269,22 +264,22 @@ function ProductConent(props) {
             {/* <DeleteProduct onDelete={() => {}} id={i.id} /> */}
             <DeleteProduct onDelete={fetchProductList} id={i.id} />
           </div>
-        );
+        )
       },
       width: 120,
     },
-  ];
+  ]
 
   useEffect(() => {
-    fetchProductList();
+    fetchProductList()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.refresh]);
+  }, [props.refresh])
 
   return (
     <Fragment>
       <AdminTable loading={loading} columns={columns} data={productList} />
     </Fragment>
-  );
+  )
 }
 
-export default ProductConent;
+export default ProductConent

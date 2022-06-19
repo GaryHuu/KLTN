@@ -1,0 +1,138 @@
+.about-us {
+  .breadcrumb-container {
+    min-height: 300px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 100% 50%;
+    position: relative;
+
+    .breadcrumb-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+
+    .container {
+      padding-top: 100px;
+    }
+
+    .content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .title {
+      font-size: 24px;
+      z-index: 2;
+      color: $white-text;
+    }
+
+    .breadcrumb {
+      display: flex;
+      color: $white-text;
+      z-index: 2;
+
+      a {
+        &:hover {
+          color: $color-primary;
+        }
+      }
+
+      p {
+        cursor: pointer;
+        z-index: 2;
+      }
+
+      span {
+        margin: 0 10px;
+      }
+    }
+  }
+
+  .information {
+    margin-top: 10px;
+    margin-bottom: 10%;
+    .title {
+      font-size: 24px;
+      color: $color-primary;
+      padding: 10px 0px 15px 0px;
+      margin: 0px 0px 15px 0px;
+      border-bottom: 1px solid #f1f1f1;
+    }
+
+    .hero {
+      border-radius: 2px;
+      display: flex;
+      position: relative;
+
+      .right {
+        position: absolute;
+        background-color: #f6f6f6;
+        min-height: 100%;
+        width: 70%;
+        left: 30%;
+        top: 10%;
+        padding-left: 200px;
+        padding-right: 30px;
+        padding-top: 20px;
+        border-radius: 10px;
+
+        .head {
+          border-bottom: 1px solid #dddddd;
+          margin-bottom: 20px;
+
+          h4 {
+            text-align: end;
+            font-size: 14px;
+            font-style: italic;
+            font-weight: 400;
+          }
+
+          h3 {
+            text-align: end;
+            font-size: 25px;
+            font-weight: 600;
+            color: $color-primary;
+          }
+        }
+
+        .content {
+          h3 {
+            color: $color-primary;
+            font-size: 18px;
+            margin-bottom: 10px;
+          }
+          p {
+            line-height: 28px;
+            font-size: 14px;
+            color: gray;
+          }
+        }
+      }
+
+      .left {
+        width: 45%;
+        border-radius: 10px;
+        overflow: hidden;
+        z-index: 2;
+      }
+    }
+  }
+
+  .vision {
+    margin-top: 50px;
+    .title {
+      text-align: center;
+      font-size: 24px;
+      color: $color-primary;
+      margin-bottom: 20px;
+      position: relative;
+    }
+  }
+}

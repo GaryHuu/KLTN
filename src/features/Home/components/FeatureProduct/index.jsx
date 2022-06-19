@@ -1,20 +1,20 @@
-import productApi from 'api/productApi';
-import featureProductBanner from 'assets/img/feature-product-banner.png';
-import iconFeatureProductBanner from 'assets/img/icon-feature-product.svg';
-import React, { useEffect, useRef, useState } from 'react';
-import Skeleton from 'react-loading-skeleton';
-import { Link } from 'react-router-dom';
-import Slider from 'react-slick';
-import { useInView } from 'react-intersection-observer';
+import productApi from 'api/productApi'
+import featureProductBanner from 'assets/img/feature-product-banner.png'
+import iconFeatureProductBanner from 'assets/img/icon-feature-product.svg'
+import React, { useEffect, useRef, useState } from 'react'
+import Skeleton from 'react-loading-skeleton'
+import { Link } from 'react-router-dom'
+import Slider from 'react-slick'
+import { useInView } from 'react-intersection-observer'
 
 function FeatureProduct() {
-  const [hotProductList, setHotProductList] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const mouted = useRef(true);
-  const isLoaded = useRef(false);
+  const [hotProductList, setHotProductList] = useState([])
+  const [loading, setLoading] = useState(true)
+  const mouted = useRef(true)
+  const isLoaded = useRef(false)
   const [ref, inView] = useInView({
     threshold: 0,
-  });
+  })
   const settings = {
     dots: true,
     infinite: true,
@@ -23,27 +23,27 @@ function FeatureProduct() {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
-  };
+  }
 
   useEffect(() => {
-    mouted.current = true;
+    mouted.current = true
     if (!isLoaded.current && inView) {
-      (async () => {
-        setLoading(true);
+      ;(async () => {
+        setLoading(true)
         try {
-          const { data } = await productApi.getHotProduct();
-          if (mouted.current) setHotProductList(data);
+          const { data } = await productApi.getHotProduct()
+          if (mouted.current) setHotProductList(data)
         } catch (error) {
           // console.log(error);
         }
-        setLoading(false);
-      })();
-      isLoaded.current = true;
+        setLoading(false)
+      })()
+      isLoaded.current = true
     }
     return () => {
-      mouted.current = false;
-    };
-  }, [inView]);
+      mouted.current = false
+    }
+  }, [inView])
 
   return (
     <section ref={ref} className='feature-product'>
@@ -64,7 +64,7 @@ function FeatureProduct() {
               <Slider {...settings} className='feature-product__list'>
                 <div className='feature-product__container'>
                   {hotProductList.slice(0, 4).map((product) => {
-                    const url = product?.images[0]?.url;
+                    const url = product?.images?.[0]?.url
                     return (
                       <Link
                         key={product.id}
@@ -73,12 +73,12 @@ function FeatureProduct() {
                       >
                         <img src={url} alt='' />
                       </Link>
-                    );
+                    )
                   })}
                 </div>
                 <div className='feature-product__container'>
                   {hotProductList.slice(4, 8).map((product) => {
-                    const url = product?.images[0]?.url;
+                    const url = product?.images?.[0]?.url
                     return (
                       <Link
                         key={product.id}
@@ -87,12 +87,12 @@ function FeatureProduct() {
                       >
                         <img src={url} alt='' />
                       </Link>
-                    );
+                    )
                   })}
                 </div>
                 <div className='feature-product__container'>
                   {hotProductList.slice(8, 12).map((product) => {
-                    const url = product?.images[0]?.url;
+                    const url = product?.images?.[0]?.url
                     return (
                       <Link
                         key={product.id}
@@ -101,7 +101,7 @@ function FeatureProduct() {
                       >
                         <img src={url} alt='' />
                       </Link>
-                    );
+                    )
                   })}
                 </div>
                 {/* <div className='feature-product__container'>
@@ -134,7 +134,7 @@ function FeatureProduct() {
         </div>
       </div>
     </section>
-  );
+  )
 }
 
-export default FeatureProduct;
+export default FeatureProduct

@@ -1,57 +1,57 @@
-import productApi from 'api/productApi';
-import Quantity from 'components/Quantity';
-import React, { Fragment, useEffect, useState } from 'react';
-import { useRouteMatch } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import Skeleton from 'react-loading-skeleton';
-import { useSelector, useDispatch } from 'react-redux';
-import { openModal } from 'features/Auth/userSlice';
-import { addToCart } from 'features/Cart/cartSlice';
-import withLoading from 'components/HOC/withLoading';
-import userApi from 'api/userApi';
+import productApi from 'api/productApi'
+import Quantity from 'components/Quantity'
+import React, { Fragment, useEffect, useState } from 'react'
+import { useRouteMatch } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import Skeleton from 'react-loading-skeleton'
+import { useSelector, useDispatch } from 'react-redux'
+import { openModal } from 'features/Auth/userSlice'
+import { addToCart } from 'features/Cart/cartSlice'
+import withLoading from 'components/HOC/withLoading'
+import userApi from 'api/userApi'
 
 function ProductDetailPage({ hideLoading, showLoading }) {
   const {
     params: { id },
-  } = useRouteMatch();
-  const [loading, setLoading] = useState(true);
-  const [product, setProduct] = useState({});
-  const [quantity, setQuantity] = useState(1);
-  const [isFavorite, setIsFavorite] = useState(false);
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.current);
+  } = useRouteMatch()
+  const [loading, setLoading] = useState(true)
+  const [product, setProduct] = useState({})
+  const [quantity, setQuantity] = useState(1)
+  const [isFavorite, setIsFavorite] = useState(false)
+  const dispatch = useDispatch()
+  const user = useSelector((state) => state.user.current)
 
   useEffect(() => {
-    (async function () {
-      setLoading(true);
-      showLoading();
+    ;(async function () {
+      setLoading(true)
+      showLoading()
       try {
-        const { data } = await productApi.getProductByID(id);
-        setProduct(data);
+        const { data } = await productApi.getProductByID(id)
+        setProduct(data)
       } catch (error) {}
-      setLoading(false);
-      hideLoading();
-    })();
+      setLoading(false)
+      hideLoading()
+    })()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [])
 
   useEffect(() => {
     if (user) {
-      (async function () {
+      ;(async function () {
         try {
-          const rs = await userApi.getIsFavoriteProduct(id);
-          if (rs === 'nope') setIsFavorite(false);
-          if (rs === 'yes') setIsFavorite(true);
+          const rs = await userApi.getIsFavoriteProduct(id)
+          if (rs === 'nope') setIsFavorite(false)
+          if (rs === 'yes') setIsFavorite(true)
         } catch (error) {}
-      })();
+      })()
     } else {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
+  }, [user])
 
   const handleQuantityChange = (newValue) => {
-    setQuantity(newValue);
-  };
+    setQuantity(newValue)
+  }
 
   const handleAddToCartClick = () => {
     if (user) {
@@ -62,7 +62,7 @@ function ProductDetailPage({ hideLoading, showLoading }) {
         price,
         priceAfterDiscount: price,
         name: product.name,
-      });
+      })
       if (isPromo && priceAfterDiscount) {
         action = addToCart({
           idProduct: product.id,
@@ -70,55 +70,55 @@ function ProductDetailPage({ hideLoading, showLoading }) {
           price,
           priceAfterDiscount: priceAfterDiscount,
           name: product.name,
-        });
+        })
       }
-      dispatch(action);
-      toast.success('Thêm vào giỏ hàng thành công!');
-      return;
+      dispatch(action)
+      toast.success('Thêm vào giỏ hàng thành công!')
+      return
     }
-    toast.warn('Đăng nhập để thêm vào giỏ hàng!');
-    const action = openModal();
-    dispatch(action);
-  };
+    toast.warn('Đăng nhập để thêm vào giỏ hàng!')
+    const action = openModal()
+    dispatch(action)
+  }
 
-  const isPromo = product?.discount !== 'No';
-  const price = parseInt(product?.price);
-  let discountPercent;
-  let priceAfterDiscount;
+  const isPromo = product?.discount !== 'No'
+  const price = parseInt(product?.price)
+  let discountPercent
+  let priceAfterDiscount
   if (isPromo) {
-    discountPercent = parseInt(product?.discount?.slice(0, -1)) / 100;
-    priceAfterDiscount = parseInt(price) - parseInt(price) * discountPercent;
+    discountPercent = parseInt(product?.discount?.slice(0, -1)) / 100
+    priceAfterDiscount = parseInt(price) - parseInt(price) * discountPercent
   }
 
   const handleFavoriteClick = () => {
-    (async function () {
-      showLoading();
+    ;(async function () {
+      showLoading()
       try {
         const res = await userApi.addFavorites({
           product_id: product.id,
-        });
+        })
         if (res.status === 200 && res.success === true) {
-          setIsFavorite(true);
-          toast.success('Đã yêu thích sản phẩm');
+          setIsFavorite(true)
+          toast.success('Đã yêu thích sản phẩm')
         }
       } catch (error) {}
-      hideLoading();
-    })();
-  };
+      hideLoading()
+    })()
+  }
 
   const handleDeleteFavorite = () => {
-    (async function () {
-      showLoading();
+    ;(async function () {
+      showLoading()
       try {
-        const res = await userApi.deteleFavoriteProduct(product.id);
+        const res = await userApi.deteleFavoriteProduct(product.id)
         if (res.status === 200 && res.success === true) {
-          setIsFavorite(false);
-          toast.success('Đã xóa yêu thích sản phẩm');
+          setIsFavorite(false)
+          toast.success('Đã xóa yêu thích sản phẩm')
         }
       } catch (error) {}
-      hideLoading();
-    })();
-  };
+      hideLoading()
+    })()
+  }
 
   return (
     <div className='product-detail-page'>
@@ -129,7 +129,7 @@ function ProductDetailPage({ hideLoading, showLoading }) {
               {loading ? (
                 <Skeleton height={420} width={350} />
               ) : (
-                <img src={product?.images[0]?.url || ''} alt='' />
+                <img src={product?.images?.[0]?.url || ''} alt='' />
               )}
             </div>
             <div className='list'>
@@ -137,9 +137,9 @@ function ProductDetailPage({ hideLoading, showLoading }) {
                 <Skeleton count={3} height={50} width={50} />
               ) : (
                 <Fragment>
-                  <img src={product?.images[0]?.url || ''} alt='' />
-                  <img src={product?.images[0]?.url || ''} alt='' />
-                  <img src={product?.images[0]?.url || ''} alt='' />
+                  <img src={product?.images?.[0]?.url || ''} alt='' />
+                  <img src={product?.images?.[0]?.url || ''} alt='' />
+                  <img src={product?.images?.[0]?.url || ''} alt='' />
                 </Fragment>
               )}
             </div>
@@ -164,7 +164,7 @@ function ProductDetailPage({ hideLoading, showLoading }) {
               ) : (
                 <p>
                   Danh Mục Sản phẩm: &nbsp;
-                  <span>{product.category.name}</span>
+                  <span>{product?.category?.name}</span>
                 </p>
               )}
 
@@ -292,7 +292,7 @@ function ProductDetailPage({ hideLoading, showLoading }) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default withLoading(ProductDetailPage);
+export default withLoading(ProductDetailPage)
