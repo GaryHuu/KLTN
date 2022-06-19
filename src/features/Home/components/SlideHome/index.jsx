@@ -1,6 +1,6 @@
-import React from 'react';
-import BannerIconHome from '../BannerIconHome.jsx';
-import BannerSlide from '../BannerSlide';
+import React from 'react'
+import BannerIconHome from '../BannerIconHome.jsx'
+import BannerSlide from '../BannerSlide'
 
 function SlideHome() {
   return (
@@ -10,7 +10,7 @@ function SlideHome() {
         <BannerIconHome />
       </div>
     </section>
-  );
+  )
 }
 
-export default SlideHome;
+export default SlideHome

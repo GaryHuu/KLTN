@@ -79,7 +79,6 @@
   }
 
   @include breakpoint-custom-max(1150px) {
-
     &__content {
       justify-content: center;
 
@@ -98,11 +97,9 @@
 
   @include breakpoint-custom-max(950px) {
     &__content {
-
       .slider {
         width: 767px;
       }
     }
   }
-  
 }

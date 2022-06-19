@@ -1,8 +1,8 @@
-import { Button, Select } from 'antd';
-import { statusOrder } from 'constant';
-import React, { useRef, useState } from 'react';
-import { useReactToPrint } from 'react-to-print';
-const { Option } = Select;
+import { Button, Select } from 'antd'
+import { statusOrder } from 'constant'
+import React, { useRef, useState } from 'react'
+import { useReactToPrint } from 'react-to-print'
+const { Option } = Select
 
 const STATUS_ORDER = [
   {
@@ -21,42 +21,42 @@ const STATUS_ORDER = [
     value: 4,
     title: statusOrder.DECLINE,
   },
-];
+]
 
 function EditOrderForm(props) {
-  const [orderState, setOrderState] = useState();
-  const { data } = props;
+  const [orderState, setOrderState] = useState()
+  const { data } = props
 
-  const typeCount = data.order_details.length;
+  const typeCount = data.order_details.length
 
-  const componentRef = useRef();
+  const componentRef = useRef()
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
     pageStyle: `@page { size: 12in ${7 + typeCount * 2}in }`,
-  });
+  })
 
   function handleChange(value) {
-    setOrderState(value);
+    setOrderState(value)
   }
   const handleSubmitStatus = () => {
-    if (!props.onSubmit) return;
-    props.onSubmit(data.id, orderState);
-  };
-  if (!data) return;
+    if (!props.onSubmit) return
+    props.onSubmit(data.id, orderState)
+  }
+  if (!data) return
   const productList = data.order_details.map((item, index) => {
-    const product = item.product;
-    const quantity = item.product_quantity;
+    const product = item.product
+    const quantity = item.product_quantity
     const discount =
       product.discount === 'No'
         ? 0
-        : parseFloat(product.discount.slice(0, -1) / 100);
+        : parseFloat(product.discount.slice(0, -1) / 100)
     const price = (product.price - product.price * discount).toLocaleString(
       'it-IT',
       {
         style: 'currency',
         currency: 'VND',
       }
-    );
+    )
     return (
       <div className='item' key={index}>
         <div>
@@ -74,11 +74,11 @@ function EditOrderForm(props) {
           </p>
         </div>
         <p>
-          <img width='120px' src={product?.images[0]?.url} alt='' />
+          <img width='120px' src={product?.images?.[0]?.url} alt='' />
         </p>
       </div>
-    );
-  });
+    )
+  })
 
   return (
     <div>
@@ -170,7 +170,7 @@ function EditOrderForm(props) {
               <Option value={item.value} key={item.value}>
                 {item.title}
               </Option>
-            );
+            )
           })}
         </Select>
         <Button
@@ -187,7 +187,7 @@ function EditOrderForm(props) {
         </Button>
       </div>
     </div>
-  );
+  )
 }
 
-export default EditOrderForm;
+export default EditOrderForm

@@ -1,50 +1,50 @@
-import productApi from 'api/productApi';
-import withLoading from 'components/HOC/withLoading';
-import Quantity from 'components/Quantity';
-import React, { Fragment, useEffect, useState } from 'react';
-import Skeleton from 'react-loading-skeleton';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { deleteItemCart } from '../cartSlice';
+import productApi from 'api/productApi'
+import withLoading from 'components/HOC/withLoading'
+import Quantity from 'components/Quantity'
+import React, { Fragment, useEffect, useState } from 'react'
+import Skeleton from 'react-loading-skeleton'
+import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { deleteItemCart } from '../cartSlice'
 
 function CartItem({ item, onChange, hideLoading, showLoading }) {
-  const [loading, setLoading] = useState(true);
-  const dispatch = useDispatch();
-  const [product, setProduct] = useState({});
-  const isPromo = product?.discount !== 'No';
-  const price = parseInt(product?.price);
-  let discountPercent;
-  let priceAfterDiscount;
+  const [loading, setLoading] = useState(true)
+  const dispatch = useDispatch()
+  const [product, setProduct] = useState({})
+  const isPromo = product?.discount !== 'No'
+  const price = parseInt(product?.price)
+  let discountPercent
+  let priceAfterDiscount
   if (isPromo) {
-    discountPercent = parseInt(product?.discount?.slice(0, -1)) / 100;
-    priceAfterDiscount = parseInt(price) - parseInt(price) * discountPercent;
+    discountPercent = parseInt(product?.discount?.slice(0, -1)) / 100
+    priceAfterDiscount = parseInt(price) - parseInt(price) * discountPercent
   }
   const handleButtonDeleteClick = () => {
     // console.log(product.id);
-    const action = deleteItemCart(product.id);
-    dispatch(action);
-  };
+    const action = deleteItemCart(product.id)
+    dispatch(action)
+  }
 
   const handleQuantityChange = (value) => {
-    if (!onChange) return;
-    onChange(item.idProduct, value);
-  };
+    if (!onChange) return
+    onChange(item.idProduct, value)
+  }
 
   useEffect(() => {
-    (async function () {
-      setLoading(true);
-      showLoading();
+    ;(async function () {
+      setLoading(true)
+      showLoading()
       try {
-        const { data } = await productApi.getProductByID(item.idProduct);
-        setProduct(data);
+        const { data } = await productApi.getProductByID(item.idProduct)
+        setProduct(data)
       } catch (error) {
-        console.log(error);
+        console.log(error)
       }
-      setLoading(false);
-      hideLoading();
-    })();
+      setLoading(false)
+      hideLoading()
+    })()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [item.idProduct]);
+  }, [item.idProduct])
 
   return (
     <div className='item'>
@@ -52,7 +52,7 @@ function CartItem({ item, onChange, hideLoading, showLoading }) {
         <Skeleton height={65} width={55} />
       ) : (
         <Link to={`/product/${item.idProduct}`}>
-          <img src={product?.images[0]?.url} alt='' />
+          <img src={product?.images?.[0]?.url} alt='' />
         </Link>
       )}
       <div className='item__info'>
@@ -120,7 +120,7 @@ function CartItem({ item, onChange, hideLoading, showLoading }) {
         )}
       </div>
     </div>
-  );
+  )
 }
 
-export default withLoading(CartItem);
+export default withLoading(CartItem)

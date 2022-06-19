@@ -1,19 +1,19 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import Slider from 'react-slick';
-import productApi from 'api/productApi';
-import iconHotPromotion from 'assets/img/icon-hot-promotion.svg';
-import Skeleton from 'react-loading-skeleton';
-import { useInView } from 'react-intersection-observer';
+import React, { useEffect, useState, useRef } from 'react'
+import { Link } from 'react-router-dom'
+import Slider from 'react-slick'
+import productApi from 'api/productApi'
+import iconHotPromotion from 'assets/img/icon-hot-promotion.svg'
+import Skeleton from 'react-loading-skeleton'
+import { useInView } from 'react-intersection-observer'
 
 function HotPromotion() {
-  const [hotPromoList, setHotPromoList] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const mouted = useRef(true);
-  const isLoaded = useRef(false);
+  const [hotPromoList, setHotPromoList] = useState([])
+  const [loading, setLoading] = useState(true)
+  const mouted = useRef(true)
+  const isLoaded = useRef(false)
   const [ref, inView] = useInView({
     threshold: 0,
-  });
+  })
   const settings = {
     dots: true,
     infinite: true,
@@ -21,7 +21,7 @@ function HotPromotion() {
     autoplay: true,
     slidesToShow: 3,
     slidesToScroll: 3,
-  };
+  }
 
   // console.log(hotPromoList)
 
@@ -29,24 +29,24 @@ function HotPromotion() {
     // fetch('https://phanolink.herokuapp.com/api/products?feature')
     //     .then((res) => res.json())
     //     .then((res) => {setHotPromoList(res.data.slice(0, 9))});
-    mouted.current = true;
+    mouted.current = true
     if (!isLoaded.current && inView) {
-      (async () => {
-        setLoading(true);
+      ;(async () => {
+        setLoading(true)
         try {
-          const { data } = await productApi.getHotPromo();
-          if (mouted.current) setHotPromoList(data.slice(0, 9));
+          const { data } = await productApi.getHotPromo()
+          if (mouted.current) setHotPromoList(data.slice(0, 9))
         } catch (error) {
           // console.log(error);
         }
-        setLoading(false);
-      })();
-      isLoaded.current = true;
+        setLoading(false)
+      })()
+      isLoaded.current = true
     }
     return () => {
-      mouted.current = false;
-    };
-  }, [inView]);
+      mouted.current = false
+    }
+  }, [inView])
 
   return (
     <section ref={ref} className='hot-promotion'>
@@ -77,7 +77,7 @@ function HotPromotion() {
                 >
                   <img
                     style={{ height: '283px', objectFit: 'cover' }}
-                    src={item?.images[0]?.url}
+                    src={item?.images?.[0]?.url}
                     alt=''
                   />
                 </Link>
@@ -87,7 +87,7 @@ function HotPromotion() {
         </div>
       </div>
     </section>
-  );
+  )
 }
 
-export default HotPromotion;
+export default HotPromotion

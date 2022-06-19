@@ -1,31 +1,35 @@
-import React from 'react';
-import { Controller } from 'react-hook-form';
+import React from 'react'
+import { Controller } from 'react-hook-form'
 
 const CATEGORY_PRODUCT = [
   {
     id: 1,
-    title: 'Thuốc không kê toa',
+    title: 'Tủ thuốc gia đình',
   },
   {
     id: 2,
-    title: 'Thực phẩm chức năng',
+    title: 'Thuốc không kê toa',
   },
   {
     id: 3,
-    title: 'Dụng cụ y khoa',
+    title: 'Thực phẩm chức năng',
   },
   {
     id: 4,
-    title: 'Mỹ phẩm',
+    title: 'Dụng cụ y khoa',
   },
   {
     id: 5,
+    title: 'Mỹ phẩm',
+  },
+  {
+    id: 6,
     title: 'Mẹ & bé',
   },
-];
+]
 
 function CategoryField(props) {
-  const { form, name, label, disable, value } = props;
+  const { form, name, label, disable, value } = props
   return (
     <Controller
       name={name}
@@ -64,7 +68,7 @@ function CategoryField(props) {
         </div>
       )}
     />
-  );
+  )
 }
 
-export default CategoryField;
+export default CategoryField
