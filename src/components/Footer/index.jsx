@@ -1,24 +1,24 @@
-import bctIcon from 'assets/img/BCT-icon.svg';
-import expressIcon from 'assets/img/express-icon.svg';
-import fbIcon from 'assets/img/fb-icon.svg';
-import ggIcon from 'assets/img/google-icon.svg';
-import mailIcon from 'assets/img/mail-icon.svg';
-import percentIcon from 'assets/img/percent-icon.svg';
-import phanoLinkLogoColor from 'assets/img/phanolink-logo-color.svg';
-import phoneIcon from 'assets/img/phone-icon.svg';
-import presentIcon from 'assets/img/present-icon.svg';
-import transactionIcon from 'assets/img/transaction-icon.svg';
-import ytIcon from 'assets/img/youtube-icon.svg';
-import zaloIcon from 'assets/img/zalo-icon.svg';
-import { openModal } from 'features/Auth/userSlice';
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import bctIcon from 'assets/img/BCT-icon.svg'
+import expressIcon from 'assets/img/express-icon.svg'
+import fbIcon from 'assets/img/fb-icon.svg'
+import ggIcon from 'assets/img/google-icon.svg'
+import mailIcon from 'assets/img/mail-icon.svg'
+import percentIcon from 'assets/img/percent-icon.svg'
+import phanoLinkLogoColor from 'assets/img/phanolink-logo-color.svg'
+import phoneIcon from 'assets/img/phone-icon.svg'
+import presentIcon from 'assets/img/present-icon.svg'
+import transactionIcon from 'assets/img/transaction-icon.svg'
+import ytIcon from 'assets/img/youtube-icon.svg'
+import zaloIcon from 'assets/img/zalo-icon.svg'
+import { openModal } from 'features/Auth/userSlice'
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 function Footer() {
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.current);
+  const dispatch = useDispatch()
+  const user = useSelector((state) => state.user.current)
   return (
     <footer>
       <div className='container footer__commit'>
@@ -46,7 +46,7 @@ function Footer() {
               <Link to='/' className='item__detail'>
                 <img src={phoneIcon} alt='phone logo' />
                 <p>
-                  Gọi ngay <strong>1800 6768</strong> (tư vấn miễn phí)
+                  Gọi ngay <strong>0379339693</strong> (tư vấn miễn phí)
                 </p>
               </Link>
             </div>
@@ -85,6 +85,9 @@ function Footer() {
             <h4>HỖ TRỢ KHÁCH HÀNG</h4>
             <ul className='assist__list'>
               <li>
+                <Link to='/about-us'>Về chúng tôi</Link>
+              </li>
+              <li>
                 <Link to='/'>Chính sách đổi trả</Link>
               </li>
               <li>
@@ -113,9 +116,9 @@ function Footer() {
               <li>
                 <Link
                   onClick={(e) => {
-                    e.preventDefault();
-                    const action = openModal();
-                    dispatch(action);
+                    e.preventDefault()
+                    const action = openModal()
+                    dispatch(action)
                   }}
                   to='/'
                 >
@@ -125,9 +128,9 @@ function Footer() {
               <li>
                 <Link
                   onClick={(e) => {
-                    e.preventDefault();
-                    const action = openModal();
-                    dispatch(action);
+                    e.preventDefault()
+                    const action = openModal()
+                    dispatch(action)
                   }}
                   to='/'
                 >
@@ -138,10 +141,10 @@ function Footer() {
                 <Link
                   onClick={(e) => {
                     if (!user) {
-                      e.preventDefault();
-                      toast.warn('Vui lòng đăng nhập!');
-                      const action = openModal();
-                      dispatch(action);
+                      e.preventDefault()
+                      toast.warn('Vui lòng đăng nhập!')
+                      const action = openModal()
+                      dispatch(action)
                     }
                   }}
                   to='/user/order?page=1&with=address,order_details.product.images&perPage=6'
@@ -159,8 +162,8 @@ function Footer() {
               </Link>
               <Link
                 onClick={(e) => {
-                  e.preventDefault();
-                  window.open('https://www.facebook.com/garyhuu2000', '_blank');
+                  e.preventDefault()
+                  window.open('https://www.facebook.com/garyhuu2000', '_blank')
                 }}
                 to='/'
               >
@@ -177,13 +180,13 @@ function Footer() {
         </div>
         <div className='info__license'>
           <p>
-            <span>© 2019</span> - Bản quyền thuộc về Công Ty Dược Phẩm Phano
+            <span>© 2022</span> - Bản quyền thuộc về Công Ty Dược Phẩm Phano
           </p>
           <img src={bctIcon} alt='BCT logo' />
         </div>
       </div>
     </footer>
-  );
+  )
 }
 
-export default Footer;
+export default Footer
