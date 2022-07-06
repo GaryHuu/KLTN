@@ -60,7 +60,7 @@ function LoginForm(props) {
         <button className='button-submit' type='submit'>
           Đăng nhập
         </button>
-        <button
+        {/* <button
           onClick={(e) => {
             e.preventDefault();
             toast.warn('Chức năng đang phát triển!');
@@ -77,7 +77,7 @@ function LoginForm(props) {
           className='button-submit button-submit--gg'
         >
           Đăng nhập bằng Google
-        </button>
+        </button> */}
       </form>
     </div>
   );
