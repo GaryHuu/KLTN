@@ -44,20 +44,16 @@ function AboutUs() {
               <div className='content'>
                 <h3>Về chúng tôi</h3>
                 <p>
-                  Năm 2007 đánh dấu bước ngoặc trọng đại với việc thành lập công
-                  ty CP Dược phẩm Phano. Nhà thuốc Phano đã có mặt tại các hệ
-                  thống phòng khám và bệnh viện, tiên phong với mô hình nhà
-                  thuốc bên trong siêu thị, trung tâm thương mại.
+                  Năm 2022 đánh dấu 1 bước ngoặc trọng đại với việc thành lập
+                  công ty CP Dược Phẩm PhanoLink.
                   <br />
-                  Suốt một thời gian dài Phano luôn dẫn đầu trong thị trường bán
-                  lẻ dược phẩm với chuỗi Hệ thống hơn 60 nhà thuốc chuẩn mực có
-                  mặt khắp các tỉnh thành. Đón đầu xu hướng chuyển đổi công nghệ
-                  số, ra mắt Phano Link Nền tảng thương mại điện tử dược phẩm
-                  đầu tiên tại Việt Nam.
+                  Nhà Thuốc PhanoLink đã có mặt tại địa chỉ số 1, Võ Văn Ngân,
+                  Phường Linh Chiểu, Quận Thủ Đức, Thành Phố Hồ Chí Minh.
                   <br />
-                  Cho đến nay mục tiêu của Phano là củng cố & phát triển bền
-                  vững và đang hợp tác cùng mô hình khám chữa bệnh từ xa, hoàn
-                  thiện hệ sinh thái chăm sóc sức khỏe toàn diện cho cộng đồng.
+                  Hiện nay PhanoLink đang phát triển với mô hình cung cấp dược
+                  phẩm từ xa cho khách hàng. Và đang lên kế hoạch mở rộng quy mô
+                  tại phòng khám và bệnh viện, tiên phong với mô hình nhà thuốc
+                  bên trong siêu thị, trung tâm thương mại.
                 </p>
               </div>
             </div>
