@@ -14,7 +14,7 @@ function LoginForm(props) {
       .required('Please enter your email')
       .email('Please enter a valid email'),
 
-    password: yup.string().required('Please enter your password').min(6),
+    password: yup.string().required('Please enter your password').min(6,'Password must be at least 6 characters'),
   });
 
   const form = useForm({
